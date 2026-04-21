@@ -127,7 +127,7 @@ export class TDWebApiParser {
 
     for (const [filePath, content] of markdownFiles) {
       // Only process section files
-      if (!filePath.includes('Home/section')) {
+      if (!filePath.startsWith('section/')) {
         continue;
       }
 
@@ -149,15 +149,15 @@ export class TDWebApiParser {
   }
 
   /**
-   * Extract types from member markdown files
+   * Extract types from type markdown files
    */
   private async extractTypes(markdownFiles: Map<string, { rawContent: string }>): Promise<ParsedType[]> {
     const types: ParsedType[] = [];
     const typeMap = new Map<string, ParsedType>();
 
     for (const [filePath, content] of markdownFiles) {
-      // Only process member files
-      if (!filePath.includes('Home/member')) {
+      // Only process type files (not member files)
+      if (!filePath.startsWith('type/')) {
         continue;
       }
 

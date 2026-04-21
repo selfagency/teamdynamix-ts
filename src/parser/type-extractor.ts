@@ -57,185 +57,255 @@ export class TypeExtractor {
 
   /**
    * Extract property definitions from type markdown content
+   * Properties are defined in markdown tables with columns:
+   * | Name | Editable? | Required? | Type | Nullable? | Summary |
    */
   private static extractProperties(content: string): ParsedTypeProperty[] {
     const properties: ParsedTypeProperty[] = [];
-    const parser = new MarkdownParser(content);
-    const keyValuePairs = parser.extractKeyValuePairs();
-
-    // Property names are typically listed as section headings
     const lines = content.split('\n');
-    let i = 0;
 
-    while (i < lines.length) {
-      const lineContent = lines[i];
-      if (!lineContent) {
-        i++;
+    // Find the Properties section
+    let inPropertiesSection = false;
+    let inTable = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (!line) continue;
+
+      const trimmed = line.trim();
+
+      // Detect start of Properties section
+      if (trimmed.toLowerCase().includes('## properties') || trimmed.toLowerCase().includes('### properties')) {
+        inPropertiesSection = true;
+        inTable = false;
         continue;
       }
-      const line = lineContent.trim();
 
-      // Look for property definition pattern
-      if (line.match(/^#{1,4}\s+\w+/)) {
-        const property = this.extractProperty(lines, i);
-        if (property) {
-          properties.push(property);
+      // Exit Properties section when reaching another section
+      if (inPropertiesSection && trimmed.match(/^#+\s+/)) {
+        if (!trimmed.toLowerCase().includes('properties')) {
+          break;
         }
       }
 
-      i++;
+      // Skip header and separator lines
+      if (trimmed.startsWith('|')) {
+        if (trimmed.match(/\|\s*-+\s*\|/)) {
+          // Separator line - start of actual table data
+          inTable = true;
+          continue;
+        }
+
+        if (inTable && inPropertiesSection) {
+          // Parse table row
+          const prop = this.parsePropertyTableRow(trimmed);
+          if (prop) {
+            properties.push(prop);
+          }
+        }
+      }
     }
 
     return properties;
   }
 
   /**
-   * Extract a single property definition
+   * Parse a single property table row
+   * Format: | [PropertyName](link) | Editable? | Required? | Type | Nullable? | Summary |
    */
-  private static extractProperty(lines: string[], startLine: number): ParsedTypeProperty | null {
-    const headerLine = lines[startLine];
-    if (!headerLine) return null;
-    const headerTrimmed = headerLine.trim();
-    const propertyName = headerTrimmed.replace(/^#+\s+/, '').trim();
+  private static parsePropertyTableRow(rowLine: string): ParsedTypeProperty | null {
+    // Split by pipe and filter empty cells
+    const cells = rowLine
+      .split('|')
+      .map(cell => cell.trim())
+      .filter(cell => cell.length > 0);
 
-    if (!propertyName) {
+    if (cells.length < 3) {
       return null;
     }
 
-    // Extract property metadata from following lines
-    let type = 'string'; // default
-    let description = '';
-    let editable = false;
-    let readOnly = false;
-    let required = false;
-
-    let i = startLine + 1;
-
-    while (i < lines.length && i < startLine + 20) {
-      const lineContent = lines[i];
-      if (!lineContent) {
-        i++;
-        continue;
-      }
-      const line = lineContent.trim();
-
-      // Stop at next header
-      if (line.match(/^#+\s+\w+/)) {
-        break;
-      }
-
-      if (line.includes('Data Type')) {
-        const typeMatch = line.match(/:\s*\*?\*?([^*\n]+)\*?\*?/);
-        if (typeMatch && typeMatch[1]) {
-          type = typeMatch[1].trim();
-        }
-      }
-
-      if (line === 'Editable') {
-        editable = true;
-      }
-
-      if (line === 'Not Editable' || line === 'Read-Only') {
-        readOnly = true;
-      }
-
-      if (line === 'Required') {
-        required = true;
-      }
-
-      if (line && !line.includes(':')) {
-        description += line + ' ';
-      }
-
-      i++;
+    // Extract property name (remove markdown link syntax)
+    const cellZero = cells[0];
+    if (!cellZero) {
+      return null;
     }
 
-    return {
-      name: propertyName,
-      description: description.trim(),
-      type,
+    let name = cellZero;
+    const linkMatch = name.match(/\[(.+?)\]/);
+    if (linkMatch && linkMatch[1]) {
+      name = linkMatch[1];
+    }
+
+    // Determine which columns we have based on count
+    let type: string = 'string';
+    let required = false;
+    let editable = true;
+    let readOnly = false;
+    let description: string = '';
+    let isNullable = false;
+
+    if (cells.length === 4) {
+      // Format: Name | Type | Nullable? | Summary
+      type = cells[1] || 'string';
+      const cell2 = cells[2];
+      if (cell2) {
+        isNullable = cell2.toLowerCase().includes('nullable');
+      }
+      description = cells[3] || '';
+    } else if (cells.length === 5) {
+      // Format: Name | Editable?/Required? | Type | Nullable? | Summary
+      // or: Name | Type | Nullable? | Something | Summary
+      const col2 = cells[1];
+      if (col2) {
+        const col2Lower = col2.toLowerCase();
+        if (col2Lower.includes('editable') || col2Lower.includes('required')) {
+          // Likely: Name | Editable? | Type | Nullable? | Summary
+          editable = col2Lower.includes('editable');
+          required = col2Lower.includes('required');
+          type = cells[2] || 'string';
+          const cell3 = cells[3];
+          if (cell3) {
+            isNullable = cell3.toLowerCase().includes('nullable');
+          }
+          description = cells[4] || '';
+        } else {
+          // Likely: Name | Type | Nullable? | ??? | Summary
+          type = col2 || 'string';
+          const cell2b = cells[2];
+          if (cell2b) {
+            isNullable = cell2b.toLowerCase().includes('nullable');
+          }
+          description = cells[4] || '';
+        }
+      }
+    } else if (cells.length >= 6) {
+      // Format: Name | Editable? | Required? | Type | Nullable? | Summary
+      const col2 = cells[1];
+      if (col2) {
+        editable = col2.toLowerCase().includes('editable');
+      }
+      const col3 = cells[2];
+      if (col3) {
+        required = col3.toLowerCase().includes('required');
+      }
+      type = cells[3] || 'string';
+      const cell4 = cells[4];
+      if (cell4) {
+        isNullable = cell4.toLowerCase().includes('nullable');
+      }
+      description = cells[5] || '';
+    }
+
+    readOnly = !editable;
+
+    const format = this.getTypeFormat(type);
+    const prop: ParsedTypeProperty = {
+      name,
+      type: this.normalizeTypeName(type),
       required,
       editable,
-      readOnly: readOnly || !editable,
+      readOnly,
     };
+
+    const trimmedDesc = description.trim();
+    if (trimmedDesc) {
+      prop.description = trimmedDesc;
+    }
+
+    if (format !== undefined) {
+      prop.format = format;
+    }
+
+    return prop;
+  }
+
+  /**
+   * Normalize type names by removing markdown links
+   */
+  private static normalizeTypeName(typeStr: string): string {
+    // Remove markdown links: [Type](link)
+    let normalized = typeStr.replace(/\[(.+?)\]\(.+?\)/g, '$1');
+    // Remove brackets and extra whitespace
+    normalized = normalized.trim();
+    return normalized || 'string';
+  }
+
+  /**
+   * Get OpenAPI format for a .NET type
+   */
+  private static getTypeFormat(typeStr: string): string | undefined {
+    const lowerType = typeStr.toLowerCase();
+    if (lowerType.includes('datetime')) return 'date-time';
+    if (lowerType.includes('guid')) return 'uuid';
+    if (lowerType.includes('decimal')) return 'decimal';
+    if (lowerType.includes('double')) return 'double';
+    if (lowerType.includes('float')) return 'float';
+    if (lowerType.includes('int32')) return 'int32';
+    if (lowerType.includes('int64')) return 'int64';
+    return undefined;
   }
 
   /**
    * Check if the type is an enumeration
    */
   private static isEnumType(content: string): boolean {
-    return content.includes('Enum') || content.includes('enumeration') || content.includes('enum values:');
+    return (
+      content.toLowerCase().includes('enumeration') ||
+      content.toLowerCase().includes('enum') ||
+      content.toLowerCase().includes('bit flag')
+    );
   }
 
   /**
-   * Extract enum values from content
+   * Extract enum values from table content
    */
   static extractEnumValues(content: string): Array<{ name: string; value: string | number }> | undefined {
-    const parser = new MarkdownParser(content);
-    const table = parser.extractTable();
-
-    if (!table || table.length < 2) {
-      return undefined;
-    }
-
+    const lines = content.split('\n');
     const values: Array<{ name: string; value: string | number }> = [];
 
-    // Assume first column is name, second is value
-    for (let i = 1; i < table.length; i++) {
-      const row = table[i];
-      if (row && row.length >= 2) {
-        const name = row[0] || '';
-        const valueStr = row[1] || '';
-        if (name) {
-          values.push({
-            name,
-            value: isNaN(Number(valueStr)) ? valueStr : Number(valueStr),
-          });
+    let inTable = false;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+
+      // Detect table
+      if (trimmed.startsWith('|')) {
+        if (trimmed.match(/\|\s*-+\s*\|/)) {
+          inTable = true;
+          continue;
+        }
+
+        if (inTable) {
+          const cells = trimmed
+            .split('|')
+            .map(cell => cell.trim())
+            .filter(cell => cell.length > 0);
+
+          if (cells.length >= 2) {
+            const nameCell = cells[0];
+            const valueCell = cells[1];
+
+            if (!nameCell || !valueCell) {
+              continue;
+            }
+
+            // Extract name (remove markdown links)
+            let name = nameCell.replace(/\[(.+?)\]\(.+?\)/g, '$1').trim();
+
+            // Parse value (could be number or string)
+            let value: string | number = valueCell;
+            if (/^\d+$/.test(valueCell)) {
+              value = parseInt(valueCell, 10);
+            }
+
+            if (name && value !== undefined) {
+              values.push({ name, value });
+            }
+          }
         }
       }
     }
 
     return values.length > 0 ? values : undefined;
-  }
-
-  /**
-   * Consolidate type variants (e.g., Type-1, Type-2, Type-3)
-   * Returns a single consolidated type with all unique properties
-   */
-  static consolidateTypeVariants(types: ParsedType[]): ParsedType[] {
-    const consolidated = new Map<string, ParsedType>();
-
-    for (const type of types) {
-      const key = type.fullName;
-
-      if (!consolidated.has(key)) {
-        consolidated.set(key, { ...type });
-      } else {
-        const existing = consolidated.get(key)!;
-
-        // Merge properties, preferring more descriptive ones
-        for (const prop of type.properties) {
-          const existingProp = existing.properties.find(p => p.name === prop.name);
-
-          if (!existingProp) {
-            existing.properties.push(prop);
-          } else if (prop.description && !existingProp.description) {
-            existingProp.description = prop.description;
-          }
-        }
-
-        // Merge descriptions
-        if (type.description && !existing.description) {
-          existing.description = type.description;
-        }
-
-        // Merge variants
-        if (type.variants) {
-          existing.variants = [...new Set([...(existing.variants || []), ...type.variants])];
-        }
-      }
-    }
-
-    return Array.from(consolidated.values());
   }
 }
