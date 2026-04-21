@@ -1,0 +1,66 @@
+.github/workflows/quality.yml
+  h_5cf1e2c1161853 1-42
+.github/hooks/vscode-fix.json
+  h_5cf1e2c1161853 1-12
+.husky/pre-commit
+  h_5cf1e2c1161853 1
+src/index.ts
+  h_5cf1e2c1161853 1
+.oxlintrc.json
+  ab916995f3ce3d35 1-43
+package.json
+  ab916995f3ce3d35 5-10,20-28,40-41
+  7739a9ccc4ec4506 4
+  h_5cf1e2c1161853 11-18,29-39
+.gitignore
+  h_5cf1e2c1161853 1-243
+.oxfmtrc.json
+  ab916995f3ce3d35 1-24
+scripts/hooks/copilot-post-tool-fix.mjs
+  h_5cf1e2c1161853 3-4,6-11,14-15,17-25,28-31,33-37,39-41,44-47,51-52,56-59,61-64,67
+tsconfig.json
+  ab916995f3ce3d35 1,3-7,9-22
+  h_5cf1e2c1161853 2,8
+scripts/hooks/vscode-post-tool-fix.mjs
+  h_5cf1e2c1161853 3-4,6-11,14-15,17-25,28-31,34-37,41-42,46-49,51-54,57
+.github/hooks/copilot-cli-fix.json
+  h_5cf1e2c1161853 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "22a3aab78512fdef5e826d3eecbac76a189c6f19",
+  "prompts": {
+    "7739a9ccc4ec4506": {
+      "agent_id": {
+        "tool": "github-copilot-tab",
+        "id": "ai_tab-1776737724452",
+        "model": "default"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "ab916995f3ce3d35": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "0237eef5-4a9a-4c7f-b146-c2708f4b1bda",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 112,
+      "total_deletions": 58,
+      "accepted_lines": 38,
+      "overriden_lines": 41
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
