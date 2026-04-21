@@ -1,0 +1,28 @@
+OPENAPI_PLAN.md
+  h_5cf1e2c1161853 1-108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "7f04019a96ab4c3939e8111df843db40067b9ea4",
+  "prompts": {
+    "43d5841fb172767d": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "d90cfacb-7c03-44ec-bd92-655ed1b8e7a5",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 1050,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
