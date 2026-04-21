@@ -1,15 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { TDWebApiParser } from '../src/parser/index.js';
-import { SchemaGenerator } from '../src/schema/schema-generator.js';
-import { PathOperationGenerator } from '../src/schema/path-operation-generator.js';
+import { TDWebApiParser } from './parser/index.js';
 import {
   MetadataEnricher,
   extractTagsFromPaths,
   generateStandardTags,
   type EnrichedOpenAPISpec,
-} from '../src/schema/metadata-enricher.js';
+} from './schema/metadata-enricher.js';
+import { PathOperationGenerator } from './schema/path-operation-generator.js';
+import { SchemaGenerator } from './schema/schema-generator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

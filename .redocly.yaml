@@ -1,0 +1,14 @@
+extends:
+  - recommended
+
+rules:
+  # Keep hard failures strict
+  path-not-include-query: error
+  no-identical-paths: error
+  operation-2xx-response: error
+
+  # Generated TeamDynamix paths intentionally use broad templates and overlap
+  # across product areas; these are noisy and not actionable in this source shape.
+  no-ambiguous-paths: off
+  no-unused-components: off
+  no-invalid-schema-examples: off

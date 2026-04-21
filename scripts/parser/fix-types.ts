@@ -6,10 +6,10 @@
 import fs from 'fs';
 import path from 'path';
 
-const files = ['src/parser/endpoint-extractor.ts', 'src/parser/markdown-parser.ts', 'src/parser/type-extractor.ts'];
+const files = ['./parser/endpoint-extractor.ts', './parser/markdown-parser.ts', './parser/type-extractor.ts'];
 
 const fixes: Record<string, Array<{ pattern: string; replacement: string }>> = {
-  'src/parser/endpoint-extractor.ts': [
+  './parser/endpoint-extractor.ts': [
     {
       pattern: 'const methodMatch = line.match',
       replacement: 'const methodMatch = line.match',

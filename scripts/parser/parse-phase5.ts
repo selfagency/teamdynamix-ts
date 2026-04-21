@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { ExampleEnricher, enrichSpecWithExamples } from '../src/schema/example-enricher.js';
+import { ExampleEnricher, enrichSpecWithExamples } from './schema/example-enricher.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SpecValidator } from '../src/schema/spec-validator.js';
-import { SpecExporter } from '../src/schema/spec-exporter.js';
+import { SpecExporter } from './schema/spec-exporter.js';
+import { SpecValidator } from './schema/spec-validator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
