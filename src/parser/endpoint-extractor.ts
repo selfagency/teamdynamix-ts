@@ -9,13 +9,11 @@ import { MarkdownParser } from './markdown-parser.js';
 export class EndpointExtractor {
   /**
    * Parse a section file and extract all endpoints
+   * Section files use markdown headings like:
+   * ### METHOD https://url Description
    */
   static extractEndpoints(content: string, sectionName: string): ParsedEndpoint[] {
-    const parser = new MarkdownParser(content);
-    const parsed = parser.parse();
     const endpoints: ParsedEndpoint[] = [];
-
-    // Look for patterns like "GET https://..."
     const lines = content.split('\n');
     let i = 0;
 
@@ -27,8 +25,11 @@ export class EndpointExtractor {
       }
       const line = lineContent.trim();
 
-      // Match HTTP method + URL pattern
-      const methodMatch = line.match(/^(GET|POST|PUT|PATCH|DELETE)\s+https?:\/\/(.+?)(\{.+?\})?$/i);
+      // Match h3 heading with HTTP method and URL
+      // Pattern: ### GET https://rollins.teamdynamix.com/TDWebApi/api/accounts Copy URL
+      const methodMatch = line.match(
+        /^###\s+(GET|POST|PUT|PATCH|DELETE)\s+(https?:\/\/.+?)(\s+(Copy URL|Remarks|Parameters))?$/i,
+      );
 
       if (methodMatch) {
         const endpoint = this.extractEndpoint(lines, i, methodMatch, sectionName);
@@ -52,52 +53,50 @@ export class EndpointExtractor {
     methodMatch: RegExpMatchArray,
     sectionName: string,
   ): ParsedEndpoint | null {
-    const method1 = methodMatch[1];
-    if (!method1) return null;
-    const methodStr = method1.toUpperCase();
-    const method = methodStr as 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    const method = (methodMatch[1] || '').toUpperCase() as 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    const fullUrl = methodMatch[2] || '';
 
-    const urlPart = methodMatch[2];
-    if (!urlPart) return null;
+    if (!method || !fullUrl) return null;
 
     // Parse the URL to extract path
-    const pathMatch = urlPart.match(/api\/(.+)$/);
-    const pathPart = pathMatch?.[1];
-    const path = pathPart ? `/api/${pathPart}` : `/api/${urlPart}`;
+    // Example: https://rollins.teamdynamix.com/TDWebApi/api/accounts
+    // Should extract: /api/accounts
+    let path = '/';
+    const apiMatch = fullUrl.match(/\/api\/(.*)$/i);
+    if (apiMatch) {
+      path = `/api/${apiMatch[1]}`;
+    } else {
+      path = fullUrl;
+    }
 
     // Generate operation ID from path
     const operationId = this.generateOperationId(method, path);
 
-    // Find summary and description by looking at lines before method
-    let summary = '';
+    // Find description by looking at following lines
+    let summary = `${method} ${path}`;
     let description = '';
-    let lookback = startLine - 1;
+    let i = startLine + 1;
 
-    while (lookback >= 0 && lookback < lines.length) {
-      const prevLine = lines[lookback];
-      if (!prevLine) break;
-      const trimmedLine = prevLine.trim();
-
-      if (trimmedLine.startsWith('###') || trimmedLine.startsWith('##')) {
-        summary = trimmedLine.replace(/^#+\s*/, '').trim();
-        break;
+    // The line after the heading usually has the description
+    if (i < lines.length) {
+      const descLine = lines[i]?.trim();
+      if (descLine && !descLine.startsWith('####') && !descLine.startsWith('###')) {
+        summary = descLine;
+        description = descLine;
+        i++;
       }
-
-      if (trimmedLine && !trimmedLine.startsWith('###') && !trimmedLine.startsWith('##')) {
-        description = trimmedLine + '\n' + description;
-      }
-
-      lookback--;
-      if (startLine - lookback > 20) break; // Limit lookback
     }
 
     // Extract parameters, request body, responses by parsing following lines
     const parameters: ParsedParameter[] = [];
-    let requestBody = undefined;
     const responses: Record<string, ParsedResponse> = {};
-    let i = startLine + 1;
+    let requestBodySchema: ParsedSchema | undefined;
+    let isRequestBody = false;
 
-    while (i < lines.length && i < startLine + 50) {
+    const startSearch = startLine + 1;
+    const endSearch = Math.min(startLine + 100, lines.length);
+
+    while (i < endSearch) {
       const lineContent = lines[i];
       if (!lineContent) {
         i++;
@@ -105,36 +104,43 @@ export class EndpointExtractor {
       }
       const line = lineContent.trim();
 
-      // Stop at next method definition
-      if (/^(GET|POST|PUT|PATCH|DELETE)\s+https?:\/\//.test(line)) {
+      // Stop at next endpoint definition
+      if (/^###\s+(GET|POST|PUT|PATCH|DELETE)\s+https?:\/\//.test(line)) {
         break;
       }
 
-      // Extract Parameters section
+      // Extract Parameters section (definition list format)
       if (line.startsWith('#### Parameters')) {
         i++;
-        while (i < lines.length && lines[i] && !lines[i]!.trim().startsWith('####')) {
-          const paramLine = lines[i]!.trim();
-
-          if (paramLine.startsWith('- ')) {
-            const param = this.parseParameter(paramLine);
-            if (param) {
-              parameters.push(param);
-            }
-          }
-
-          i++;
-        }
+        const params = this.extractParametersFromDefinitionList(lines, i);
+        parameters.push(...params.parameters);
+        i = params.nextLine;
         continue;
       }
 
       // Extract Returns section
       if (line.startsWith('#### Returns')) {
         i++;
-        const returnType = lines[i]?.trim() || '';
-        if (returnType && !returnType.startsWith('####')) {
+        let returnDesc = '';
+        let returnType = '';
+
+        // Parse the return type (may be on next line)
+        while (i < lines.length) {
+          const retLine = lines[i]?.trim() || '';
+          if (retLine.startsWith('####')) break;
+          if (retLine && !retLine.startsWith('**')) {
+            if ((!returnType && retLine.includes('TeamDynamix')) || retLine.includes('[]')) {
+              returnType = retLine;
+            } else if (retLine) {
+              returnDesc = retLine;
+            }
+          }
+          i++;
+        }
+
+        if (returnType) {
           responses['200'] = {
-            description: 'Successful response',
+            description: returnDesc || 'Successful response',
             content: {
               'application/json': {
                 schema: this.parseTypeReference(returnType),
@@ -142,15 +148,17 @@ export class EndpointExtractor {
             },
           };
         }
+        continue;
       }
 
-      // Extract Rate Limitations
-      if (line.startsWith('#### Rate Limitations')) {
+      // Extract Request Body section
+      if (line.startsWith('#### Request Body')) {
         i++;
-        const rateLimitLine = lines[i]?.trim() || '';
-        if (rateLimitLine && !rateLimitLine.startsWith('####')) {
-          // Extract rate limit info if needed
+        const bodyType = lines[i]?.trim() || '';
+        if (bodyType && bodyType.includes('TeamDynamix')) {
+          requestBodySchema = this.parseTypeReference(bodyType);
         }
+        continue;
       }
 
       i++;
@@ -165,25 +173,123 @@ export class EndpointExtractor {
     const endpoint: ParsedEndpoint = {
       method,
       path,
-      summary: summary || description.split('\n')[0] || 'API Endpoint',
-      description: description.trim(),
+      summary,
+      description,
       operationId,
       parameters,
       responses,
       tags: [sectionName],
       security: ['bearerAuth'],
-      rawUrl: `${method} ${urlPart}`,
+      rawUrl: `${method} ${fullUrl}`,
     };
 
-    if (requestBody) {
-      endpoint.requestBody = requestBody;
+    if (requestBodySchema) {
+      endpoint.requestBody = {
+        required: true,
+        content: {
+          'application/json': {
+            schema: requestBodySchema,
+          },
+        },
+      };
     }
 
     return endpoint;
   }
 
   /**
-   * Extract parameters from lines
+   * Extract parameters from definition list format
+   * Format:
+   * * Parameter Name
+   *   :   ##### id
+   *   Type
+   *   :   Int32
+   *   Source
+   *   :   URI
+   *   Description
+   *   :   The account ID.
+   */
+  private static extractParametersFromDefinitionList(
+    lines: string[],
+    startLine: number,
+  ): { parameters: ParsedParameter[]; nextLine: number } {
+    const parameters: ParsedParameter[] = [];
+    let i = startLine;
+    let currentParam: Partial<ParsedParameter> | null = null;
+    let lastKey = '';
+
+    while (i < lines.length) {
+      const lineContent = lines[i];
+      if (!lineContent) {
+        i++;
+        continue;
+      }
+      const line = lineContent.trim();
+
+      // Stop if we hit the next section heading
+      if (line.startsWith('####') || (line.startsWith('###') && !line.startsWith('#####'))) {
+        break;
+      }
+
+      // Parameter name line starts with *
+      if (line.startsWith('*') && !line.startsWith('*   :')) {
+        if (currentParam && currentParam.name) {
+          parameters.push(currentParam as ParsedParameter);
+        }
+        currentParam = {
+          name: line.replace(/^\*\s*/, '').trim(),
+          in: 'query',
+          required: false,
+          schema: { type: 'string' },
+        };
+        lastKey = 'name';
+      }
+      // Definition list value line starts with :
+      else if (line.startsWith(':')) {
+        const value = line.replace(/^:\s*/, '').trim();
+
+        if (lastKey === 'name') {
+          // This might be a type or a heading, skip heading-like values
+          if (!value.startsWith('#')) {
+            lastKey = 'type';
+            if (currentParam) currentParam.schema = this.parseType(value);
+          }
+        } else if (lastKey === 'type') {
+          lastKey = 'source';
+          if (currentParam) {
+            const sourceMap: Record<string, 'path' | 'query' | 'header' | 'cookie'> = {
+              uri: 'path',
+              query: 'query',
+              body: 'query',
+              header: 'header',
+            };
+            currentParam.in = sourceMap[value.toLowerCase()] || 'query';
+          }
+        } else if (lastKey === 'source') {
+          lastKey = 'required';
+          if (currentParam) {
+            currentParam.required = value.toLowerCase() === 'required';
+          }
+        } else if (lastKey === 'required') {
+          lastKey = 'description';
+          if (currentParam) {
+            currentParam.description = value;
+          }
+        }
+      }
+
+      i++;
+    }
+
+    if (currentParam && currentParam.name) {
+      parameters.push(currentParam as ParsedParameter);
+    }
+
+    return { parameters, nextLine: i };
+  }
+
+  /**
+   * Extract parameters from definition list format (alternative)
    */
   private static extractParameters(lines: string[], startLine: number, endLine: number): ParsedParameter[] {
     const parameters: ParsedParameter[] = [];

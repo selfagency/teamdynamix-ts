@@ -19,6 +19,7 @@
     "lint:md:fix": "rumdl check --fix . && rumdl fmt .",
     "parse:phase1": "tsx scripts/parse-phase1.ts",
     "parse:phase2": "tsx scripts/parse-phase2.ts",
+    "parse:phase3": "tsx scripts/parse-phase3.ts",
     "generate:openapi": "tsx scripts/generate-openapi.ts"
   },
   "devDependencies": {
