@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import YAML from 'js-yaml';
 
 /**
  * Exports OpenAPI specification in various formats
@@ -17,8 +18,8 @@ export class SpecExporter {
    * Export spec as YAML
    */
   static exportYAML(spec: any, outputPath: string): void {
-    // Simple YAML serialization (more complete than basic JSON replacement)
-    const yaml = this.toYAML(spec, 0);
+    // Use js-yaml for proper YAML formatting
+    const yaml = YAML.dump(spec, { lineWidth: -1, noRefs: true });
     fs.writeFileSync(outputPath, yaml, 'utf-8');
   }
 
@@ -36,63 +37,6 @@ export class SpecExporter {
   static exportMarkdown(spec: any, outputPath: string): void {
     const markdown = this.generateMarkdownDocs(spec);
     fs.writeFileSync(outputPath, markdown, 'utf-8');
-  }
-
-  /**
-   * Simple YAML serializer
-   */
-  private static toYAML(obj: any, indent = 0): string {
-    const indentStr = ' '.repeat(indent);
-    const lines: string[] = [];
-
-    if (obj === null || obj === undefined) {
-      return 'null';
-    }
-
-    if (typeof obj !== 'object') {
-      if (typeof obj === 'string' && (obj.includes(':') || obj.includes('\n'))) {
-        return `"${obj.replace(/"/g, '\\"')}"`;
-      }
-      return String(obj);
-    }
-
-    if (Array.isArray(obj)) {
-      if (obj.length === 0) {
-        return '[]';
-      }
-      obj.forEach(item => {
-        const serialized = this.toYAML(item, indent + 2);
-        if (typeof item === 'object' && item !== null) {
-          lines.push(`- ${serialized.split('\n')[0]}`);
-          if (serialized.includes('\n')) {
-            serialized
-              .split('\n')
-              .slice(1)
-              .forEach(line => {
-                lines.push(`  ${line}`);
-              });
-          }
-        } else {
-          lines.push(`- ${serialized}`);
-        }
-      });
-      return lines.join('\n');
-    }
-
-    // Object
-    Object.entries(obj).forEach(([key, value]) => {
-      const serialized = this.toYAML(value, indent + 2);
-      if (serialized.includes('\n')) {
-        lines.push(`${indentStr}${key}:`);
-        serialized.split('\n').forEach(line => {
-          lines.push(`${indentStr}  ${line}`);
-        });
-      } else {
-        lines.push(`${indentStr}${key}: ${serialized}`);
-      }
-    });
-
-    return lines.join('\n');
   }
 
   /**

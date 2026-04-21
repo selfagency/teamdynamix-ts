@@ -27,6 +27,7 @@
     "generate:openapi": "tsx scripts/generate-openapi.ts"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.6.0",
     "gray-matter": "^4.0.3",
     "husky": "^9.1.7",

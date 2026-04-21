@@ -44,7 +44,7 @@ class OpenAPIGeneratorPipeline {
     console.log('🚀 OpenAPI Generator - Complete Pipeline');
     console.log('═'.repeat(70) + '\n');
 
-    const outputDir = path.join(__dirname, '../../output');
+    const outputDir = path.join(__dirname, '../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
@@ -98,10 +98,10 @@ class OpenAPIGeneratorPipeline {
       console.log(`📍 Phase ${phase.num}: ${phase.name}`);
       console.log(`   Script: ${phase.script}`);
 
-      const child = spawn('node', ['--loader', 'ts-node/esm', scriptPath], {
+      const child = spawn('pnpm', ['exec', 'tsx', scriptPath], {
         stdio: 'inherit',
         cwd: __dirname,
-        env: { ...process.env, NODE_OPTIONS: '--loader ts-node/esm' },
+        env: { ...process.env },
       });
 
       child.on('close', code => {
@@ -228,9 +228,9 @@ Options:
   --help, -h        Show this help message
 
 Examples:
-  node parse-all.ts                    # Run all phases
-  node parse-all.ts --skip 1           # Skip phase 1
-  node parse-all.ts --skip 1 --skip 2  # Skip phases 1 and 2
+  tsx scripts/parse-all.ts                    # Run all phases
+  tsx scripts/parse-all.ts --skip 1           # Skip phase 1
+  tsx scripts/parse-all.ts --skip 1 --skip 2  # Skip phases 1 and 2
 `);
   process.exit(0);
 }

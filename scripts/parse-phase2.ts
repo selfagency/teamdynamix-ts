@@ -72,7 +72,7 @@ async function runPhase2(): Promise<PhaseResult> {
 
     // Step 3: Write schemas to disk
     console.log('\n💾 Step 3: Writing output files...');
-    const outputDir = path.join(__dirname, '../../output');
+    const outputDir = path.join(__dirname, '../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }

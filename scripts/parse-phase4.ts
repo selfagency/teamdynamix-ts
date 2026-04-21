@@ -157,7 +157,7 @@ async function runPhase4(): Promise<PhaseResult> {
 
     // Step 5: Write enriched spec
     console.log('\n💾 Step 5: Writing enriched specification...');
-    const outputDir = path.join(__dirname, '../../output');
+    const outputDir = path.join(__dirname, '../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
