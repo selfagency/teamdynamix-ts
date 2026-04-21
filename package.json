@@ -21,6 +21,9 @@
     "parse:phase2": "tsx scripts/parse-phase2.ts",
     "parse:phase3": "tsx scripts/parse-phase3.ts",
     "parse:phase4": "tsx scripts/parse-phase4.ts",
+    "parse:phase5": "tsx scripts/parse-phase5.ts",
+    "parse:phase6": "tsx scripts/parse-phase6.ts",
+    "parse:all": "tsx scripts/parse-all.ts",
     "generate:openapi": "tsx scripts/generate-openapi.ts"
   },
   "devDependencies": {
