@@ -1,0 +1,41 @@
+{
+  "name": "teamdynamix-ts",
+  "version": "0.1.0",
+  "description": "An open source TypeScript client for the TeamDynamix API.",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Daniel Sieradski <daniel@self.agency>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt --no-error-on-unmatched-pattern .",
+    "format:check": "oxfmt --check .",
+    "lint:md": "rumdl check .",
+    "lint:md:fix": "rumdl check --fix . && rumdl fmt ."
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.46.0",
+    "oxlint": "^1.61.0",
+    "rumdl": "^0.1.76",
+    "typescript": "^6.0.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}": [
+      "oxlint --fix",
+      "oxfmt --no-error-on-unmatched-pattern"
+    ],
+    "*.{json,jsonc,yaml,yml}": "oxfmt --no-error-on-unmatched-pattern",
+    "*.{md,markdown,mdown,mkdn,mdx}": [
+      "rumdl check --fix",
+      "rumdl fmt"
+    ]
+  },
+  "packageManager": "pnpm@10.33.0"
+}
