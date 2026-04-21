@@ -28,8 +28,25 @@ if (!['editFiles', 'create_file', 'replace_string_in_file'].includes(toolName)) 
   process.exit(0);
 }
 
-const toolInput = payload.tool_input ?? {};
-const filePath = toolInput.filePath ?? toolInput.file_path ?? '';
+let toolInput = payload.tool_input ?? payload.toolArgs ?? {};
+
+if (typeof toolInput === 'string') {
+  try {
+    toolInput = JSON.parse(toolInput);
+  } catch {
+    toolInput = {};
+  }
+}
+
+const filePath =
+  toolInput.filePath ??
+  toolInput.file_path ??
+  toolInput.target_file ??
+  toolInput.old_file_path ??
+  toolInput.new_file_path ??
+  toolInput.file?.filePath ??
+  toolInput.file?.path ??
+  '';
 if (!filePath || typeof filePath !== 'string') {
   process.exit(0);
 }

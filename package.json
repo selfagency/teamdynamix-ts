@@ -5,6 +5,7 @@
   "keywords": [],
   "license": "MIT",
   "author": "Daniel Sieradski <daniel@self.agency>",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,15 +16,21 @@
     "format": "oxfmt --no-error-on-unmatched-pattern .",
     "format:check": "oxfmt --check .",
     "lint:md": "rumdl check .",
-    "lint:md:fix": "rumdl check --fix . && rumdl fmt ."
+    "lint:md:fix": "rumdl check --fix . && rumdl fmt .",
+    "parse:phase1": "tsx scripts/parse-phase1.ts",
+    "generate:openapi": "tsx scripts/generate-openapi.ts"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "gray-matter": "^4.0.3",
     "husky": "^9.1.7",
+    "js-yaml": "^4.1.0",
     "lint-staged": "^16.4.0",
+    "markdown-it": "^14.0.0",
     "oxfmt": "^0.46.0",
     "oxlint": "^1.61.0",
     "rumdl": "^0.1.76",
+    "tsx": "^4.7.0",
     "typescript": "^6.0.3"
   },
   "lint-staged": {

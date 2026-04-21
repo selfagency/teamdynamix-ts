@@ -23,23 +23,33 @@ try {
   process.exit(0);
 }
 
-const toolName = payload.toolName ?? '';
+const toolName = payload.toolName ?? payload.tool_name ?? '';
 if (!['editFiles', 'create_file', 'replace_string_in_file'].includes(toolName)) {
   process.exit(0);
 }
 
 let toolArgs = {};
-if (typeof payload.toolArgs === 'string') {
+const rawToolArgs = payload.toolArgs ?? payload.tool_input ?? {};
+
+if (typeof rawToolArgs === 'string') {
   try {
-    toolArgs = JSON.parse(payload.toolArgs);
+    toolArgs = JSON.parse(rawToolArgs);
   } catch {
     toolArgs = {};
   }
-} else if (payload.toolArgs && typeof payload.toolArgs === 'object') {
-  toolArgs = payload.toolArgs;
+} else if (rawToolArgs && typeof rawToolArgs === 'object') {
+  toolArgs = rawToolArgs;
 }
 
-const filePath = toolArgs.filePath ?? toolArgs.file_path ?? '';
+const filePath =
+  toolArgs.filePath ??
+  toolArgs.file_path ??
+  toolArgs.target_file ??
+  toolArgs.old_file_path ??
+  toolArgs.new_file_path ??
+  toolArgs.file?.filePath ??
+  toolArgs.file?.path ??
+  '';
 if (!filePath || typeof filePath !== 'string') {
   process.exit(0);
 }
