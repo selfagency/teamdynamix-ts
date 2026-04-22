@@ -1,0 +1,28 @@
+src/generated/client-metadata.json
+  83c339e245c91968 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "652aff07cf29142ec356cabdae0b5a35ca0931aa",
+  "prompts": {
+    "83c339e245c91968": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "7949f8ad-26f3-44f6-aa9a-83d285ff96ed",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
