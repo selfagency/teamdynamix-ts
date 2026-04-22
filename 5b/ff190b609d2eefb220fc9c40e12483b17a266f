@@ -1,0 +1,20 @@
+plans/openapi-client.plan.md
+  h_5cf1e2c1161853 5,118,134,156,164
+scripts/parser/prepare-types-input.ts
+  h_5cf1e2c1161853 21-22,26,63-67,73,78,84
+scripts/parser/generate-client.ts
+  h_5cf1e2c1161853 14,19,21,25,32,45
+src/client/validation.ts
+  h_5cf1e2c1161853 15-18,37-51,77-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "5bff190b609d2eefb220fc9c40e12483b17a266f",
+  "prompts": {},
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
