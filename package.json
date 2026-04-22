@@ -19,13 +19,16 @@
     "format:check": "oxfmt --check .",
     "lint:md": "rumdl check .",
     "lint:md:fix": "rumdl check --fix . && rumdl fmt .",
-    "generate:types": "openapi-typescript ./output/openapi.json -o ./src/generated/schema.d.ts --path-params-as-types --generate-path-params --default-non-nullable",
-    "generate:types:check": "openapi-typescript ./output/openapi.json -o ./src/generated/schema.d.ts --path-params-as-types --generate-path-params --default-non-nullable --check"
+    "generate:client": "pnpm exec tsx ./scripts/parser/generate-client.ts",
+    "generate:all": "pnpm run generate:client && pnpm run generate:types",
+    "generate:types": "openapi-typescript ./output/openapi-types.json -o ./src/generated/schema.d.ts --path-params-as-types --generate-path-params --default-non-nullable",
+    "generate:types:check": "openapi-typescript ./output/openapi-types.json -o ./src/generated/schema.d.ts --path-params-as-types --generate-path-params --default-non-nullable --check"
   },
   "dependencies": {
     "ajv": "^8.18.0",
     "ajv-formats": "^3.0.1",
-    "openapi-fetch": "^0.17.0"
+    "openapi-fetch": "^0.17.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@apidevtools/swagger-parser": "^12.1.0",

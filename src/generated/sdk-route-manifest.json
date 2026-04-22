@@ -1,0 +1,3962 @@
+[
+  {
+    "domain": "referenceData",
+    "methodName": "accounts",
+    "operationId": "getAccounts",
+    "path": "/api/accounts",
+    "httpMethod": "GET",
+    "tags": ["Accounts"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "accounts2",
+    "operationId": "postAccounts",
+    "path": "/api/accounts",
+    "httpMethod": "POST",
+    "tags": ["Accounts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "accountsId",
+    "operationId": "getAccountsId",
+    "path": "/api/accounts/{id}",
+    "httpMethod": "GET",
+    "tags": ["Accounts"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "accountsId2",
+    "operationId": "putAccountsId",
+    "path": "/api/accounts/{id}",
+    "httpMethod": "PUT",
+    "tags": ["Accounts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "accountsSearch",
+    "operationId": "postAccountsSearch",
+    "path": "/api/accounts/search",
+    "httpMethod": "POST",
+    "tags": ["Accounts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "discovery",
+    "methodName": "applications",
+    "operationId": "getApplications",
+    "path": "/api/applications",
+    "httpMethod": "GET",
+    "tags": ["Applications"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "appIdAssetsSearches",
+    "operationId": "getAppIdAssetsSearches",
+    "path": "/api/{appId}/assets/searches",
+    "httpMethod": "GET",
+    "tags": ["AssetReports"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "appIdAssetsSearchesSearchIdResults",
+    "operationId": "postAppIdAssetsSearchesSearchIdResults",
+    "path": "/api/{appId}/assets/searches/{searchId}/results",
+    "httpMethod": "POST",
+    "tags": ["AssetReports"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsStatuses",
+    "operationId": "getAppIdAssetsStatuses",
+    "path": "/api/{appId}/assets/statuses",
+    "httpMethod": "GET",
+    "tags": ["AssetStatuses"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsStatuses2",
+    "operationId": "postAppIdAssetsStatuses",
+    "path": "/api/{appId}/assets/statuses",
+    "httpMethod": "POST",
+    "tags": ["AssetStatuses"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsStatusesId",
+    "operationId": "getAppIdAssetsStatusesId",
+    "path": "/api/{appId}/assets/statuses/{id}",
+    "httpMethod": "GET",
+    "tags": ["AssetStatuses"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsStatusesId2",
+    "operationId": "putAppIdAssetsStatusesId",
+    "path": "/api/{appId}/assets/statuses/{id}",
+    "httpMethod": "PUT",
+    "tags": ["AssetStatuses"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsStatusesSearch",
+    "operationId": "postAppIdAssetsStatusesSearch",
+    "path": "/api/{appId}/assets/statuses/search",
+    "httpMethod": "POST",
+    "tags": ["AssetStatuses"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssets",
+    "operationId": "postAppIdAssets",
+    "path": "/api/{appId}/assets",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsAssetIdUsersResourceID",
+    "operationId": "postAppIdAssetsAssetIdUsersResourceID",
+    "path": "/api/{appId}/assets/{assetId}/users/{resourceID}",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsAssetIdUsersResourceID2",
+    "operationId": "deleteAppIdAssetsAssetIdUsersResourceID",
+    "path": "/api/{appId}/assets/{assetId}/users/{resourceID}",
+    "httpMethod": "DELETE",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": true
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsId",
+    "operationId": "getAppIdAssetsId",
+    "path": "/api/{appId}/assets/{id}",
+    "httpMethod": "GET",
+    "tags": ["Assets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsId2",
+    "operationId": "postAppIdAssetsId",
+    "path": "/api/{appId}/assets/{id}",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsId3",
+    "operationId": "patchAppIdAssetsId",
+    "path": "/api/{appId}/assets/{id}",
+    "httpMethod": "PATCH",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsId4",
+    "operationId": "deleteAppIdAssetsId",
+    "path": "/api/{appId}/assets/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdArticles",
+    "operationId": "getAppIdAssetsIdArticles",
+    "path": "/api/{appId}/assets/{id}/articles",
+    "httpMethod": "GET",
+    "tags": ["Assets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdArticlesArticleId",
+    "operationId": "postAppIdAssetsIdArticlesArticleId",
+    "path": "/api/{appId}/assets/{id}/articles/{articleId}",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdArticlesArticleId2",
+    "operationId": "deleteAppIdAssetsIdArticlesArticleId",
+    "path": "/api/{appId}/assets/{id}/articles/{articleId}",
+    "httpMethod": "DELETE",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdAssociatedcontracts",
+    "operationId": "getAppIdAssetsIdAssociatedcontracts",
+    "path": "/api/{appId}/assets/{id}/associatedcontracts",
+    "httpMethod": "GET",
+    "tags": ["Assets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdAssociatedcontractsContractId",
+    "operationId": "postAppIdAssetsIdAssociatedcontractsContractId",
+    "path": "/api/{appId}/assets/{id}/associatedcontracts/{contractId}",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdAssociatedcontractsContractId2",
+    "operationId": "putAppIdAssetsIdAssociatedcontractsContractId",
+    "path": "/api/{appId}/assets/{id}/associatedcontracts/{contractId}",
+    "httpMethod": "PUT",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdAssociatedcontractsContractId3",
+    "operationId": "deleteAppIdAssetsIdAssociatedcontractsContractId",
+    "path": "/api/{appId}/assets/{id}/associatedcontracts/{contractId}",
+    "httpMethod": "DELETE",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdAttachments",
+    "operationId": "postAppIdAssetsIdAttachments",
+    "path": "/api/{appId}/assets/{id}/attachments",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdFeed",
+    "operationId": "getAppIdAssetsIdFeed",
+    "path": "/api/{appId}/assets/{id}/feed",
+    "httpMethod": "GET",
+    "tags": ["Assets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdFeed2",
+    "operationId": "postAppIdAssetsIdFeed",
+    "path": "/api/{appId}/assets/{id}/feed",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdTicketsTicketId",
+    "operationId": "postAppIdAssetsIdTicketsTicketId",
+    "path": "/api/{appId}/assets/{id}/tickets/{ticketId}",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdTicketsTicketId2",
+    "operationId": "deleteAppIdAssetsIdTicketsTicketId",
+    "path": "/api/{appId}/assets/{id}/tickets/{ticketId}",
+    "httpMethod": "DELETE",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsIdUsers",
+    "operationId": "getAppIdAssetsIdUsers",
+    "path": "/api/{appId}/assets/{id}/users",
+    "httpMethod": "GET",
+    "tags": ["Assets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsFeed",
+    "operationId": "getAppIdAssetsFeed",
+    "path": "/api/{appId}/assets/feed",
+    "httpMethod": "GET",
+    "tags": ["Assets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsForms",
+    "operationId": "getAppIdAssetsForms",
+    "path": "/api/{appId}/assets/forms",
+    "httpMethod": "GET",
+    "tags": ["Assets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsImport",
+    "operationId": "postAppIdAssetsImport",
+    "path": "/api/{appId}/assets/import",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsSearch",
+    "operationId": "postAppIdAssetsSearch",
+    "path": "/api/{appId}/assets/search",
+    "httpMethod": "POST",
+    "tags": ["Assets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attachmentsId",
+    "operationId": "getAttachmentsId",
+    "path": "/api/attachments/{id}",
+    "httpMethod": "GET",
+    "tags": ["Attachments"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attachmentsId2",
+    "operationId": "deleteAttachmentsId",
+    "path": "/api/attachments/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["Attachments"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attachmentsIdContent",
+    "operationId": "getAttachmentsIdContent",
+    "path": "/api/attachments/{id}/content",
+    "httpMethod": "GET",
+    "tags": ["Attachments"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attachmentsIdContentBase64",
+    "operationId": "getAttachmentsIdContentBase64",
+    "path": "/api/attachments/{id}/contentBase64",
+    "httpMethod": "GET",
+    "tags": ["Attachments"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attributesIdChoices",
+    "operationId": "getAttributesIdChoices",
+    "path": "/api/attributes/{id}/choices",
+    "httpMethod": "GET",
+    "tags": ["Attributes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attributesIdChoices2",
+    "operationId": "postAttributesIdChoices",
+    "path": "/api/attributes/{id}/choices",
+    "httpMethod": "POST",
+    "tags": ["Attributes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attributesIdChoicesChoiceId",
+    "operationId": "putAttributesIdChoicesChoiceId",
+    "path": "/api/attributes/{id}/choices/{choiceId}",
+    "httpMethod": "PUT",
+    "tags": ["Attributes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attributesIdChoicesChoiceId2",
+    "operationId": "deleteAttributesIdChoicesChoiceId",
+    "path": "/api/attributes/{id}/choices/{choiceId}",
+    "httpMethod": "DELETE",
+    "tags": ["Attributes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "attributesCustom",
+    "operationId": "getAttributesCustom",
+    "path": "/api/attributes/custom",
+    "httpMethod": "GET",
+    "tags": ["Attributes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "discovery",
+    "methodName": "auth",
+    "operationId": "postAuth",
+    "path": "/api/auth",
+    "httpMethod": "POST",
+    "tags": ["Auth"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "discovery",
+    "methodName": "authGetuser",
+    "operationId": "getAuthGetuser",
+    "path": "/api/auth/getuser",
+    "httpMethod": "GET",
+    "tags": ["Auth"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "discovery",
+    "methodName": "authLogin",
+    "operationId": "postAuthLogin",
+    "path": "/api/auth/login",
+    "httpMethod": "POST",
+    "tags": ["Auth"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "discovery",
+    "methodName": "authLoginadmin",
+    "operationId": "postAuthLoginadmin",
+    "path": "/api/auth/loginadmin",
+    "httpMethod": "POST",
+    "tags": ["Auth"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "discovery",
+    "methodName": "authLoginsso",
+    "operationId": "getAuthLoginsso",
+    "path": "/api/auth/loginsso",
+    "httpMethod": "GET",
+    "tags": ["Auth"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsBlackoutwindows",
+    "operationId": "getAppIdTicketsBlackoutwindows",
+    "path": "/api/{appId}/tickets/blackoutwindows",
+    "httpMethod": "GET",
+    "tags": ["BlackoutWindows"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsBlackoutwindows2",
+    "operationId": "postAppIdTicketsBlackoutwindows",
+    "path": "/api/{appId}/tickets/blackoutwindows",
+    "httpMethod": "POST",
+    "tags": ["BlackoutWindows"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsBlackoutwindowsId",
+    "operationId": "getAppIdTicketsBlackoutwindowsId",
+    "path": "/api/{appId}/tickets/blackoutwindows/{id}",
+    "httpMethod": "GET",
+    "tags": ["BlackoutWindows"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsBlackoutwindowsId2",
+    "operationId": "putAppIdTicketsBlackoutwindowsId",
+    "path": "/api/{appId}/tickets/blackoutwindows/{id}",
+    "httpMethod": "PUT",
+    "tags": ["BlackoutWindows"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsBlackoutwindowsSearch",
+    "operationId": "postAppIdTicketsBlackoutwindowsSearch",
+    "path": "/api/{appId}/tickets/blackoutwindows/search",
+    "httpMethod": "POST",
+    "tags": ["BlackoutWindows"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbSearches",
+    "operationId": "getAppIdCmdbSearches",
+    "path": "/api/{appId}/cmdb/searches",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItemReports"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbSearchesSearchIdResults",
+    "operationId": "postAppIdCmdbSearchesSearchIdResults",
+    "path": "/api/{appId}/cmdb/searches/{searchId}/results",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItemReports"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbTypes",
+    "operationId": "getAppIdCmdbTypes",
+    "path": "/api/{appId}/cmdb/types",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItemTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbTypes2",
+    "operationId": "postAppIdCmdbTypes",
+    "path": "/api/{appId}/cmdb/types",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItemTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbTypesId",
+    "operationId": "getAppIdCmdbTypesId",
+    "path": "/api/{appId}/cmdb/types/{id}",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItemTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbTypesId2",
+    "operationId": "putAppIdCmdbTypesId",
+    "path": "/api/{appId}/cmdb/types/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ConfigurationItemTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbTypesSearch",
+    "operationId": "postAppIdCmdbTypesSearch",
+    "path": "/api/{appId}/cmdb/types/search",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItemTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdb",
+    "operationId": "postAppIdCmdb",
+    "path": "/api/{appId}/cmdb",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbId",
+    "operationId": "getAppIdCmdbId",
+    "path": "/api/{appId}/cmdb/{id}",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItems"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbId2",
+    "operationId": "putAppIdCmdbId",
+    "path": "/api/{appId}/cmdb/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbId3",
+    "operationId": "patchAppIdCmdbId",
+    "path": "/api/{appId}/cmdb/{id}",
+    "httpMethod": "PATCH",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbId4",
+    "operationId": "deleteAppIdCmdbId",
+    "path": "/api/{appId}/cmdb/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdArticles",
+    "operationId": "getAppIdCmdbIdArticles",
+    "path": "/api/{appId}/cmdb/{id}/articles",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItems"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdArticlesArticleId",
+    "operationId": "postAppIdCmdbIdArticlesArticleId",
+    "path": "/api/{appId}/cmdb/{id}/articles/{articleId}",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdArticlesArticleId2",
+    "operationId": "deleteAppIdCmdbIdArticlesArticleId",
+    "path": "/api/{appId}/cmdb/{id}/articles/{articleId}",
+    "httpMethod": "DELETE",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdAttachments",
+    "operationId": "postAppIdCmdbIdAttachments",
+    "path": "/api/{appId}/cmdb/{id}/attachments",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdFeed",
+    "operationId": "getAppIdCmdbIdFeed",
+    "path": "/api/{appId}/cmdb/{id}/feed",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItems"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdFeed2",
+    "operationId": "postAppIdCmdbIdFeed",
+    "path": "/api/{appId}/cmdb/{id}/feed",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdRelationships",
+    "operationId": "getAppIdCmdbIdRelationships",
+    "path": "/api/{appId}/cmdb/{id}/relationships",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItems"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdRelationships2",
+    "operationId": "putAppIdCmdbIdRelationships",
+    "path": "/api/{appId}/cmdb/{id}/relationships",
+    "httpMethod": "PUT",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdRelationshipsRelationshipId",
+    "operationId": "deleteAppIdCmdbIdRelationshipsRelationshipId",
+    "path": "/api/{appId}/cmdb/{id}/relationships/{relationshipId}",
+    "httpMethod": "DELETE",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdTickets",
+    "operationId": "getAppIdCmdbIdTickets",
+    "path": "/api/{appId}/cmdb/{id}/tickets",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItems"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdTicketsTicketId",
+    "operationId": "postAppIdCmdbIdTicketsTicketId",
+    "path": "/api/{appId}/cmdb/{id}/tickets/{ticketId}",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbIdTicketsTicketId2",
+    "operationId": "deleteAppIdCmdbIdTicketsTicketId",
+    "path": "/api/{appId}/cmdb/{id}/tickets/{ticketId}",
+    "httpMethod": "DELETE",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbForms",
+    "operationId": "getAppIdCmdbForms",
+    "path": "/api/{appId}/cmdb/forms",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationItems"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbRelationshipsBulkadd",
+    "operationId": "postAppIdCmdbRelationshipsBulkadd",
+    "path": "/api/{appId}/cmdb/relationships/bulkadd",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbRelationshipsBulkdelete",
+    "operationId": "postAppIdCmdbRelationshipsBulkdelete",
+    "path": "/api/{appId}/cmdb/relationships/bulkdelete",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbSearch",
+    "operationId": "postAppIdCmdbSearch",
+    "path": "/api/{appId}/cmdb/search",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationItems"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbRelationshiptypes",
+    "operationId": "getAppIdCmdbRelationshiptypes",
+    "path": "/api/{appId}/cmdb/relationshiptypes",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationRelationshipTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbRelationshiptypes2",
+    "operationId": "postAppIdCmdbRelationshiptypes",
+    "path": "/api/{appId}/cmdb/relationshiptypes",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationRelationshipTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbRelationshiptypesId",
+    "operationId": "getAppIdCmdbRelationshiptypesId",
+    "path": "/api/{appId}/cmdb/relationshiptypes/{id}",
+    "httpMethod": "GET",
+    "tags": ["ConfigurationRelationshipTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbRelationshiptypesId2",
+    "operationId": "putAppIdCmdbRelationshiptypesId",
+    "path": "/api/{appId}/cmdb/relationshiptypes/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ConfigurationRelationshipTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbRelationshiptypesSearch",
+    "operationId": "postAppIdCmdbRelationshiptypesSearch",
+    "path": "/api/{appId}/cmdb/relationshiptypes/search",
+    "httpMethod": "POST",
+    "tags": ["ConfigurationRelationshipTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContracts",
+    "operationId": "postAppIdAssetsContracts",
+    "path": "/api/{appId}/assets/contracts",
+    "httpMethod": "POST",
+    "tags": ["Contracts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsId",
+    "operationId": "getAppIdAssetsContractsId",
+    "path": "/api/{appId}/assets/contracts/{id}",
+    "httpMethod": "GET",
+    "tags": ["Contracts"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsId2",
+    "operationId": "putAppIdAssetsContractsId",
+    "path": "/api/{appId}/assets/contracts/{id}",
+    "httpMethod": "PUT",
+    "tags": ["Contracts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsIdAssociatedassets",
+    "operationId": "getAppIdAssetsContractsIdAssociatedassets",
+    "path": "/api/{appId}/assets/contracts/{id}/associatedassets",
+    "httpMethod": "GET",
+    "tags": ["Contracts"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsIdAssociatedassetsAssetId",
+    "operationId": "postAppIdAssetsContractsIdAssociatedassetsAssetId",
+    "path": "/api/{appId}/assets/contracts/{id}/associatedassets/{assetId}",
+    "httpMethod": "POST",
+    "tags": ["Contracts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsIdAssociatedassetsAssetId2",
+    "operationId": "putAppIdAssetsContractsIdAssociatedassetsAssetId",
+    "path": "/api/{appId}/assets/contracts/{id}/associatedassets/{assetId}",
+    "httpMethod": "PUT",
+    "tags": ["Contracts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsIdAssociatedassetsAssetId3",
+    "operationId": "deleteAppIdAssetsContractsIdAssociatedassetsAssetId",
+    "path": "/api/{appId}/assets/contracts/{id}/associatedassets/{assetId}",
+    "httpMethod": "DELETE",
+    "tags": ["Contracts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsIdAttachments",
+    "operationId": "postAppIdAssetsContractsIdAttachments",
+    "path": "/api/{appId}/assets/contracts/{id}/attachments",
+    "httpMethod": "POST",
+    "tags": ["Contracts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsContractsSearch",
+    "operationId": "postAppIdAssetsContractsSearch",
+    "path": "/api/{appId}/assets/contracts/search",
+    "httpMethod": "POST",
+    "tags": ["Contracts"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "daysoff",
+    "operationId": "getDaysoff",
+    "path": "/api/daysoff",
+    "httpMethod": "GET",
+    "tags": ["DaysOff"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "feedId",
+    "operationId": "getFeedId",
+    "path": "/api/feed/{id}",
+    "httpMethod": "GET",
+    "tags": ["Feed"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIDFilesId",
+    "operationId": "getProjectsProjectIDFilesId",
+    "path": "/api/projects/{projectID}/files/{id}",
+    "httpMethod": "GET",
+    "tags": ["Files"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIDFilesIdContent",
+    "operationId": "getProjectsProjectIDFilesIdContent",
+    "path": "/api/projects/{projectID}/files/{id}/content",
+    "httpMethod": "GET",
+    "tags": ["Files"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIDFolders",
+    "operationId": "getProjectsProjectIDFolders",
+    "path": "/api/projects/{projectID}/folders",
+    "httpMethod": "GET",
+    "tags": ["Folders"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIDFoldersIdFiles",
+    "operationId": "getProjectsProjectIDFoldersIdFiles",
+    "path": "/api/projects/{projectID}/folders/{id}/files",
+    "httpMethod": "GET",
+    "tags": ["Folders"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIDFoldersIdFiles2",
+    "operationId": "postProjectsProjectIDFoldersIdFiles",
+    "path": "/api/projects/{projectID}/folders/{id}/files",
+    "httpMethod": "POST",
+    "tags": ["Folders"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "functionalroles",
+    "operationId": "postFunctionalroles",
+    "path": "/api/functionalroles",
+    "httpMethod": "POST",
+    "tags": ["FunctionalRoles"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "functionalrolesId",
+    "operationId": "putFunctionalrolesId",
+    "path": "/api/functionalroles/{id}",
+    "httpMethod": "PUT",
+    "tags": ["FunctionalRoles"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "functionalrolesSearch",
+    "operationId": "postFunctionalrolesSearch",
+    "path": "/api/functionalroles/search",
+    "httpMethod": "POST",
+    "tags": ["FunctionalRoles"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groups",
+    "operationId": "postGroups",
+    "path": "/api/groups",
+    "httpMethod": "POST",
+    "tags": ["Group"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsId",
+    "operationId": "getGroupsId",
+    "path": "/api/groups/{id}",
+    "httpMethod": "GET",
+    "tags": ["Group"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsId2",
+    "operationId": "putGroupsId",
+    "path": "/api/groups/{id}",
+    "httpMethod": "PUT",
+    "tags": ["Group"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsIdApplications",
+    "operationId": "getGroupsIdApplications",
+    "path": "/api/groups/{id}/applications",
+    "httpMethod": "GET",
+    "tags": ["Group"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsIdApplications2",
+    "operationId": "postGroupsIdApplications",
+    "path": "/api/groups/{id}/applications",
+    "httpMethod": "POST",
+    "tags": ["Group"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsIdApplications3",
+    "operationId": "deleteGroupsIdApplications",
+    "path": "/api/groups/{id}/applications",
+    "httpMethod": "DELETE",
+    "tags": ["Group"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsIdMembers",
+    "operationId": "getGroupsIdMembers",
+    "path": "/api/groups/{id}/members",
+    "httpMethod": "GET",
+    "tags": ["Group"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsIdMembers2",
+    "operationId": "postGroupsIdMembers",
+    "path": "/api/groups/{id}/members",
+    "httpMethod": "POST",
+    "tags": ["Group"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsIdMembers3",
+    "operationId": "deleteGroupsIdMembers",
+    "path": "/api/groups/{id}/members",
+    "httpMethod": "DELETE",
+    "tags": ["Group"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "groupsSearch",
+    "operationId": "postGroupsSearch",
+    "path": "/api/groups/search",
+    "httpMethod": "POST",
+    "tags": ["Group"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "industries",
+    "operationId": "getIndustries",
+    "path": "/api/industries",
+    "httpMethod": "GET",
+    "tags": ["Industries"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "industries2",
+    "operationId": "postIndustries",
+    "path": "/api/industries",
+    "httpMethod": "POST",
+    "tags": ["Industries"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "industriesId",
+    "operationId": "putIndustriesId",
+    "path": "/api/industries/{id}",
+    "httpMethod": "PUT",
+    "tags": ["Industries"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "integrationsIntegrationIdExcludeAssetAssetId",
+    "operationId": "postIntegrationsIntegrationIdExcludeAssetAssetId",
+    "path": "/api/integrations/{integrationId}/exclude/asset/{assetId}",
+    "httpMethod": "POST",
+    "tags": ["Integrations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "integrationsIntegrationIdExcludeAssetAssetId2",
+    "operationId": "deleteIntegrationsIntegrationIdExcludeAssetAssetId",
+    "path": "/api/integrations/{integrationId}/exclude/asset/{assetId}",
+    "httpMethod": "DELETE",
+    "tags": ["Integrations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "integrationsIntegrationIdExcludeAssets",
+    "operationId": "postIntegrationsIntegrationIdExcludeAssets",
+    "path": "/api/integrations/{integrationId}/exclude/assets",
+    "httpMethod": "POST",
+    "tags": ["Integrations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "integrationsIntegrationIdExclusions",
+    "operationId": "getIntegrationsIntegrationIdExclusions",
+    "path": "/api/integrations/{integrationId}/exclusions",
+    "httpMethod": "GET",
+    "tags": ["Integrations"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "integrationsWebhook",
+    "operationId": "postIntegrationsWebhook",
+    "path": "/api/integrations/webhook",
+    "httpMethod": "POST",
+    "tags": ["IntegrationsWebhook"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdAssetsIntuneAssetIdMap",
+    "operationId": "putAppIdAssetsIntuneAssetIdMap",
+    "path": "/api/{appId}/assets/intune/{assetId}/map",
+    "httpMethod": "PUT",
+    "tags": ["IntuneAssets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdAssetsIntuneMap",
+    "operationId": "putAppIdAssetsIntuneMap",
+    "path": "/api/{appId}/assets/intune/map",
+    "httpMethod": "PUT",
+    "tags": ["IntuneAssets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesIssueId",
+    "operationId": "getProjectsProjectIdIssuesIssueId",
+    "path": "/api/projects/{projectId}/issues/{issueId}",
+    "httpMethod": "GET",
+    "tags": ["Issues"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesIssueId2",
+    "operationId": "postProjectsProjectIdIssuesIssueId",
+    "path": "/api/projects/{projectId}/issues/{issueId}",
+    "httpMethod": "POST",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesIssueIdAttachments",
+    "operationId": "postProjectsProjectIdIssuesIssueIdAttachments",
+    "path": "/api/projects/{projectId}/issues/{issueId}/attachments",
+    "httpMethod": "POST",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesIssueIdFeed",
+    "operationId": "getProjectsProjectIdIssuesIssueIdFeed",
+    "path": "/api/projects/{projectId}/issues/{issueId}/feed",
+    "httpMethod": "GET",
+    "tags": ["Issues"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesIssueIdFeed2",
+    "operationId": "postProjectsProjectIdIssuesIssueIdFeed",
+    "path": "/api/projects/{projectId}/issues/{issueId}/feed",
+    "httpMethod": "POST",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesCategories",
+    "operationId": "getProjectsProjectIdIssuesCategories",
+    "path": "/api/projects/{projectId}/issues/categories",
+    "httpMethod": "GET",
+    "tags": ["Issues"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesCategories2",
+    "operationId": "postProjectsProjectIdIssuesCategories",
+    "path": "/api/projects/{projectId}/issues/categories",
+    "httpMethod": "POST",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesCategoriesIssueCategoryId",
+    "operationId": "getProjectsProjectIdIssuesCategoriesIssueCategoryId",
+    "path": "/api/projects/{projectId}/issues/categories/{issueCategoryId}",
+    "httpMethod": "GET",
+    "tags": ["Issues"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesCategoriesIssueCategoryId2",
+    "operationId": "putProjectsProjectIdIssuesCategoriesIssueCategoryId",
+    "path": "/api/projects/{projectId}/issues/categories/{issueCategoryId}",
+    "httpMethod": "PUT",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdIssuesCategoriesIssueCategoryId3",
+    "operationId": "deleteProjectsProjectIdIssuesCategoriesIssueCategoryId",
+    "path": "/api/projects/{projectId}/issues/categories/{issueCategoryId}",
+    "httpMethod": "DELETE",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIssuesPriorities",
+    "operationId": "getProjectsIssuesPriorities",
+    "path": "/api/projects/issues/priorities",
+    "httpMethod": "GET",
+    "tags": ["Issues"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIssuesSearch",
+    "operationId": "postProjectsIssuesSearch",
+    "path": "/api/projects/issues/search",
+    "httpMethod": "POST",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIssuesStatuses",
+    "operationId": "getProjectsIssuesStatuses",
+    "path": "/api/projects/issues/statuses",
+    "httpMethod": "GET",
+    "tags": ["Issues"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIssues",
+    "operationId": "postProjectsIssues",
+    "path": "/api/projects/issues",
+    "httpMethod": "POST",
+    "tags": ["Issues"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebase",
+    "operationId": "postAppIdKnowledgebase",
+    "path": "/api/{appId}/knowledgebase",
+    "httpMethod": "POST",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseId",
+    "operationId": "getAppIdKnowledgebaseId",
+    "path": "/api/{appId}/knowledgebase/{id}",
+    "httpMethod": "GET",
+    "tags": ["KnowledgeBase"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseId2",
+    "operationId": "putAppIdKnowledgebaseId",
+    "path": "/api/{appId}/knowledgebase/{id}",
+    "httpMethod": "PUT",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseId3",
+    "operationId": "deleteAppIdKnowledgebaseId",
+    "path": "/api/{appId}/knowledgebase/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseIdAssetscis",
+    "operationId": "getAppIdKnowledgebaseIdAssetscis",
+    "path": "/api/{appId}/knowledgebase/{id}/assetscis",
+    "httpMethod": "GET",
+    "tags": ["KnowledgeBase"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseIdAttachments",
+    "operationId": "postAppIdKnowledgebaseIdAttachments",
+    "path": "/api/{appId}/knowledgebase/{id}/attachments",
+    "httpMethod": "POST",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseIdRelated",
+    "operationId": "getAppIdKnowledgebaseIdRelated",
+    "path": "/api/{appId}/knowledgebase/{id}/related",
+    "httpMethod": "GET",
+    "tags": ["KnowledgeBase"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseIdRelatedRelatedArticleId",
+    "operationId": "postAppIdKnowledgebaseIdRelatedRelatedArticleId",
+    "path": "/api/{appId}/knowledgebase/{id}/related/{relatedArticleId}",
+    "httpMethod": "POST",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseIdRelatedRelatedArticleId2",
+    "operationId": "deleteAppIdKnowledgebaseIdRelatedRelatedArticleId",
+    "path": "/api/{appId}/knowledgebase/{id}/related/{relatedArticleId}",
+    "httpMethod": "DELETE",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseCategories",
+    "operationId": "getAppIdKnowledgebaseCategories",
+    "path": "/api/{appId}/knowledgebase/categories",
+    "httpMethod": "GET",
+    "tags": ["KnowledgeBase"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseCategories2",
+    "operationId": "postAppIdKnowledgebaseCategories",
+    "path": "/api/{appId}/knowledgebase/categories",
+    "httpMethod": "POST",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseCategoriesId",
+    "operationId": "getAppIdKnowledgebaseCategoriesId",
+    "path": "/api/{appId}/knowledgebase/categories/{id}",
+    "httpMethod": "GET",
+    "tags": ["KnowledgeBase"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseCategoriesId2",
+    "operationId": "putAppIdKnowledgebaseCategoriesId",
+    "path": "/api/{appId}/knowledgebase/categories/{id}",
+    "httpMethod": "PUT",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseCategoriesId3",
+    "operationId": "deleteAppIdKnowledgebaseCategoriesId",
+    "path": "/api/{appId}/knowledgebase/categories/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "knowledgeBase",
+    "methodName": "appIdKnowledgebaseSearch",
+    "operationId": "postAppIdKnowledgebaseSearch",
+    "path": "/api/{appId}/knowledgebase/search",
+    "httpMethod": "POST",
+    "tags": ["KnowledgeBase"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdLinks",
+    "operationId": "postProjectsProjectIdLinks",
+    "path": "/api/projects/{projectId}/links",
+    "httpMethod": "POST",
+    "tags": ["Links"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdLinksLinkId",
+    "operationId": "getProjectsProjectIdLinksLinkId",
+    "path": "/api/projects/{projectId}/links/{linkId}",
+    "httpMethod": "GET",
+    "tags": ["Links"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdLinksLinkId2",
+    "operationId": "putProjectsProjectIdLinksLinkId",
+    "path": "/api/projects/{projectId}/links/{linkId}",
+    "httpMethod": "PUT",
+    "tags": ["Links"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdLinksLinkIdFeed",
+    "operationId": "getProjectsProjectIdLinksLinkIdFeed",
+    "path": "/api/projects/{projectId}/links/{linkId}/feed",
+    "httpMethod": "GET",
+    "tags": ["Links"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdLinksLinkIdFeed2",
+    "operationId": "postProjectsProjectIdLinksLinkIdFeed",
+    "path": "/api/projects/{projectId}/links/{linkId}/feed",
+    "httpMethod": "POST",
+    "tags": ["Links"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdLinksCategories",
+    "operationId": "getProjectsProjectIdLinksCategories",
+    "path": "/api/projects/{projectId}/links/categories",
+    "httpMethod": "GET",
+    "tags": ["Links"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdLinksSearch",
+    "operationId": "postProjectsProjectIdLinksSearch",
+    "path": "/api/projects/{projectId}/links/search",
+    "httpMethod": "POST",
+    "tags": ["Links"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locations",
+    "operationId": "getLocations",
+    "path": "/api/locations",
+    "httpMethod": "GET",
+    "tags": ["Locations"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locations2",
+    "operationId": "postLocations",
+    "path": "/api/locations",
+    "httpMethod": "POST",
+    "tags": ["Locations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locationsId",
+    "operationId": "getLocationsId",
+    "path": "/api/locations/{id}",
+    "httpMethod": "GET",
+    "tags": ["Locations"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locationsId2",
+    "operationId": "putLocationsId",
+    "path": "/api/locations/{id}",
+    "httpMethod": "PUT",
+    "tags": ["Locations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locationsIdRoomsRoomId",
+    "operationId": "getLocationsIdRoomsRoomId",
+    "path": "/api/locations/{id}/rooms/{roomId}",
+    "httpMethod": "GET",
+    "tags": ["Locations"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locationsIdRoomsRoomId2",
+    "operationId": "putLocationsIdRoomsRoomId",
+    "path": "/api/locations/{id}/rooms/{roomId}",
+    "httpMethod": "PUT",
+    "tags": ["Locations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locationsIdRoomsRoomId3",
+    "operationId": "deleteLocationsIdRoomsRoomId",
+    "path": "/api/locations/{id}/rooms/{roomId}",
+    "httpMethod": "DELETE",
+    "tags": ["Locations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locationsIdRooms",
+    "operationId": "postLocationsIdRooms",
+    "path": "/api/locations/{id}/rooms",
+    "httpMethod": "POST",
+    "tags": ["Locations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "locationsSearch",
+    "operationId": "postLocationsSearch",
+    "path": "/api/locations/search",
+    "httpMethod": "POST",
+    "tags": ["Locations"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTicketIdMaintenanceActivities",
+    "operationId": "getAppIdTicketsTicketIdMaintenanceActivities",
+    "path": "/api/{appId}/tickets/{ticketId}/MaintenanceActivities",
+    "httpMethod": "GET",
+    "tags": ["MaintenanceActivites"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTicketIdMaintenanceActivities2",
+    "operationId": "postAppIdTicketsTicketIdMaintenanceActivities",
+    "path": "/api/{appId}/tickets/{ticketId}/MaintenanceActivities",
+    "httpMethod": "POST",
+    "tags": ["MaintenanceActivites"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTicketIdMaintenanceActivitiesId",
+    "operationId": "getAppIdTicketsTicketIdMaintenanceActivitiesId",
+    "path": "/api/{appId}/tickets/{ticketId}/MaintenanceActivities/{id}",
+    "httpMethod": "GET",
+    "tags": ["MaintenanceActivites"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTicketIdMaintenanceActivitiesId2",
+    "operationId": "postAppIdTicketsTicketIdMaintenanceActivitiesId",
+    "path": "/api/{appId}/tickets/{ticketId}/MaintenanceActivities/{id}",
+    "httpMethod": "POST",
+    "tags": ["MaintenanceActivites"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTicketIdMaintenanceActivitiesId3",
+    "operationId": "putAppIdTicketsTicketIdMaintenanceActivitiesId",
+    "path": "/api/{appId}/tickets/{ticketId}/MaintenanceActivities/{id}",
+    "httpMethod": "PUT",
+    "tags": ["MaintenanceActivites"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTicketIdMaintenanceActivitiesId4",
+    "operationId": "deleteAppIdTicketsTicketIdMaintenanceActivitiesId",
+    "path": "/api/{appId}/tickets/{ticketId}/MaintenanceActivities/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["MaintenanceActivites"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTicketIdMaintenanceActivitiesIdFeed",
+    "operationId": "getAppIdTicketsTicketIdMaintenanceActivitiesIdFeed",
+    "path": "/api/{appId}/tickets/{ticketId}/MaintenanceActivities/{id}/feed",
+    "httpMethod": "GET",
+    "tags": ["MaintenanceActivites"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbMaintenanceschedules",
+    "operationId": "getAppIdCmdbMaintenanceschedules",
+    "path": "/api/{appId}/cmdb/maintenanceschedules",
+    "httpMethod": "GET",
+    "tags": ["MaintenanceSchedules"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbMaintenanceschedulesSearch",
+    "operationId": "postAppIdCmdbMaintenanceschedulesSearch",
+    "path": "/api/{appId}/cmdb/maintenanceschedules/search",
+    "httpMethod": "POST",
+    "tags": ["MaintenanceSchedules"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbMaintenancewindows",
+    "operationId": "getAppIdCmdbMaintenancewindows",
+    "path": "/api/{appId}/cmdb/maintenancewindows",
+    "httpMethod": "GET",
+    "tags": ["MaintenanceSchedules"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbMaintenancewindows2",
+    "operationId": "postAppIdCmdbMaintenancewindows",
+    "path": "/api/{appId}/cmdb/maintenancewindows",
+    "httpMethod": "POST",
+    "tags": ["MaintenanceSchedules"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbMaintenancewindowsId",
+    "operationId": "getAppIdCmdbMaintenancewindowsId",
+    "path": "/api/{appId}/cmdb/maintenancewindows/{id}",
+    "httpMethod": "GET",
+    "tags": ["MaintenanceSchedules"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbMaintenancewindowsId2",
+    "operationId": "putAppIdCmdbMaintenancewindowsId",
+    "path": "/api/{appId}/cmdb/maintenancewindows/{id}",
+    "httpMethod": "PUT",
+    "tags": ["MaintenanceSchedules"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdCmdbMaintenancewindowsSearch",
+    "operationId": "postAppIdCmdbMaintenancewindowsSearch",
+    "path": "/api/{appId}/cmdb/maintenancewindows/search",
+    "httpMethod": "POST",
+    "tags": ["MaintenanceSchedules"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "people",
+    "operationId": "postPeople",
+    "path": "/api/people",
+    "httpMethod": "POST",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUid",
+    "operationId": "getPeopleUid",
+    "path": "/api/people/{uid}",
+    "httpMethod": "GET",
+    "tags": ["People"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUid2",
+    "operationId": "postPeopleUid",
+    "path": "/api/people/{uid}",
+    "httpMethod": "POST",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUid3",
+    "operationId": "patchPeopleUid",
+    "path": "/api/people/{uid}",
+    "httpMethod": "PATCH",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidFunctionalroles",
+    "operationId": "getPeopleUidFunctionalroles",
+    "path": "/api/people/{uid}/functionalroles",
+    "httpMethod": "GET",
+    "tags": ["People"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidFunctionalrolesRoleId",
+    "operationId": "putPeopleUidFunctionalrolesRoleId",
+    "path": "/api/people/{uid}/functionalroles/{roleId}",
+    "httpMethod": "PUT",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidFunctionalrolesRoleId2",
+    "operationId": "deletePeopleUidFunctionalrolesRoleId",
+    "path": "/api/people/{uid}/functionalroles/{roleId}",
+    "httpMethod": "DELETE",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidGroups",
+    "operationId": "getPeopleUidGroups",
+    "path": "/api/people/{uid}/groups",
+    "httpMethod": "GET",
+    "tags": ["People"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidGroups2",
+    "operationId": "postPeopleUidGroups",
+    "path": "/api/people/{uid}/groups",
+    "httpMethod": "POST",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidGroupsGroupID",
+    "operationId": "putPeopleUidGroupsGroupID",
+    "path": "/api/people/{uid}/groups/{groupID}",
+    "httpMethod": "PUT",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidGroupsGroupID2",
+    "operationId": "deletePeopleUidGroupsGroupID",
+    "path": "/api/people/{uid}/groups/{groupID}",
+    "httpMethod": "DELETE",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUidIsactive",
+    "operationId": "putPeopleUidIsactive",
+    "path": "/api/people/{uid}/isactive",
+    "httpMethod": "PUT",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleGetuidUsername",
+    "operationId": "getPeopleGetuidUsername",
+    "path": "/api/people/getuid/{username}",
+    "httpMethod": "GET",
+    "tags": ["People"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleImport",
+    "operationId": "postPeopleImport",
+    "path": "/api/people/import",
+    "httpMethod": "POST",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleLookup",
+    "operationId": "getPeopleLookup",
+    "path": "/api/people/lookup",
+    "httpMethod": "GET",
+    "tags": ["People"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleSearch",
+    "operationId": "postPeopleSearch",
+    "path": "/api/people/search",
+    "httpMethod": "POST",
+    "tags": ["People"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleUserlist",
+    "operationId": "getPeopleUserlist",
+    "path": "/api/people/userlist",
+    "httpMethod": "GET",
+    "tags": ["People"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdBoardsBoardIdLists",
+    "operationId": "getProjectsProjectIdBoardsBoardIdLists",
+    "path": "/api/projects/{projectId}/boards/{boardId}/lists",
+    "httpMethod": "GET",
+    "tags": ["Plans"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlans",
+    "operationId": "postProjectsProjectIdPlans",
+    "path": "/api/projects/{projectId}/plans",
+    "httpMethod": "POST",
+    "tags": ["Plans"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIDPlansPlanID",
+    "operationId": "getProjectsProjectIDPlansPlanID",
+    "path": "/api/projects/{projectID}/plans/{planID}",
+    "httpMethod": "GET",
+    "tags": ["Plans"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdCheckedOutTo",
+    "operationId": "getProjectsProjectIdPlansPlanIdCheckedOutTo",
+    "path": "/api/projects/{projectId}/plans/{planId}/checkedOutTo",
+    "httpMethod": "GET",
+    "tags": ["Plans"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIDPlansPlanIDDraftsDraftID",
+    "operationId": "postProjectsProjectIDPlansPlanIDDraftsDraftID",
+    "path": "/api/projects/{projectID}/plans/{planID}/drafts/{draftID}",
+    "httpMethod": "POST",
+    "tags": ["Plans"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdFeed",
+    "operationId": "getProjectsProjectIdPlansPlanIdFeed",
+    "path": "/api/projects/{projectId}/plans/{planId}/feed",
+    "httpMethod": "GET",
+    "tags": ["Plans"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasks",
+    "operationId": "getProjectsProjectIdPlansPlanIdTasks",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks",
+    "httpMethod": "GET",
+    "tags": ["Plans"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansSearch",
+    "operationId": "postProjectsProjectIdPlansSearch",
+    "path": "/api/projects/{projectId}/plans/search",
+    "httpMethod": "POST",
+    "tags": ["Plans"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModels",
+    "operationId": "getAppIdAssetsModels",
+    "path": "/api/{appId}/assets/models",
+    "httpMethod": "GET",
+    "tags": ["ProductModels"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModels2",
+    "operationId": "postAppIdAssetsModels",
+    "path": "/api/{appId}/assets/models",
+    "httpMethod": "POST",
+    "tags": ["ProductModels"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsId",
+    "operationId": "getAppIdAssetsModelsId",
+    "path": "/api/{appId}/assets/models/{id}",
+    "httpMethod": "GET",
+    "tags": ["ProductModels"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsId2",
+    "operationId": "putAppIdAssetsModelsId",
+    "path": "/api/{appId}/assets/models/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ProductModels"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsSearch",
+    "operationId": "postAppIdAssetsModelsSearch",
+    "path": "/api/{appId}/assets/models/search",
+    "httpMethod": "POST",
+    "tags": ["ProductModels"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsTypes",
+    "operationId": "getAppIdAssetsModelsTypes",
+    "path": "/api/{appId}/assets/models/types",
+    "httpMethod": "GET",
+    "tags": ["ProductTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsTypes2",
+    "operationId": "postAppIdAssetsModelsTypes",
+    "path": "/api/{appId}/assets/models/types",
+    "httpMethod": "POST",
+    "tags": ["ProductTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsTypesId",
+    "operationId": "getAppIdAssetsModelsTypesId",
+    "path": "/api/{appId}/assets/models/types/{id}",
+    "httpMethod": "GET",
+    "tags": ["ProductTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsTypesId2",
+    "operationId": "putAppIdAssetsModelsTypesId",
+    "path": "/api/{appId}/assets/models/types/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ProductTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "assets",
+    "methodName": "appIdAssetsModelsTypesSearch",
+    "operationId": "postAppIdAssetsModelsTypesSearch",
+    "path": "/api/{appId}/assets/models/types/search",
+    "httpMethod": "POST",
+    "tags": ["ProductTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectrequests",
+    "operationId": "postProjectrequests",
+    "path": "/api/projectrequests",
+    "httpMethod": "POST",
+    "tags": ["ProjectRequests"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectrequestsIdSubmit",
+    "operationId": "postProjectrequestsIdSubmit",
+    "path": "/api/projectrequests/{id}/submit",
+    "httpMethod": "POST",
+    "tags": ["ProjectRequests"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projecttemplatesIdPlans",
+    "operationId": "getProjecttemplatesIdPlans",
+    "path": "/api/projecttemplates/{id}/plans",
+    "httpMethod": "GET",
+    "tags": ["ProjectTemplates"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projecttemplates",
+    "operationId": "getProjecttemplates",
+    "path": "/api/projecttemplates",
+    "httpMethod": "GET",
+    "tags": ["ProjectTemplates"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsTypes",
+    "operationId": "getProjectsTypes",
+    "path": "/api/projects/types",
+    "httpMethod": "GET",
+    "tags": ["ProjectTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsTypes2",
+    "operationId": "postProjectsTypes",
+    "path": "/api/projects/types",
+    "httpMethod": "POST",
+    "tags": ["ProjectTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsTypesId",
+    "operationId": "getProjectsTypesId",
+    "path": "/api/projects/types/{id}",
+    "httpMethod": "GET",
+    "tags": ["ProjectTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsTypesId2",
+    "operationId": "putProjectsTypesId",
+    "path": "/api/projects/types/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ProjectTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsId",
+    "operationId": "getProjectsId",
+    "path": "/api/projects/{id}",
+    "httpMethod": "GET",
+    "tags": ["Projects"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsId2",
+    "operationId": "postProjectsId",
+    "path": "/api/projects/{id}",
+    "httpMethod": "POST",
+    "tags": ["Projects"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsId3",
+    "operationId": "patchProjectsId",
+    "path": "/api/projects/{id}",
+    "httpMethod": "PATCH",
+    "tags": ["Projects"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIdFeed",
+    "operationId": "getProjectsIdFeed",
+    "path": "/api/projects/{id}/feed",
+    "httpMethod": "GET",
+    "tags": ["Projects"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIdFeed2",
+    "operationId": "postProjectsIdFeed",
+    "path": "/api/projects/{id}/feed",
+    "httpMethod": "POST",
+    "tags": ["Projects"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIdResources",
+    "operationId": "getProjectsIdResources",
+    "path": "/api/projects/{id}/resources",
+    "httpMethod": "GET",
+    "tags": ["Projects"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsIdResourcesResourceUid",
+    "operationId": "postProjectsIdResourcesResourceUid",
+    "path": "/api/projects/{id}/resources/{resourceUid}",
+    "httpMethod": "POST",
+    "tags": ["Projects"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsFeed",
+    "operationId": "getProjectsFeed",
+    "path": "/api/projects/feed",
+    "httpMethod": "GET",
+    "tags": ["Projects"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsList",
+    "operationId": "getProjectsList",
+    "path": "/api/projects/list",
+    "httpMethod": "GET",
+    "tags": ["Projects"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsSearch",
+    "operationId": "postProjectsSearch",
+    "path": "/api/projects/search",
+    "httpMethod": "POST",
+    "tags": ["Projects"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projects",
+    "operationId": "postProjects",
+    "path": "/api/projects",
+    "httpMethod": "POST",
+    "tags": ["Projects"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "reports",
+    "operationId": "getReports",
+    "path": "/api/reports",
+    "httpMethod": "GET",
+    "tags": ["Reports"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "reportsId",
+    "operationId": "getReportsId",
+    "path": "/api/reports/{id}",
+    "httpMethod": "GET",
+    "tags": ["Reports"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "reportsSearch",
+    "operationId": "postReportsSearch",
+    "path": "/api/reports/search",
+    "httpMethod": "POST",
+    "tags": ["Reports"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "resourcepools",
+    "operationId": "postResourcepools",
+    "path": "/api/resourcepools",
+    "httpMethod": "POST",
+    "tags": ["ResourcePools"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "resourcepoolsId",
+    "operationId": "putResourcepoolsId",
+    "path": "/api/resourcepools/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ResourcePools"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "resourcepoolsSearch",
+    "operationId": "postResourcepoolsSearch",
+    "path": "/api/resourcepools/search",
+    "httpMethod": "POST",
+    "tags": ["ResourcePools"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksRiskId",
+    "operationId": "getProjectsProjectIdRisksRiskId",
+    "path": "/api/projects/{projectId}/risks/{riskId}",
+    "httpMethod": "GET",
+    "tags": ["Risks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksRiskId2",
+    "operationId": "postProjectsProjectIdRisksRiskId",
+    "path": "/api/projects/{projectId}/risks/{riskId}",
+    "httpMethod": "POST",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksRiskIdAttachments",
+    "operationId": "postProjectsProjectIdRisksRiskIdAttachments",
+    "path": "/api/projects/{projectId}/risks/{riskId}/attachments",
+    "httpMethod": "POST",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksRiskIdFeed",
+    "operationId": "getProjectsProjectIdRisksRiskIdFeed",
+    "path": "/api/projects/{projectId}/risks/{riskId}/feed",
+    "httpMethod": "GET",
+    "tags": ["Risks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksRiskIdFeed2",
+    "operationId": "postProjectsProjectIdRisksRiskIdFeed",
+    "path": "/api/projects/{projectId}/risks/{riskId}/feed",
+    "httpMethod": "POST",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksCategories",
+    "operationId": "getProjectsProjectIdRisksCategories",
+    "path": "/api/projects/{projectId}/risks/categories",
+    "httpMethod": "GET",
+    "tags": ["Risks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksCategories2",
+    "operationId": "postProjectsProjectIdRisksCategories",
+    "path": "/api/projects/{projectId}/risks/categories",
+    "httpMethod": "POST",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksCategoriesRiskCategoryId",
+    "operationId": "getProjectsProjectIdRisksCategoriesRiskCategoryId",
+    "path": "/api/projects/{projectId}/risks/categories/{riskCategoryId}",
+    "httpMethod": "GET",
+    "tags": ["Risks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksCategoriesRiskCategoryId2",
+    "operationId": "putProjectsProjectIdRisksCategoriesRiskCategoryId",
+    "path": "/api/projects/{projectId}/risks/categories/{riskCategoryId}",
+    "httpMethod": "PUT",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdRisksCategoriesRiskCategoryId3",
+    "operationId": "deleteProjectsProjectIdRisksCategoriesRiskCategoryId",
+    "path": "/api/projects/{projectId}/risks/categories/{riskCategoryId}",
+    "httpMethod": "DELETE",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsRisksSearch",
+    "operationId": "postProjectsRisksSearch",
+    "path": "/api/projects/risks/search",
+    "httpMethod": "POST",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsRisksStatuses",
+    "operationId": "getProjectsRisksStatuses",
+    "path": "/api/projects/risks/statuses",
+    "httpMethod": "GET",
+    "tags": ["Risks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsRisks",
+    "operationId": "postProjectsRisks",
+    "path": "/api/projects/risks",
+    "httpMethod": "POST",
+    "tags": ["Risks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "securityrolesId",
+    "operationId": "getSecurityrolesId",
+    "path": "/api/securityroles/{id}",
+    "httpMethod": "GET",
+    "tags": ["SecurityRoles"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "securityrolesId2",
+    "operationId": "putSecurityrolesId",
+    "path": "/api/securityroles/{id}",
+    "httpMethod": "PUT",
+    "tags": ["SecurityRoles"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "securityrolesPermissions",
+    "operationId": "getSecurityrolesPermissions",
+    "path": "/api/securityroles/permissions",
+    "httpMethod": "GET",
+    "tags": ["SecurityRoles"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "securityrolesSearch",
+    "operationId": "postSecurityrolesSearch",
+    "path": "/api/securityroles/search",
+    "httpMethod": "POST",
+    "tags": ["SecurityRoles"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "securityroles",
+    "operationId": "postSecurityroles",
+    "path": "/api/securityroles",
+    "httpMethod": "POST",
+    "tags": ["SecurityRoles"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServices",
+    "operationId": "getAppIdServices",
+    "path": "/api/{appId}/services",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServices2",
+    "operationId": "postAppIdServices",
+    "path": "/api/{appId}/services",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesId",
+    "operationId": "getAppIdServicesId",
+    "path": "/api/{appId}/services/{id}",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesId2",
+    "operationId": "putAppIdServicesId",
+    "path": "/api/{appId}/services/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesId3",
+    "operationId": "deleteAppIdServicesId",
+    "path": "/api/{appId}/services/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesIdAttachments",
+    "operationId": "postAppIdServicesIdAttachments",
+    "path": "/api/{appId}/services/{id}/attachments",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesIdPermissions",
+    "operationId": "getAppIdServicesIdPermissions",
+    "path": "/api/{appId}/services/{id}/permissions",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesIdPermissions2",
+    "operationId": "putAppIdServicesIdPermissions",
+    "path": "/api/{appId}/services/{id}/permissions",
+    "httpMethod": "PUT",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesIdRelatedarticles",
+    "operationId": "getAppIdServicesIdRelatedarticles",
+    "path": "/api/{appId}/services/{id}/relatedarticles",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesIdRelatedarticlesRelatedArticleId",
+    "operationId": "postAppIdServicesIdRelatedarticlesRelatedArticleId",
+    "path": "/api/{appId}/services/{id}/relatedarticles/{relatedArticleId}",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesIdRelatedarticlesRelatedArticleId2",
+    "operationId": "deleteAppIdServicesIdRelatedarticlesRelatedArticleId",
+    "path": "/api/{appId}/services/{id}/relatedarticles/{relatedArticleId}",
+    "httpMethod": "DELETE",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferings",
+    "operationId": "postAppIdServicesServiceIdOfferings",
+    "path": "/api/{appId}/services/{serviceId}/offerings",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferingsId",
+    "operationId": "getAppIdServicesServiceIdOfferingsId",
+    "path": "/api/{appId}/services/{serviceId}/offerings/{id}",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferingsId2",
+    "operationId": "putAppIdServicesServiceIdOfferingsId",
+    "path": "/api/{appId}/services/{serviceId}/offerings/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferingsId3",
+    "operationId": "deleteAppIdServicesServiceIdOfferingsId",
+    "path": "/api/{appId}/services/{serviceId}/offerings/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferingsIdAttachments",
+    "operationId": "postAppIdServicesServiceIdOfferingsIdAttachments",
+    "path": "/api/{appId}/services/{serviceId}/offerings/{id}/attachments",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferingsIdRelatedarticles",
+    "operationId": "getAppIdServicesServiceIdOfferingsIdRelatedarticles",
+    "path": "/api/{appId}/services/{serviceId}/offerings/{id}/relatedarticles",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferingsIdRelatedarticlesRelatedArticleId",
+    "operationId": "postAppIdServicesServiceIdOfferingsIdRelatedarticlesRelatedArticleId",
+    "path": "/api/{appId}/services/{serviceId}/offerings/{id}/relatedarticles/{relatedArticleId}",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesServiceIdOfferingsIdRelatedarticlesRelatedArticleId2",
+    "operationId": "deleteAppIdServicesServiceIdOfferingsIdRelatedarticlesRelatedArticleId",
+    "path": "/api/{appId}/services/{serviceId}/offerings/{id}/relatedarticles/{relatedArticleId}",
+    "httpMethod": "DELETE",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesCategories",
+    "operationId": "getAppIdServicesCategories",
+    "path": "/api/{appId}/services/categories",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesCategories2",
+    "operationId": "postAppIdServicesCategories",
+    "path": "/api/{appId}/services/categories",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesCategoriesId",
+    "operationId": "getAppIdServicesCategoriesId",
+    "path": "/api/{appId}/services/categories/{id}",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesCategoriesId2",
+    "operationId": "putAppIdServicesCategoriesId",
+    "path": "/api/{appId}/services/categories/{id}",
+    "httpMethod": "PUT",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesCategoriesId3",
+    "operationId": "deleteAppIdServicesCategoriesId",
+    "path": "/api/{appId}/services/categories/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesCategoriesIdPermissions",
+    "operationId": "getAppIdServicesCategoriesIdPermissions",
+    "path": "/api/{appId}/services/categories/{id}/permissions",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesCategoriesIdPermissions2",
+    "operationId": "putAppIdServicesCategoriesIdPermissions",
+    "path": "/api/{appId}/services/categories/{id}/permissions",
+    "httpMethod": "PUT",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesIcons",
+    "operationId": "getAppIdServicesIcons",
+    "path": "/api/{appId}/services/icons",
+    "httpMethod": "GET",
+    "tags": ["ServiceCatalog"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesOfferingsSearch",
+    "operationId": "postAppIdServicesOfferingsSearch",
+    "path": "/api/{appId}/services/offerings/search",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "services",
+    "methodName": "appIdServicesSearch",
+    "operationId": "postAppIdServicesSearch",
+    "path": "/api/{appId}/services/search",
+    "httpMethod": "POST",
+    "tags": ["ServiceCatalog"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasksTaskId",
+    "operationId": "getProjectsProjectIdPlansPlanIdTasksTaskId",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks/{taskId}",
+    "httpMethod": "GET",
+    "tags": ["Tasks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasksTaskId2",
+    "operationId": "postProjectsProjectIdPlansPlanIdTasksTaskId",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks/{taskId}",
+    "httpMethod": "POST",
+    "tags": ["Tasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasksTaskIdComment",
+    "operationId": "postProjectsProjectIdPlansPlanIdTasksTaskIdComment",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks/{taskId}/comment",
+    "httpMethod": "POST",
+    "tags": ["Tasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasksTaskIdEdit",
+    "operationId": "postProjectsProjectIdPlansPlanIdTasksTaskIdEdit",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks/{taskId}/edit",
+    "httpMethod": "POST",
+    "tags": ["Tasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasksTaskIdFeed",
+    "operationId": "getProjectsProjectIdPlansPlanIdTasksTaskIdFeed",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks/{taskId}/feed",
+    "httpMethod": "GET",
+    "tags": ["Tasks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasksTaskIdFeed2",
+    "operationId": "postProjectsProjectIdPlansPlanIdTasksTaskIdFeed",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks/{taskId}/feed",
+    "httpMethod": "POST",
+    "tags": ["Tasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "projects",
+    "methodName": "projectsProjectIdPlansPlanIdTasksInsert",
+    "operationId": "postProjectsProjectIdPlansPlanIdTasksInsert",
+    "path": "/api/projects/{projectId}/plans/{planId}/tasks/insert",
+    "httpMethod": "POST",
+    "tags": ["Tasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsImpacts",
+    "operationId": "getAppIdTicketsImpacts",
+    "path": "/api/{appId}/tickets/impacts",
+    "httpMethod": "GET",
+    "tags": ["TicketImpacts"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsPriorities",
+    "operationId": "getAppIdTicketsPriorities",
+    "path": "/api/{appId}/tickets/priorities",
+    "httpMethod": "GET",
+    "tags": ["TicketPriorities"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsSearches",
+    "operationId": "getAppIdTicketsSearches",
+    "path": "/api/{appId}/tickets/searches",
+    "httpMethod": "GET",
+    "tags": ["TicketReports"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsSearchesSearchIdResults",
+    "operationId": "postAppIdTicketsSearchesSearchIdResults",
+    "path": "/api/{appId}/tickets/searches/{searchId}/results",
+    "httpMethod": "POST",
+    "tags": ["TicketReports"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsSources",
+    "operationId": "getAppIdTicketsSources",
+    "path": "/api/{appId}/tickets/sources",
+    "httpMethod": "GET",
+    "tags": ["TicketSources"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "appIdTicketsStatuses",
+    "operationId": "getAppIdTicketsStatuses",
+    "path": "/api/{appId}/tickets/statuses",
+    "httpMethod": "GET",
+    "tags": ["TicketStatuses"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "appIdTicketsStatuses2",
+    "operationId": "postAppIdTicketsStatuses",
+    "path": "/api/{appId}/tickets/statuses",
+    "httpMethod": "POST",
+    "tags": ["TicketStatuses"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "appIdTicketsStatusesId",
+    "operationId": "getAppIdTicketsStatusesId",
+    "path": "/api/{appId}/tickets/statuses/{id}",
+    "httpMethod": "GET",
+    "tags": ["TicketStatuses"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "appIdTicketsStatusesId2",
+    "operationId": "putAppIdTicketsStatusesId",
+    "path": "/api/{appId}/tickets/statuses/{id}",
+    "httpMethod": "PUT",
+    "tags": ["TicketStatuses"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "appIdTicketsStatusesSearch",
+    "operationId": "postAppIdTicketsStatusesSearch",
+    "path": "/api/{appId}/tickets/statuses/search",
+    "httpMethod": "POST",
+    "tags": ["TicketStatuses"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsTicketIdTasks",
+    "operationId": "getAppIdTicketsTicketIdTasks",
+    "path": "/api/{appId}/tickets/{ticketId}/tasks",
+    "httpMethod": "GET",
+    "tags": ["TicketTasks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsTicketIdTasks2",
+    "operationId": "postAppIdTicketsTicketIdTasks",
+    "path": "/api/{appId}/tickets/{ticketId}/tasks",
+    "httpMethod": "POST",
+    "tags": ["TicketTasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsTicketIdTasksId",
+    "operationId": "getAppIdTicketsTicketIdTasksId",
+    "path": "/api/{appId}/tickets/{ticketId}/tasks/{id}",
+    "httpMethod": "GET",
+    "tags": ["TicketTasks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsTicketIdTasksId2",
+    "operationId": "putAppIdTicketsTicketIdTasksId",
+    "path": "/api/{appId}/tickets/{ticketId}/tasks/{id}",
+    "httpMethod": "PUT",
+    "tags": ["TicketTasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsTicketIdTasksId3",
+    "operationId": "deleteAppIdTicketsTicketIdTasksId",
+    "path": "/api/{appId}/tickets/{ticketId}/tasks/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["TicketTasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsTicketIdTasksIdFeed",
+    "operationId": "getAppIdTicketsTicketIdTasksIdFeed",
+    "path": "/api/{appId}/tickets/{ticketId}/tasks/{id}/feed",
+    "httpMethod": "GET",
+    "tags": ["TicketTasks"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsTicketIdTasksIdFeed2",
+    "operationId": "postAppIdTicketsTicketIdTasksIdFeed",
+    "path": "/api/{appId}/tickets/{ticketId}/tasks/{id}/feed",
+    "httpMethod": "POST",
+    "tags": ["TicketTasks"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTypes",
+    "operationId": "getAppIdTicketsTypes",
+    "path": "/api/{appId}/tickets/types",
+    "httpMethod": "GET",
+    "tags": ["TicketTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTypes2",
+    "operationId": "postAppIdTicketsTypes",
+    "path": "/api/{appId}/tickets/types",
+    "httpMethod": "POST",
+    "tags": ["TicketTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTypesId",
+    "operationId": "getAppIdTicketsTypesId",
+    "path": "/api/{appId}/tickets/types/{id}",
+    "httpMethod": "GET",
+    "tags": ["TicketTypes"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsTypesId2",
+    "operationId": "putAppIdTicketsTypesId",
+    "path": "/api/{appId}/tickets/types/{id}",
+    "httpMethod": "PUT",
+    "tags": ["TicketTypes"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsUrgencies",
+    "operationId": "getAppIdTicketsUrgencies",
+    "path": "/api/{appId}/tickets/urgencies",
+    "httpMethod": "GET",
+    "tags": ["TicketUrgencies"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsId",
+    "operationId": "getAppIdTicketsId",
+    "path": "/api/{appId}/tickets/{id}",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsId2",
+    "operationId": "postAppIdTicketsId",
+    "path": "/api/{appId}/tickets/{id}",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsId3",
+    "operationId": "patchAppIdTicketsId",
+    "path": "/api/{appId}/tickets/{id}",
+    "httpMethod": "PATCH",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdApplication",
+    "operationId": "postAppIdTicketsIdApplication",
+    "path": "/api/{appId}/tickets/{id}/application",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsIdAssets",
+    "operationId": "getAppIdTicketsIdAssets",
+    "path": "/api/{appId}/tickets/{id}/assets",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsIdAssetsAssetId",
+    "operationId": "postAppIdTicketsIdAssetsAssetId",
+    "path": "/api/{appId}/tickets/{id}/assets/{assetId}",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsIdAssetsAssetId2",
+    "operationId": "deleteAppIdTicketsIdAssetsAssetId",
+    "path": "/api/{appId}/tickets/{id}/assets/{assetId}",
+    "httpMethod": "DELETE",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": true
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdAttachments",
+    "operationId": "postAppIdTicketsIdAttachments",
+    "path": "/api/{appId}/tickets/{id}/attachments",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdChildren",
+    "operationId": "postAppIdTicketsIdChildren",
+    "path": "/api/{appId}/tickets/{id}/children",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdClassification",
+    "operationId": "putAppIdTicketsIdClassification",
+    "path": "/api/{appId}/tickets/{id}/classification",
+    "httpMethod": "PUT",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdConfigurationItems",
+    "operationId": "getAppIdTicketsIdConfigurationItems",
+    "path": "/api/{appId}/tickets/{id}/configurationItems",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdConfigurationItemsConfigurationItemId",
+    "operationId": "postAppIdTicketsIdConfigurationItemsConfigurationItemId",
+    "path": "/api/{appId}/tickets/{id}/configurationItems/{configurationItemId}",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdConfigurationItemsConfigurationItemId2",
+    "operationId": "deleteAppIdTicketsIdConfigurationItemsConfigurationItemId",
+    "path": "/api/{appId}/tickets/{id}/configurationItems/{configurationItemId}",
+    "httpMethod": "DELETE",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsIdContacts",
+    "operationId": "getAppIdTicketsIdContacts",
+    "path": "/api/{appId}/tickets/{id}/contacts",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsIdContactsContactUid",
+    "operationId": "postAppIdTicketsIdContactsContactUid",
+    "path": "/api/{appId}/tickets/{id}/contacts/{contactUid}",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "ticketRelationships",
+    "methodName": "appIdTicketsIdContactsContactUid2",
+    "operationId": "deleteAppIdTicketsIdContactsContactUid",
+    "path": "/api/{appId}/tickets/{id}/contacts/{contactUid}",
+    "httpMethod": "DELETE",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": true
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdFeed",
+    "operationId": "getAppIdTicketsIdFeed",
+    "path": "/api/{appId}/tickets/{id}/feed",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdFeed2",
+    "operationId": "postAppIdTicketsIdFeed",
+    "path": "/api/{appId}/tickets/{id}/feed",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdSla",
+    "operationId": "putAppIdTicketsIdSla",
+    "path": "/api/{appId}/tickets/{id}/sla",
+    "httpMethod": "PUT",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdSlaDelete",
+    "operationId": "putAppIdTicketsIdSlaDelete",
+    "path": "/api/{appId}/tickets/{id}/sla/delete",
+    "httpMethod": "PUT",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdTags",
+    "operationId": "postAppIdTicketsIdTags",
+    "path": "/api/{appId}/tickets/{id}/tags",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdTags2",
+    "operationId": "deleteAppIdTicketsIdTags",
+    "path": "/api/{appId}/tickets/{id}/tags",
+    "httpMethod": "DELETE",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdWorkflow",
+    "operationId": "getAppIdTicketsIdWorkflow",
+    "path": "/api/{appId}/tickets/{id}/workflow",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdWorkflow2",
+    "operationId": "putAppIdTicketsIdWorkflow",
+    "path": "/api/{appId}/tickets/{id}/workflow",
+    "httpMethod": "PUT",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdWorkflowActions",
+    "operationId": "getAppIdTicketsIdWorkflowActions",
+    "path": "/api/{appId}/tickets/{id}/workflow/actions",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdWorkflowApprove",
+    "operationId": "postAppIdTicketsIdWorkflowApprove",
+    "path": "/api/{appId}/tickets/{id}/workflow/approve",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsIdWorkflowReassign",
+    "operationId": "postAppIdTicketsIdWorkflowReassign",
+    "path": "/api/{appId}/tickets/{id}/workflow/reassign",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsSourceIdAttachmentsAttachmentIdCopyAttachment",
+    "operationId": "putAppIdTicketsSourceIdAttachmentsAttachmentIdCopyAttachment",
+    "path": "/api/{appId}/tickets/{sourceId}/attachments/{attachmentId}/copyAttachment",
+    "httpMethod": "PUT",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsFeed",
+    "operationId": "getAppIdTicketsFeed",
+    "path": "/api/{appId}/tickets/feed",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsForms",
+    "operationId": "getAppIdTicketsForms",
+    "path": "/api/{appId}/tickets/forms",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsResources",
+    "operationId": "getAppIdTicketsResources",
+    "path": "/api/{appId}/tickets/resources",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsResponseTemplates",
+    "operationId": "getAppIdTicketsResponseTemplates",
+    "path": "/api/{appId}/tickets/responseTemplates",
+    "httpMethod": "GET",
+    "tags": ["Tickets"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTicketsSearch",
+    "operationId": "postAppIdTicketsSearch",
+    "path": "/api/{appId}/tickets/search",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "tickets",
+    "methodName": "appIdTickets",
+    "operationId": "postAppIdTickets",
+    "path": "/api/{appId}/tickets",
+    "httpMethod": "POST",
+    "tags": ["Tickets"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "time",
+    "operationId": "postTime",
+    "path": "/api/time",
+    "httpMethod": "POST",
+    "tags": ["Time"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeId",
+    "operationId": "getTimeId",
+    "path": "/api/time/{id}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeId2",
+    "operationId": "putTimeId",
+    "path": "/api/time/{id}",
+    "httpMethod": "PUT",
+    "tags": ["Time"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeId3",
+    "operationId": "deleteTimeId",
+    "path": "/api/time/{id}",
+    "httpMethod": "DELETE",
+    "tags": ["Time"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeDelete",
+    "operationId": "postTimeDelete",
+    "path": "/api/time/delete",
+    "httpMethod": "POST",
+    "tags": ["Time"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeLocked",
+    "operationId": "getTimeLocked",
+    "path": "/api/time/locked",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeReportReportDate",
+    "operationId": "getTimeReportReportDate",
+    "path": "/api/time/report/{reportDate}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeReportReportDateUid",
+    "operationId": "getTimeReportReportDateUid",
+    "path": "/api/time/report/{reportDate}/{uid}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeSearch",
+    "operationId": "postTimeSearch",
+    "path": "/api/time/search",
+    "httpMethod": "POST",
+    "tags": ["Time"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypes",
+    "operationId": "getTimeTypes",
+    "path": "/api/time/types",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesId",
+    "operationId": "getTimeTypesId",
+    "path": "/api/time/types/{id}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesIdLimitsUid",
+    "operationId": "getTimeTypesIdLimitsUid",
+    "path": "/api/time/types/{id}/limits/{uid}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentAppAppIDTicketTicketID",
+    "operationId": "getTimeTypesComponentAppAppIDTicketTicketID",
+    "path": "/api/time/types/component/app/{appID}/ticket/{ticketID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentAppAppIDTicketTicketID2",
+    "operationId": "postTimeTypesComponentAppAppIDTicketTicketID",
+    "path": "/api/time/types/component/app/{appID}/ticket/{ticketID}",
+    "httpMethod": "POST",
+    "tags": ["Time"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentAppAppIDTicketTicketID3",
+    "operationId": "deleteTimeTypesComponentAppAppIDTicketTicketID",
+    "path": "/api/time/types/component/app/{appID}/ticket/{ticketID}",
+    "httpMethod": "DELETE",
+    "tags": ["Time"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentAppAppIDTicketTicketIDTaskTaskID",
+    "operationId": "getTimeTypesComponentAppAppIDTicketTicketIDTaskTaskID",
+    "path": "/api/time/types/component/app/{appID}/ticket/{ticketID}/task/{taskID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentProjectProjectID",
+    "operationId": "getTimeTypesComponentProjectProjectID",
+    "path": "/api/time/types/component/project/{projectID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentProjectProjectIDIssueIssueID",
+    "operationId": "getTimeTypesComponentProjectProjectIDIssueIssueID",
+    "path": "/api/time/types/component/project/{projectID}/issue/{issueID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentProjectProjectIDPlanPlanIDTaskTaskID",
+    "operationId": "getTimeTypesComponentProjectProjectIDPlanPlanIDTaskTaskID",
+    "path": "/api/time/types/component/project/{projectID}/plan/{planID}/task/{taskID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentRequestRequestID",
+    "operationId": "getTimeTypesComponentRequestRequestID",
+    "path": "/api/time/types/component/request/{requestID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentTimeoffProjectID",
+    "operationId": "getTimeTypesComponentTimeoffProjectID",
+    "path": "/api/time/types/component/timeoff/{projectID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "time",
+    "methodName": "timeTypesComponentWorkspaceWorkspaceID",
+    "operationId": "getTimeTypesComponentWorkspaceWorkspaceID",
+    "path": "/api/time/types/component/workspace/{workspaceID}",
+    "httpMethod": "GET",
+    "tags": ["Time"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "typecategories",
+    "operationId": "getTypecategories",
+    "path": "/api/typecategories",
+    "httpMethod": "GET",
+    "tags": ["TypeCategories"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "typecategories2",
+    "operationId": "postTypecategories",
+    "path": "/api/typecategories",
+    "httpMethod": "POST",
+    "tags": ["TypeCategories"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "typecategoriesId",
+    "operationId": "getTypecategoriesId",
+    "path": "/api/typecategories/{id}",
+    "httpMethod": "GET",
+    "tags": ["TypeCategories"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "referenceData",
+    "methodName": "typecategoriesId2",
+    "operationId": "putTypecategoriesId",
+    "path": "/api/typecategories/{id}",
+    "httpMethod": "PUT",
+    "tags": ["TypeCategories"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkApplydashboardTemplateDashboardId",
+    "operationId": "postPeopleBulkApplydashboardTemplateDashboardId",
+    "path": "/api/people/bulk/applydashboard/{templateDashboardId}",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkApplydesktopTemplateDesktopId",
+    "operationId": "postPeopleBulkApplydesktopTemplateDesktopId",
+    "path": "/api/people/bulk/applydesktop/{templateDesktopId}",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkChangeacctdepts",
+    "operationId": "postPeopleBulkChangeacctdepts",
+    "path": "/api/people/bulk/changeacctdepts",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkChangeactivestatus",
+    "operationId": "postPeopleBulkChangeactivestatus",
+    "path": "/api/people/bulk/changeactivestatus",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkChangeapplications",
+    "operationId": "postPeopleBulkChangeapplications",
+    "path": "/api/people/bulk/changeapplications",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkChangeorgapplications",
+    "operationId": "postPeopleBulkChangeorgapplications",
+    "path": "/api/people/bulk/changeorgapplications",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkChangesecurityroleSecurityRoleId",
+    "operationId": "postPeopleBulkChangesecurityroleSecurityRoleId",
+    "path": "/api/people/bulk/changesecurityrole/{securityRoleId}",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "people",
+    "methodName": "peopleBulkManagegroups",
+    "operationId": "postPeopleBulkManagegroups",
+    "path": "/api/people/bulk/managegroups",
+    "httpMethod": "POST",
+    "tags": ["UserManagement"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdAssetsVendors",
+    "operationId": "getAppIdAssetsVendors",
+    "path": "/api/{appId}/assets/vendors",
+    "httpMethod": "GET",
+    "tags": ["Vendors"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdAssetsVendors2",
+    "operationId": "postAppIdAssetsVendors",
+    "path": "/api/{appId}/assets/vendors",
+    "httpMethod": "POST",
+    "tags": ["Vendors"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdAssetsVendorsId",
+    "operationId": "getAppIdAssetsVendorsId",
+    "path": "/api/{appId}/assets/vendors/{id}",
+    "httpMethod": "GET",
+    "tags": ["Vendors"],
+    "mutating": false,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdAssetsVendorsId2",
+    "operationId": "putAppIdAssetsVendorsId",
+    "path": "/api/{appId}/assets/vendors/{id}",
+    "httpMethod": "PUT",
+    "tags": ["Vendors"],
+    "mutating": true,
+    "destructive": false
+  },
+  {
+    "domain": "cmdb",
+    "methodName": "appIdAssetsVendorsSearch",
+    "operationId": "postAppIdAssetsVendorsSearch",
+    "path": "/api/{appId}/assets/vendors/search",
+    "httpMethod": "POST",
+    "tags": ["Vendors"],
+    "mutating": true,
+    "destructive": false
+  }
+]
