@@ -40,3 +40,6 @@ jobs:
 
       - name: Markdown lint (Rumdl)
         run: pnpm run lint:md
+
+      - name: Test (Vitest)
+        run: pnpm run test

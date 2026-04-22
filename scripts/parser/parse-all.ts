@@ -44,7 +44,7 @@ class OpenAPIGeneratorPipeline {
     console.log('🚀 OpenAPI Generator - Complete Pipeline');
     console.log('═'.repeat(70) + '\n');
 
-    const outputDir = path.join(__dirname, '../output');
+    const outputDir = path.join(__dirname, '../../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }

@@ -43,7 +43,7 @@ async function runPhase4(): Promise<PhaseResult> {
 
     // Step 1: Parse and generate from previous phases
     console.log('\n📄 Step 1: Loading extracted data...');
-    const sourceDir = path.join(__dirname, '../sources/TDWebApi/Home');
+    const sourceDir = path.join(__dirname, '../../sources/TDWebApi/Home');
 
     const parser = new TDWebApiParser(sourceDir);
     const parseResult = await parser.parse();
@@ -157,7 +157,7 @@ async function runPhase4(): Promise<PhaseResult> {
 
     // Step 5: Write enriched spec
     console.log('\n💾 Step 5: Writing enriched specification...');
-    const outputDir = path.join(__dirname, '../output');
+    const outputDir = path.join(__dirname, '../../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }

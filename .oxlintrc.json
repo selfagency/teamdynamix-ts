@@ -38,6 +38,7 @@
     "playwright-report",
     "test-results",
     "src/lexicons",
-    ".wxt"
+    ".wxt",
+    "scripts"
   ]
 }

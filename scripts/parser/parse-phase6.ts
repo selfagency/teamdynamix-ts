@@ -37,7 +37,7 @@ async function runPhase6(): Promise<Phase6Result> {
 
     // Step 1: Load enriched spec from Phase 5
     console.log('\n📄 Step 1: Loading enriched specification...');
-    const outputDir = path.join(__dirname, '../output');
+    const outputDir = path.join(__dirname, '../../output');
 
     // Ensure output directory exists
     if (!fs.existsSync(outputDir)) {
