@@ -1,0 +1,55 @@
+scripts/parser/parse-all.ts
+  h_5cf1e2c1161853 3
+src/client/index.ts
+  h_5cf1e2c1161853 3
+src/client/spec.ts
+  h_5cf1e2c1161853 1
+package.json
+  a97fb775e1532c60 12
+tests/client.test.ts
+  h_5cf1e2c1161853 2
+src/client/client.ts
+  h_5cf1e2c1161853 2
+src/client/validation.ts
+  h_5cf1e2c1161853 2
+.github/workflows/quality.yml
+  h_5cf1e2c1161853 43-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "3dd7982105d25c2e668aea80a037974dfc768fee",
+  "prompts": {
+    "769c0e41dc1bfba2": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "e53724d4-1531-4053-bc3f-3d9eee7dd0a9",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 11,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "a97fb775e1532c60": {
+      "agent_id": {
+        "tool": "github-copilot-tab",
+        "id": "ai_tab-1776818762604",
+        "model": "default"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
