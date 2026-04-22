@@ -123,17 +123,16 @@ Adopt high-value functionality patterns from seven external TeamDynamix projects
 
 ## Relevant files
 
-- `/Users/daniel/Developer/teamdynamix-ts/src/client/sdk/build-sdk.ts` — primary extension point for new curated helpers/mutators and workflow composition.
-- `/Users/daniel/Developer/teamdynamix-ts/src/client/sdk/types.ts` — extend SDK helper/mutation type contracts.
-- `/Users/daniel/Developer/teamdynamix-ts/src/client/schemas/common.ts` and `/Users/daniel/Developer/teamdynamix-ts/src/client/schemas/index.ts` — shared input schemas for new helper contracts.
-- `/Users/daniel/Developer/teamdynamix-ts/src/client/sdk/request.ts` — request execution behavior (if pagination/filter convenience needs shared request primitives).
-- `/Users/daniel/Developer/teamdynamix-ts/tests/sdk-mutations.test.ts` — add bulk/admin mutator coverage.
-- `/Users/daniel/Developer/teamdynamix-ts/tests/sdk.test.ts` — add helper workflow tests.
-- `/Users/daniel/Developer/teamdynamix-ts/tests/sdk-edge.test.ts` — add regression tests for confirmation and fail-open/fail-closed interactions.
-- `/Users/daniel/Developer/teamdynamix-ts/tests/fixtures/openapi-test-spec.json` — fixture additions if new helper wrappers rely on covered routes.
-- `/Users/daniel/Developer/teamdynamix-ts/README.md` — document imported functionality and usage.
-- `/Users/daniel/Developer/teamdynamix-ts/docs/guide/index.md` and `/Users/daniel/Developer/teamdynamix-ts/docs/developer/index.md` — implementation and operational guidance.
-- `/Users/daniel/Developer/teamdynamix-ts/docs/guide/quick-start.md` — practical snippets for new helpers.
+- `src/client/sdk/types.ts` — extend SDK helper/mutation type contracts.
+- `src/client/schemas/common.ts` and `src/client/schemas/index.ts` — shared input schemas for new helper contracts.
+- `src/client/sdk/request.ts` — request execution behavior (if pagination/filter convenience needs shared request primitives).
+- `tests/sdk-mutations.test.ts` — add bulk/admin mutator coverage.
+- `tests/sdk.test.ts` — add helper workflow tests.
+- `tests/sdk-edge.test.ts` — add regression tests for confirmation and fail-open/fail-closed interactions.
+- `tests/fixtures/openapi-test-spec.json` — fixture additions if new helper wrappers rely on covered routes.
+- `README.md` — document imported functionality and usage.
+- `docs/guide/index.md` and `docs/developer/index.md` — implementation and operational guidance.
+- `docs/guide/quick-start.md` — practical snippets for new helpers.
 
 ## Verification
 

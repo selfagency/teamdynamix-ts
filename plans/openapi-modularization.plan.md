@@ -43,15 +43,15 @@ Split OpenAPI generation into configurable, domain-aware units to reduce TypeScr
 
 ## Relevant files
 
-- `/Users/daniel/Developer/teamdynamix-ts/package.json` — add/adjust scripts for parse-all, multispec orchestration, and type generation variants.
-- `/Users/daniel/Developer/teamdynamix-ts/scripts/parser/parse-all.ts` — wire deterministic prepare-types step and canonical output flow.
-- `/Users/daniel/Developer/teamdynamix-ts/scripts/parser/prepare-types-input.ts` — keep as sanitization contract; ensure invocation and output path strategy are explicit.
-- `/Users/daniel/Developer/teamdynamix-ts/scripts/parser/generate-client.ts` — refactor hard-coded path/domain assumptions behind config.
-- `/Users/daniel/Developer/teamdynamix-ts/scripts/parser/` (new orchestrator/config files) — add spec config types and multi-spec runner.
-- `/Users/daniel/Developer/teamdynamix-ts/src/generated/` — introduce per-domain type output layout.
-- `/Users/daniel/Developer/teamdynamix-ts/scripts/sync-docs-openapi.mjs` — evolve from single-spec sync to multi-spec-capable sync.
-- `/Users/daniel/Developer/teamdynamix-ts/docs/.vitepress/config.ts` — optional multi-spec docs navigation support.
-- `/Users/daniel/Developer/teamdynamix-ts/.github/workflows/ci.yml` — enforce multi-spec generation and type checks.
+- `package.json` — add/adjust scripts for parse-all, multispec orchestration, and type generation variants.
+- `scripts/parser/parse-all.ts` — wire deterministic prepare-types step and canonical output flow.
+- `scripts/parser/prepare-types-input.ts` — keep as sanitization contract; ensure invocation and output path strategy are explicit.
+- `scripts/parser/generate-client.ts` — refactor hard-coded path/domain assumptions behind config.
+- `scripts/parser/` (new orchestrator/config files) — add spec config types and multi-spec runner.
+- `src/generated/` — introduce per-domain type output layout.
+- `scripts/sync-docs-openapi.mjs` — evolve from single-spec sync to multi-spec-capable sync.
+- `docs/.vitepress/config.ts` — optional multi-spec docs navigation support.
+- `.github/workflows/ci.yml` — enforce multi-spec generation and type checks.
 
 ## Verification
 
