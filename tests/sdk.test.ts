@@ -43,6 +43,8 @@ describe('SDK domain surface', () => {
 
     const rawResult = await raw.GET('/api/accounts');
     expect(rawResult.data).toEqual([{ id: 1, Name: 'IT' }]);
+    expect((raw as Record<string, unknown>).referenceData).toBeUndefined();
+    expect((raw as Record<string, unknown>).helpers).toBeUndefined();
   });
 
   it('requires explicit confirm=true on destructive ticket relationship methods', async () => {

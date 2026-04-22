@@ -197,7 +197,7 @@
     "httpMethod": "DELETE",
     "tags": ["Assets"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "assets",
@@ -227,7 +227,7 @@
     "httpMethod": "DELETE",
     "tags": ["Assets"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "assets",
@@ -267,7 +267,7 @@
     "httpMethod": "DELETE",
     "tags": ["Assets"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "assets",
@@ -317,7 +317,7 @@
     "httpMethod": "DELETE",
     "tags": ["Assets"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "assets",
@@ -387,7 +387,7 @@
     "httpMethod": "DELETE",
     "tags": ["Attachments"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "referenceData",
@@ -447,7 +447,7 @@
     "httpMethod": "DELETE",
     "tags": ["Attributes"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "referenceData",
@@ -677,7 +677,7 @@
     "httpMethod": "DELETE",
     "tags": ["ConfigurationItems"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "cmdb",
@@ -707,7 +707,7 @@
     "httpMethod": "DELETE",
     "tags": ["ConfigurationItems"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "cmdb",
@@ -767,7 +767,7 @@
     "httpMethod": "DELETE",
     "tags": ["ConfigurationItems"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "cmdb",
@@ -797,7 +797,7 @@
     "httpMethod": "DELETE",
     "tags": ["ConfigurationItems"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "cmdb",
@@ -957,7 +957,7 @@
     "httpMethod": "DELETE",
     "tags": ["Contracts"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "assets",
@@ -1137,7 +1137,7 @@
     "httpMethod": "DELETE",
     "tags": ["Group"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "people",
@@ -1167,7 +1167,7 @@
     "httpMethod": "DELETE",
     "tags": ["Group"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "people",
@@ -1227,7 +1227,7 @@
     "httpMethod": "DELETE",
     "tags": ["Integrations"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "referenceData",
@@ -1377,7 +1377,7 @@
     "httpMethod": "DELETE",
     "tags": ["Issues"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "projects",
@@ -1457,7 +1457,7 @@
     "httpMethod": "DELETE",
     "tags": ["KnowledgeBase"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "knowledgeBase",
@@ -1507,7 +1507,7 @@
     "httpMethod": "DELETE",
     "tags": ["KnowledgeBase"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "knowledgeBase",
@@ -1557,7 +1557,7 @@
     "httpMethod": "DELETE",
     "tags": ["KnowledgeBase"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "knowledgeBase",
@@ -1707,7 +1707,7 @@
     "httpMethod": "DELETE",
     "tags": ["Locations"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "referenceData",
@@ -1787,7 +1787,7 @@
     "httpMethod": "DELETE",
     "tags": ["MaintenanceActivites"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "tickets",
@@ -1937,7 +1937,7 @@
     "httpMethod": "DELETE",
     "tags": ["People"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "people",
@@ -1977,7 +1977,7 @@
     "httpMethod": "DELETE",
     "tags": ["People"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "people",
@@ -2567,7 +2567,7 @@
     "httpMethod": "DELETE",
     "tags": ["Risks"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "projects",
@@ -2697,7 +2697,7 @@
     "httpMethod": "DELETE",
     "tags": ["ServiceCatalog"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "services",
@@ -2757,7 +2757,7 @@
     "httpMethod": "DELETE",
     "tags": ["ServiceCatalog"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "services",
@@ -2797,7 +2797,7 @@
     "httpMethod": "DELETE",
     "tags": ["ServiceCatalog"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "services",
@@ -2837,7 +2837,7 @@
     "httpMethod": "DELETE",
     "tags": ["ServiceCatalog"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "services",
@@ -2887,7 +2887,7 @@
     "httpMethod": "DELETE",
     "tags": ["ServiceCatalog"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "services",
@@ -3157,7 +3157,7 @@
     "httpMethod": "DELETE",
     "tags": ["TicketTasks"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "ticketRelationships",
@@ -3357,7 +3357,7 @@
     "httpMethod": "DELETE",
     "tags": ["Tickets"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "ticketRelationships",
@@ -3447,7 +3447,7 @@
     "httpMethod": "DELETE",
     "tags": ["Tickets"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "tickets",
@@ -3607,7 +3607,7 @@
     "httpMethod": "DELETE",
     "tags": ["Time"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "time",
@@ -3717,7 +3717,7 @@
     "httpMethod": "DELETE",
     "tags": ["Time"],
     "mutating": true,
-    "destructive": false
+    "destructive": true
   },
   {
     "domain": "time",

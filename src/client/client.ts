@@ -222,8 +222,9 @@ export const createTeamDynamixClient = async (
   client.use(validationMiddleware);
   client.use(retryMiddleware);
 
+  const rawClient = client;
   const sdk = createTeamDynamixSdk(client);
-  const sdkClient = Object.assign(client, sdk);
+  const sdkClient = Object.assign(Object.create(client) as TeamDynamixFetchClient, sdk);
 
-  return { client: sdkClient, raw: client, config: normalized };
+  return { client: sdkClient, raw: rawClient, config: normalized };
 };

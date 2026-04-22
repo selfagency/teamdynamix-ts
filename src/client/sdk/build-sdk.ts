@@ -599,7 +599,7 @@ const createHelpers = (client: TeamDynamixFetchClient): SdkHelpers => ({
         mutating: false,
         destructive: false,
       },
-      { body: { SearchText: email } },
+      { body: { SearchText: parsedEmail } },
     );
 
     if (!Array.isArray(response)) {

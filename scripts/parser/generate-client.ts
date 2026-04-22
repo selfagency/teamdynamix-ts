@@ -130,11 +130,6 @@ const mapDomain = (pathKey: string, tags: string[]): SdkDomainName => {
   return 'referenceData';
 };
 
-const isDestructivePath = (pathKey: string): boolean => {
-  const normalized = pathKey.toLowerCase();
-  return normalized.includes('/assets/{assetid}') || normalized.includes('/contacts/{contactuid}');
-};
-
 // nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 if (!fs.existsSync(outputSpecPath)) {
   throw new Error(`Expected generated OpenAPI spec at ${outputSpecPath}. Run "pnpm run parse:all" first.`);
@@ -180,7 +175,7 @@ for (const [pathKey, pathItem] of Object.entries(spec.paths ?? {})) {
       httpMethod: method.toUpperCase() as SdkRouteManifestEntry['httpMethod'],
       tags,
       mutating: method !== 'get',
-      destructive: method === 'delete' && isDestructivePath(pathKey),
+      destructive: method === 'delete',
     });
   }
 }
