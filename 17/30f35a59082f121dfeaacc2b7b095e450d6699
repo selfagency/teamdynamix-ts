@@ -1,0 +1,30 @@
+package.json
+  h_5cf1e2c1161853 15
+pnpm-workspace.yaml
+  h_5cf1e2c1161853 7-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "1730f35a59082f121dfeaacc2b7b095e450d6699",
+  "prompts": {
+    "83c339e245c91968": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "7949f8ad-26f3-44f6-aa9a-83d285ff96ed",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 3,
+      "accepted_lines": 6,
+      "overriden_lines": 1
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
