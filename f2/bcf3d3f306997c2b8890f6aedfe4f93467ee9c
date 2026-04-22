@@ -1,0 +1,14 @@
+README.md
+  h_5cf1e2c1161853 3-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "f2bcf3d3f306997c2b8890f6aedfe4f93467ee9c",
+  "prompts": {},
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
