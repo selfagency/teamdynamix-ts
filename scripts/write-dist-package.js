@@ -43,8 +43,12 @@ async function main() {
   try {
     await copyFile(readmeSrc, readmeDest);
     console.log('Copied', readmeSrc, 'to', readmeDest);
-  } catch {
-    console.warn('No README.md found; skipping copy.');
+  } catch (err) {
+    if (err && typeof err === 'object' && 'code' in err && err.code === 'ENOENT') {
+      console.warn('No README.md found; skipping copy.');
+      return;
+    }
+    throw err;
   }
 }
 

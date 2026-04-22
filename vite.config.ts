@@ -1,6 +1,11 @@
 import { resolve } from 'node:path';
 import { builtinModules } from 'node:module';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const nodeBuiltins = new Set(builtinModules.flatMap(mod => [mod, `node:${mod}`]));
 
