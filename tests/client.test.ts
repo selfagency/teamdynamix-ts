@@ -61,6 +61,21 @@ describe('createTeamDynamixClient — auth middleware', () => {
     expect((err as TeamDynamixClientError).code).toBe('AUTH_ERROR');
   });
 
+  it('throws AUTH_ERROR with validation details when token provider returns whitespace', async () => {
+    server.use(http.get('https://api.teamdynamix.com/api/accounts', () => HttpResponse.json([])));
+
+    const { client } = await createTeamDynamixClient({
+      tenant: 'api',
+      tokenProvider: () => '   ',
+      specPath,
+    });
+
+    const err = await client.GET('/api/accounts').catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(TeamDynamixClientError);
+    expect((err as TeamDynamixClientError).code).toBe('AUTH_ERROR');
+    expect((err as TeamDynamixClientError).details).toBeDefined();
+  });
+
   it('skips auth header for paths in unauthenticatedPaths', async () => {
     let capturedAuth: string | null = null;
     server.use(
@@ -298,5 +313,65 @@ describe('createTeamDynamixClient — retry middleware', () => {
     const result = await client.POST('/api/accounts', { body: {} });
     expect(result.response.status).toBe(429);
     expect(onRetry).not.toHaveBeenCalled();
+  });
+
+  it('retries bodyless POST requests when retryUnsafeMethods is enabled', async () => {
+    const onRetry = vi.fn();
+    let callCount = 0;
+    server.use(
+      http.post('https://api.teamdynamix.com/api/accounts', () => {
+        callCount += 1;
+        if (callCount === 1) {
+          return HttpResponse.json({ message: 'rate limited' }, { status: 429, headers: { 'retry-after': '0' } });
+        }
+        return HttpResponse.json({ ok: true }, { status: 200 });
+      }),
+    );
+
+    const { client } = await createTeamDynamixClient({
+      tenant: 'api',
+      tokenProvider: () => 'token',
+      runtimeValidationMode: 'fail-open',
+      specPath,
+      onRetry,
+      retryPolicy: { initialDelayMs: 1, maxDelayMs: 5, retryUnsafeMethods: true },
+    });
+
+    // @ts-expect-error — POST not in fixture spec; runtime behavior under test
+    const result = await client.POST('/api/accounts');
+    expect(result.response.status).toBe(200);
+    expect(onRetry).toHaveBeenCalledTimes(1);
+  });
+
+  it('retries network errors and succeeds when a subsequent attempt returns 200', async () => {
+    const onRetry = vi.fn();
+    let callCount = 0;
+    server.use(
+      http.get('https://api.teamdynamix.com/api/accounts', () => {
+        callCount += 1;
+        if (callCount === 1) {
+          return HttpResponse.error();
+        }
+        return HttpResponse.json([{ id: 222 }], { status: 200 });
+      }),
+    );
+
+    const { client } = await createTeamDynamixClient({
+      tenant: 'api',
+      tokenProvider: () => 'token',
+      runtimeValidationMode: 'fail-open',
+      specPath,
+      onRetry,
+      retryPolicy: { initialDelayMs: 1, maxDelayMs: 5 },
+    });
+
+    const result = await client.GET('/api/accounts');
+    expect(result.data).toEqual([{ id: 222 }]);
+    expect(onRetry).toHaveBeenCalledWith(
+      expect.objectContaining({
+        reason: 'network-error',
+        method: 'GET',
+      }),
+    );
   });
 });

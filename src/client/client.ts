@@ -3,6 +3,8 @@ import createClient, { type Middleware } from 'openapi-fetch';
 import type { paths } from '../generated/schema.js';
 import { TeamDynamixClientError } from './errors.js';
 import { calculateBackoffDelay, isRetryable, parseRetryAfter, waitForRetry } from './retry.js';
+import { tenantSchema, tokenSchema } from './schemas/index.js';
+import { createTeamDynamixSdk } from './sdk/index.js';
 import { defaultSpecPath, loadDereferencedSpec } from './spec.js';
 import type { NormalizedClientConfig, TeamDynamixClientConfig } from './types.js';
 import { DEFAULT_RETRY_POLICY, DEFAULT_TIMEOUT_MS } from './types.js';
@@ -71,8 +73,13 @@ export type TeamDynamixFetchClient = ReturnType<typeof createClient<paths>>;
 
 export const createTeamDynamixClient = async (
   config: TeamDynamixClientConfig,
-): Promise<{ client: TeamDynamixFetchClient; config: NormalizedClientConfig }> => {
-  if (!config.tenant || config.tenant.trim().length === 0) {
+): Promise<{
+  client: TeamDynamixFetchClient & ReturnType<typeof createTeamDynamixSdk>;
+  raw: TeamDynamixFetchClient;
+  config: NormalizedClientConfig;
+}> => {
+  const tenantParse = tenantSchema.safeParse(config.tenant);
+  if (!tenantParse.success) {
     throw new TeamDynamixClientError('Tenant is required.', { code: 'CONFIG_ERROR' });
   }
 
@@ -83,14 +90,17 @@ export const createTeamDynamixClient = async (
   const authMiddleware: Middleware = {
     async onRequest({ schemaPath, request }) {
       if (!normalized.unauthenticatedPaths.has(schemaPath)) {
-        const token = await config.tokenProvider();
-        if (!token || token.trim().length === 0) {
+        const providedToken = await config.tokenProvider();
+        const tokenParse = tokenSchema.safeParse(providedToken);
+        if (!tokenParse.success) {
           throw new TeamDynamixClientError('Token provider returned an empty token.', {
             code: 'AUTH_ERROR',
             schemaPath,
             method: request.method,
+            details: tokenParse.error.issues,
           });
         }
+        const token = tokenParse.data;
         request.headers.set('Authorization', `Bearer ${token}`);
       }
       return withTimeout(request, normalized.timeoutMs);
@@ -212,5 +222,9 @@ export const createTeamDynamixClient = async (
   client.use(validationMiddleware);
   client.use(retryMiddleware);
 
-  return { client, config: normalized };
+  const rawClient = client;
+  const sdk = createTeamDynamixSdk(client);
+  const sdkClient = Object.assign(Object.create(client) as TeamDynamixFetchClient, sdk);
+
+  return { client: sdkClient, raw: rawClient, config: normalized };
 };

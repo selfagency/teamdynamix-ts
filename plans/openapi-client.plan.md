@@ -172,3 +172,12 @@ Build a Node-first, secure, generated TypeScript client from the existing OpenAP
 3. Retry policy strictness:
    - Option A: safe-method retries only by default (recommended).
    - Option B: broader retries with per-endpoint allowlist if operationally required.
+
+## Implementation progress (feature/openapi-secure-client)
+
+- ✅ Slice A complete: Zod v4 boundary validation introduced for tenant/token and shared SDK schema primitives.
+- ✅ Slice B complete: route manifest generator now emits `src/generated/sdk-route-manifest.json` and `src/generated/sdk-read-manifest.ts` from OpenAPI metadata.
+- ✅ Slice C complete: `createTeamDynamixClient` now returns `client` augmented with domain-object SDK methods and preserves raw escape hatch as `raw`.
+- ✅ Slice D expanded: curated guarded mutating methods now implemented for tickets, ticket relationships, knowledge base, projects, services, assets, CMDB, and time.
+- ✅ Slice E partial: helper workflows added for account lookup, user lookup, and ticket lookup context resolution.
+- ✅ Slice F expanded: route manifest parity tests and SDK behavior/safety tests now cover added curated mutators and destructive confirmation semantics across additional domains.

@@ -4,6 +4,17 @@ import { createTeamDynamixClient, TeamDynamixClientError } from '../src/client/i
 const specPath = `${process.cwd()}/tests/fixtures/openapi-test-spec.json`;
 
 describe('createTeamDynamixClient configuration', () => {
+  it('rejects a non-string tenant at runtime', async () => {
+    await expect(
+      createTeamDynamixClient({
+        // @ts-expect-error runtime guard coverage
+        tenant: 123,
+        tokenProvider: () => 'token',
+        specPath,
+      }),
+    ).rejects.toThrow(TeamDynamixClientError);
+  });
+
   it('rejects an empty tenant', async () => {
     await expect(
       createTeamDynamixClient({
