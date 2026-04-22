@@ -159,6 +159,11 @@ output/
 # vuepress v2.x temp and cache directory
 .temp
 
+# VitePress cache and build output
+docs/.vitepress/cache
+docs/.vitepress/dist
+docs/public/openapi.json
+
 # Docusaurus cache and generated files
 .docusaurus
 

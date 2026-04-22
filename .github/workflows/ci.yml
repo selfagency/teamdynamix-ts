@@ -42,6 +42,9 @@ jobs:
       - name: Test (Vitest)
         run: pnpm run test:coverage --reporter=default --reporter=junit --outputFile=test-report.junit.xml
 
+      - name: Build docs (VitePress)
+        run: pnpm run docs:build
+
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1

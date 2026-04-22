@@ -10,6 +10,10 @@
   "scripts": {
     "build": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && vite build && tsc -p tsconfig.build.json",
     "postbuild": "node scripts/write-dist-package.js",
+    "docs:sync-openapi": "node scripts/sync-docs-openapi.mjs",
+    "docs:dev": "pnpm run docs:sync-openapi && vitepress dev docs",
+    "docs:build": "pnpm run docs:sync-openapi && vitepress build docs",
+    "docs:preview": "vitepress preview docs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
@@ -45,6 +49,8 @@
     "rumdl": "^0.1.76",
     "typescript": "^6.0.3",
     "vite": "^8.0.9",
+    "vitepress": "^1.6.4",
+    "vitepress-openapi": "^0.1.20",
     "vitest": "4.1.5"
   },
   "lint-staged": {
