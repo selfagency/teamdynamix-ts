@@ -8,14 +8,14 @@ import type {
   CmdbMutations,
   KnowledgeBaseMutations,
   ProjectMutations,
-  ServiceMutations,
   SdkHelpers,
   SdkReadDomain,
+  ServiceMutations,
   TeamDynamixSdk,
   TeamDynamixSdkReadDomains,
-  TimeMutations,
   TicketMutations,
   TicketRelationshipMutations,
+  TimeMutations,
 } from './types.js';
 
 const nonEmptyIdSchema = z.union([z.string().trim().min(1), z.number().int().nonnegative()]);

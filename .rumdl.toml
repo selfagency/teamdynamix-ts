@@ -8,4 +8,4 @@ disable = [
 
 # Include all documentation but exclude dependencies
 include = ["**/*.md"]
-exclude = ["node_modules/**", "vendor/**", ".git/**", "coverage/**"]
+exclude = ["node_modules/**", "vendor/**", ".git/**", "coverage/**", ".agents/**"]

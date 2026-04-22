@@ -17,6 +17,9 @@ generated from OpenAPI 3.1.
 
 ## Source of truth
 
+- Canonical OpenAPI spec in this repository: `src/spec/openapi.yaml`
+- Canonical TeamDynamix API source: static TeamDynamix API documentation (`sources/TDWebApi/**`)
+- OpenAPI 3.1 spec origin: reverse engineered from the static TeamDynamix docs via this repo's parser/enrichment pipeline
 - Enriched generated spec: `output/openapi.json`
 - Generated TS declarations: `src/generated/schema.d.ts`
 
