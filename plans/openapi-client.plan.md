@@ -1,6 +1,6 @@
 ## Plan: Secure TeamDynamix TS Client via openapi-ts.dev
 
-Build a Node-first, secure, generated TypeScript client from the existing OpenAPI 3.1 spec (`/Users/daniel/Developer/teamdynamix-ts/src/openapi.yaml`) using `openapi-typescript` + `openapi-fetch`, with runtime validation for all endpoints, auth and resiliency middleware, contract tests, and CI drift checks. The implementation will reuse the existing 6-phase spec pipeline and add a deterministic client-generation phase and validation gates.
+Build a Node-first, secure, generated TypeScript client from the existing OpenAPI 3.1 spec (`src/spec/openapi.yaml`) using `openapi-typescript` + `openapi-fetch`, with runtime validation for all endpoints, auth and resiliency middleware, contract tests, and CI drift checks. The implementation will reuse the 6-phase spec pipeline and add a deterministic client-generation phase and validation gates.
 
 ## Steps
 
@@ -117,19 +117,19 @@ Build a Node-first, secure, generated TypeScript client from the existing OpenAP
 
 ## Relevant files
 
-- `/Users/daniel/Developer/teamdynamix-ts/package.json` — add generation/check scripts and dependencies.
-- `/Users/daniel/Developer/teamdynamix-ts/tsconfig.json` — verify compiler options remain compatible with generated declarations and strict mode.
-- `/Users/daniel/Developer/teamdynamix-ts/scripts/parser/parse-all.ts` — add or coordinate post-parse generation orchestration.
-- `/Users/daniel/Developer/teamdynamix-ts/scripts/parser/parse-phase4.ts` — existing security schemes/servers metadata source used by generated client assumptions.
-- `/Users/daniel/Developer/teamdynamix-ts/src/openapi.yaml` — source spec; maintain semantic correctness for generation fidelity.
-- `/Users/daniel/Developer/teamdynamix-ts/output/openapi.json` — generation input artifact after enrichment/validation.
-- `/Users/daniel/Developer/teamdynamix-ts/src/index.ts` — export stable public client API.
-- `/Users/daniel/Developer/teamdynamix-ts/.github/workflows/quality.yml` — integrate generation + drift + tests in CI.
-- `/Users/daniel/Developer/teamdynamix-ts/README.md` (or docs files) — update usage/generation/security guidance.
-- `/Users/daniel/Developer/teamdynamix-ts/redocly.yaml` (new) — lint and multi-schema generation policy.
-- `/Users/daniel/Developer/teamdynamix-ts/src/generated/*` (new) — generated OpenAPI TS declarations and related artifacts.
-- `/Users/daniel/Developer/teamdynamix-ts/src/client/*` (new) — secure runtime wrapper and middleware.
-- `/Users/daniel/Developer/teamdynamix-ts/tests/*` (new) — unit + MSW integration tests.
+- `package.json` — add generation/check scripts and dependencies.
+- `tsconfig.json` — verify compiler options remain compatible with generated declarations and strict mode.
+- `scripts/parser/parse-all.ts` — add or coordinate post-parse generation orchestration.
+- `scripts/parser/parse-phase4.ts` — existing security schemes/servers metadata source used by generated client assumptions.
+- `src/spec/openapi.yaml` — source spec; maintain semantic correctness for generation fidelity.
+- `output/openapi.json` — generation input artifact after enrichment/validation.
+- `src/index.ts` — export stable public client API.
+- `.github/workflows/quality.yml` — integrate generation + drift + tests in CI.
+- `README.md` (or docs files) — update usage/generation/security guidance.
+- `.redocly.yaml` — lint and multi-schema generation policy.
+- `src/generated/*` (new) — generated OpenAPI TS declarations and related artifacts.
+- `src/client/*` (new) — secure runtime wrapper and middleware.
+- `tests/*` (new) — unit + MSW integration tests.
 
 ## Verification
 

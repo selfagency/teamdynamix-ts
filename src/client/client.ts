@@ -46,6 +46,10 @@ const normalizeConfig = (config: TeamDynamixClientConfig): NormalizedClientConfi
 };
 
 const withTimeout = (request: Request, timeoutMs: number): Request => {
+  if (request.signal.aborted) {
+    return new Request(request, { signal: request.signal });
+  }
+
   const controller = new AbortController();
   // Allow many listeners when retries clone the request and inherit this signal.
   setMaxListeners(100, controller.signal);
@@ -137,12 +141,12 @@ export const createTeamDynamixClient = async (
   const retryMiddleware: Middleware = {
     async onResponse({ schemaPath, request, response, options }) {
       const fetchImpl = options.fetch ?? fetch;
-      const baseReason = `${response.status}`;
 
       if (!isRetryable(request.method, response.status, normalized.retryPolicy, false)) {
         return response;
       }
 
+      const retryRequest = request.clone();
       let lastResponse = response;
       for (let attempt = 1; attempt <= normalized.retryPolicy.maxRetries; attempt += 1) {
         const retryAfter = parseRetryAfter(lastResponse.headers.get('retry-after'));
@@ -153,12 +157,12 @@ export const createTeamDynamixClient = async (
           method: request.method,
           attempt,
           delayMs,
-          reason: baseReason,
+          reason: `${lastResponse.status}`,
         });
 
         await waitForRetry(delayMs);
 
-        const retriedResponse = await fetchImpl(new Request(request));
+        const retriedResponse = await fetchImpl(retryRequest.clone());
         if (!isRetryable(request.method, retriedResponse.status, normalized.retryPolicy, false)) {
           return retriedResponse;
         }
@@ -173,6 +177,7 @@ export const createTeamDynamixClient = async (
         return error as Error;
       }
 
+      const retryRequest = request.clone();
       for (let attempt = 1; attempt <= normalized.retryPolicy.maxRetries; attempt += 1) {
         const delayMs = calculateBackoffDelay(attempt, normalized.retryPolicy);
         config.onRetry?.({
@@ -186,7 +191,7 @@ export const createTeamDynamixClient = async (
         await waitForRetry(delayMs);
 
         try {
-          const response = await fetch(new Request(request));
+          const response = await fetch(retryRequest.clone());
           return response;
         } catch {
           // Continue retry loop

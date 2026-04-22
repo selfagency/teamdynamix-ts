@@ -72,7 +72,7 @@ const visit = (
 
 // nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 if (!fs.existsSync(inputPath)) {
-  throw new Error(`Missing ${inputPath}. Run \"pnpm run parse:all\" first.`);
+  throw new Error(`Missing ${inputPath}. Run "pnpm run parse:all" first.`);
 }
 
 // nosemgrep: javascript.lang.security.detect-non-literal-fs-filename

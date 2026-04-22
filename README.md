@@ -27,7 +27,7 @@ generated from OpenAPI 3.1.
 ## Client usage
 
 ```ts
-import { createTeamDynamixClient } from './src/index.js';
+import { createTeamDynamixClient } from 'teamdynamix-ts';
 
 const { client } = await createTeamDynamixClient({
   tenant: 'api',
