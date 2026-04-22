@@ -26,6 +26,7 @@
   },
   "globals": {},
   "ignorePatterns": [
+    ".agents",
     ".beans",
     ".beans.yml",
     ".github",
