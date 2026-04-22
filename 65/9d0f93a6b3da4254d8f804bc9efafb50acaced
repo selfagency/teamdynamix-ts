@@ -1,0 +1,93 @@
+src/client/validation.ts
+  h_5cf1e2c1161853 1-100
+vitest.config.ts
+  h_5cf1e2c1161853 1-12
+scripts/parser/parse-phase4.ts
+  h_5cf1e2c1161853 46,160
+src/index.ts
+  h_5cf1e2c1161853 1
+tests/setup.ts
+  h_5cf1e2c1161853 1-5
+src/generated/client-metadata.json
+  769c0e41dc1bfba2 1-9
+package.json
+  h_5cf1e2c1161853 11-12,21-22,24-27,30,34-35,39-40
+src/client/retry.ts
+  h_5cf1e2c1161853 1-42
+src/client/client.ts
+  769c0e41dc1bfba2 12,37-39,117-120
+  h_5cf1e2c1161853 1-11,13-36,40-116,121-211
+scripts/parser/parse-phase1.ts
+  h_5cf1e2c1161853 15
+src/client/spec.ts
+  h_5cf1e2c1161853 1-35
+tests/retry.test.ts
+  h_5cf1e2c1161853 1-134
+src/client/errors.ts
+  769c0e41dc1bfba2 16-26
+  h_5cf1e2c1161853 1-15,27-41
+src/generated/schema.d.ts
+  769c0e41dc1bfba2 1-29675
+scripts/parser/parse-all.ts
+  h_5cf1e2c1161853 47
+scripts/parser/parse-phase2.ts
+  h_5cf1e2c1161853 37,74
+src/generated/openapi.json
+  769c0e41dc1bfba2 1-43924
+src/client/index.ts
+  h_5cf1e2c1161853 1-3
+scripts/parser/parse-phase5.ts
+  h_5cf1e2c1161853 36
+tests/client.test.ts
+  h_5cf1e2c1161853 1-143,145-302
+scripts/parser/prepare-types-input.ts
+  h_5cf1e2c1161853 1-87
+.oxlintrc.json
+  h_5cf1e2c1161853 41-42
+.github/workflows/quality.yml
+  h_5cf1e2c1161853 43-45
+.rumdl.toml
+  h_5cf1e2c1161853 1
+tests/config.test.ts
+  h_5cf1e2c1161853 1-126
+scripts/parser/parse-phase3.ts
+  h_5cf1e2c1161853 42,89
+scripts/parser/generate-client.ts
+  h_5cf1e2c1161853 9,32
+.redocly.yaml
+  h_5cf1e2c1161853 5-6
+tests/fixtures/openapi-test-spec.json
+  h_5cf1e2c1161853 1-34
+README.md
+  h_5cf1e2c1161853 1-56
+scripts/parser/parse-phase6.ts
+  h_5cf1e2c1161853 40
+src/client/types.ts
+  769c0e41dc1bfba2 24
+  h_5cf1e2c1161853 1-23,25-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "659d0f93a6b3da4254d8f804bc9efafb50acaced",
+  "prompts": {
+    "769c0e41dc1bfba2": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "e53724d4-1531-4053-bc3f-3d9eee7dd0a9",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 30085,
+      "total_deletions": 30889,
+      "accepted_lines": 73628,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
