@@ -28,7 +28,7 @@
     "ajv": "^8.18.0",
     "ajv-formats": "^3.0.1",
     "openapi-fetch": "^0.17.0",
-    "zod": "^4.1.12"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@apidevtools/swagger-parser": "^12.1.0",

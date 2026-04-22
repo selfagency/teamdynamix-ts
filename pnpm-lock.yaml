@@ -18,7 +18,7 @@ importers:
         specifier: ^0.17.0
         version: 0.17.0
       zod:
-        specifier: ^4.1.12
+        specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
       '@apidevtools/swagger-parser':
