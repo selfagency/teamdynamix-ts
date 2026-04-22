@@ -1,0 +1,44 @@
+src/client/client.ts
+  h_5cf1e2c1161853 225,227,229
+scripts/parser/generate-client.ts
+  h_5cf1e2c1161853 178
+src/client/sdk/build-sdk.ts
+  h_5cf1e2c1161853 602
+src/generated/client-metadata.json
+  d3dcb705dedbdc01 2
+src/generated/sdk-route-manifest.json
+  d3dcb705dedbdc01 200,230,270,320,390,450,680,710,770,800,960,1140,1170,1230,1380,1460,1510,1560,1710,1790,1940,1980,2570,2700,2760,2800,2840,2890,3160,3360,3450,3610,3720
+tests/sdk-request.test.ts
+  h_5cf1e2c1161853 1-9,14-62
+  d3dcb705dedbdc01 10-13
+tests/sdk.test.ts
+  h_5cf1e2c1161853 46-47
+tests/sdk-mutations.test.ts
+  d3dcb705dedbdc01 33-62,64-66,68-70,73-75,78-80,83-85,88-90,102-129,132-135,141-144,147-150,154-157,161-166,169-172
+  h_5cf1e2c1161853 1-32,63,67,71-72,76-77,81-82,86-87,91-101,130-131,136-140,145-146,151-153,158-160,167-168,173-175
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "50108c5c95c22dfab04f6b9c27473596d046a5fc",
+  "prompts": {
+    "d3dcb705dedbdc01": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "d9c64502-e31e-48c6-b43e-84c028e09736",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 6766,
+      "total_deletions": 6692,
+      "accepted_lines": 2560,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
