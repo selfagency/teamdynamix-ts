@@ -8,29 +8,30 @@ const projectRoot = path.resolve(__dirname, '..');
 
 const preferredSourceSpec = path.join(projectRoot, 'output', 'openapi-types.json');
 const fallbackSourceSpec = path.join(projectRoot, 'src', 'generated', 'openapi.json');
+const sourceCandidates = [
+  path.join(projectRoot, 'output', 'openapi-types.json'),
+  path.join(projectRoot, 'src', 'generated', 'openapi.json'),
+  path.join(projectRoot, 'output', 'openapi.json'),
+];
 const docsPublicDir = path.join(projectRoot, 'docs', 'public');
 const destinationSpec = path.join(docsPublicDir, 'openapi.json');
 
-async function resolveSourceSpec(...candidates) {
-  for (const candidate of candidates) {
-    try {
-      await access(candidate);
-      return candidate;
-    } catch {
-      // Try the next candidate.
-    }
+let sourceSpec;
+for (const candidate of sourceCandidates) {
+  try {
+    await access(candidate);
+    sourceSpec = candidate;
+    break;
+  } catch {
+    // Continue to next candidate.
   }
-
-  throw new Error(
-    `Unable to find an OpenAPI spec to sync. Checked:\n` +
-      `- ${preferredSourceSpec}\n` +
-      `- ${fallbackSourceSpec}\n\n` +
-      'Run the OpenAPI generation step that produces output/openapi-types.json, or ensure src/generated/openapi.json is present.'
-  );
 }
 
-const sourceSpec = await resolveSourceSpec(preferredSourceSpec, fallbackSourceSpec);
+if (!sourceSpec) {
+  throw new Error(`Unable to find an OpenAPI source spec. Checked:\n- ${sourceCandidates.join('\n- ')}`);
+}
+
 await mkdir(docsPublicDir, { recursive: true });
 await copyFile(sourceSpec, destinationSpec);
 
-console.log('✓ Synced OpenAPI spec to docs/public/openapi.json');
+console.log(`✓ Synced OpenAPI spec to docs/public/openapi.json (source: ${sourceSpec})`);
