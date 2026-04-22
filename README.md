@@ -1,5 +1,7 @@
 # teamdynamix-ts
 
+[![CI](https://github.com/selfagency/teamdynamix-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/selfagency/teamdynamix-ts/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/selfagency/teamdynamix-ts/graph/badge.svg?token=TbW25stfHD)](https://codecov.io/gh/selfagency/teamdynamix-ts)
+
 Secure Node-first TypeScript client for the TeamDynamix Web API,
 generated from OpenAPI 3.1.
 
