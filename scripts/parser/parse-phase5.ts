@@ -33,7 +33,7 @@ async function runPhase5(): Promise<PhaseResult> {
 
     // Step 1: Load enriched spec from Phase 4
     console.log('\n📄 Step 1: Loading enriched specification...');
-    const outputDir = path.join(__dirname, '../output');
+    const outputDir = path.join(__dirname, '../../output');
     const specPath = path.join(outputDir, 'openapi.json');
 
     if (!fs.existsSync(specPath)) {

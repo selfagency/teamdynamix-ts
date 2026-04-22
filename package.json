@@ -8,7 +8,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint .",
@@ -17,28 +19,27 @@
     "format:check": "oxfmt --check .",
     "lint:md": "rumdl check .",
     "lint:md:fix": "rumdl check --fix . && rumdl fmt .",
-    "parse:phase1": "tsx scripts/parse-phase1.ts",
-    "parse:phase2": "tsx scripts/parse-phase2.ts",
-    "parse:phase3": "tsx scripts/parse-phase3.ts",
-    "parse:phase4": "tsx scripts/parse-phase4.ts",
-    "parse:phase5": "tsx scripts/parse-phase5.ts",
-    "parse:phase6": "tsx scripts/parse-phase6.ts",
-    "parse:all": "tsx scripts/parse-all.ts",
-    "generate:openapi": "tsx scripts/generate-openapi.ts"
+    "generate:types": "openapi-typescript ./output/openapi.json -o ./src/generated/schema.d.ts --path-params-as-types --generate-path-params --default-non-nullable",
+    "generate:types:check": "openapi-typescript ./output/openapi.json -o ./src/generated/schema.d.ts --path-params-as-types --generate-path-params --default-non-nullable --check"
+  },
+  "dependencies": {
+    "ajv": "^8.18.0",
+    "ajv-formats": "^3.0.1",
+    "openapi-fetch": "^0.17.0"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
+    "@apidevtools/swagger-parser": "^12.1.0",
     "@types/node": "^25.6.0",
-    "gray-matter": "^4.0.3",
+    "@vitest/coverage-v8": "^4.1.5",
     "husky": "^9.1.7",
-    "js-yaml": "^4.1.0",
     "lint-staged": "^16.4.0",
-    "markdown-it": "^14.0.0",
+    "msw": "^2.13.4",
+    "openapi-typescript": "^7.13.0",
     "oxfmt": "^0.46.0",
     "oxlint": "^1.61.0",
     "rumdl": "^0.1.76",
-    "tsx": "^4.7.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "4.1.5"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}": [

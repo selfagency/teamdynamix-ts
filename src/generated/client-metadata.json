@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-04-22T00:13:30.358Z",
+  "source": "output/openapi-types.json",
+  "copiedTo": "src/generated/openapi.json",
+  "stats": {
+    "pathCount": 275,
+    "schemaCount": 36
+  }
+}

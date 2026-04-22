@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -44,7 +44,7 @@ class OpenAPIGeneratorPipeline {
     console.log('🚀 OpenAPI Generator - Complete Pipeline');
     console.log('═'.repeat(70) + '\n');
 
-    const outputDir = path.join(__dirname, '../output');
+    const outputDir = path.join(__dirname, '../../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
