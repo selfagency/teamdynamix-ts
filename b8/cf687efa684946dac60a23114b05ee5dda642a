@@ -1,0 +1,74 @@
+package.json
+  h_5cf1e2c1161853 22-25,30-31
+src/client/sdk/build-sdk.ts
+  d3dcb705dedbdc01 41-42,50-52,64-67,143-145,162-164,182-187,316-318,369-371,462-464
+  h_5cf1e2c1161853 1-40,43-49,53-63,68-142,146-161,165-181,188-315,319-368,372-461,465-716
+src/generated/client-metadata.json
+  d3dcb705dedbdc01 2,7-22
+src/client/schemas/common.ts
+  h_5cf1e2c1161853 1-21
+src/client/schemas/index.ts
+  h_5cf1e2c1161853 1-9
+README.md
+  h_5cf1e2c1161853 13,45-103,109
+src/generated/sdk-route-manifest.json
+  d3dcb705dedbdc01 1-3962
+tests/sdk.test.ts
+  h_5cf1e2c1161853 1-28,32-76,80,87-107,111,115-180
+  d3dcb705dedbdc01 29-31,77-79,81-86,108-110,112-114
+src/client/index.ts
+  h_5cf1e2c1161853 3,5
+src/generated/sdk-read-manifest.ts
+  d3dcb705dedbdc01 1-1564
+tests/sdk-edge.test.ts
+  h_5cf1e2c1161853 1-27,31-43,49-117
+  d3dcb705dedbdc01 28-30,44-48
+tests/sdk-manifest.test.ts
+  h_5cf1e2c1161853 1-57
+src/client/sdk/types.ts
+  d3dcb705dedbdc01 58-62,93-102,113-117
+  h_5cf1e2c1161853 1-57,63-92,103-112,118-152
+src/client/sdk/index.ts
+  h_5cf1e2c1161853 1-9
+tests/schemas.test.ts
+  h_5cf1e2c1161853 1-49
+plans/openapi-client.plan.md
+  h_5cf1e2c1161853 175-183
+src/client/sdk/request.ts
+  h_5cf1e2c1161853 1-72
+src/client/client.ts
+  h_5cf1e2c1161853 6-7,81-82,93-95,100,103,225-228
+  d3dcb705dedbdc01 76-80
+tests/config.test.ts
+  h_5cf1e2c1161853 7-17
+scripts/parser/generate-client.ts
+  d3dcb705dedbdc01 93-99
+  h_5cf1e2c1161853 13-14,16-92,100-136,152,159-200,209-211,219
+tests/client.test.ts
+  h_5cf1e2c1161853 64-78,317-376
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "b8cf687efa684946dac60a23114b05ee5dda642a",
+  "prompts": {
+    "d3dcb705dedbdc01": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "d9c64502-e31e-48c6-b43e-84c028e09736",
+        "model": "copilot/auto"
+      },
+      "human_author": "Daniel Sieradski",
+      "messages": [],
+      "total_additions": 69692,
+      "total_deletions": 64025,
+      "accepted_lines": 35757,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_5cf1e2c1161853": {
+      "author": "Daniel Sieradski"
+    }
+  }
+}
