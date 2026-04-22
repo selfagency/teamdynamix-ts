@@ -12,7 +12,7 @@
     "postbuild": "node scripts/write-dist-package.js",
     "docs:sync-openapi": "node scripts/sync-docs-openapi.mjs",
     "docs:dev": "pnpm run docs:sync-openapi && vitepress dev docs",
-    "docs:build": "pnpm run docs:sync-openapi && vitepress build docs",
+    "docs:build": "pnpm run docs:sync-openapi && NODE_OPTIONS=\"--max-old-space-size=4096\" vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
