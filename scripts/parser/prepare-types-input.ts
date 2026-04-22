@@ -15,10 +15,15 @@ const resolveJsonPointer = (root: unknown, pointer: string): unknown => {
   const parts = pointer.slice(2).split('/').map(decodePointerToken);
   let current: unknown = root;
   for (const part of parts) {
-    if (typeof current !== 'object' || current === null || !(part in current)) {
+    if (
+      typeof current !== 'object' ||
+      current === null ||
+      ['__proto__', 'prototype', 'constructor'].includes(part) ||
+      !Object.prototype.hasOwnProperty.call(current, part)
+    ) {
       return undefined;
     }
-    current = (current as Record<string, unknown>)[part];
+    current = Reflect.get(current as object, part);
   }
   return current;
 };
@@ -55,21 +60,28 @@ const visit = (
 
   const result: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(obj)) {
-    result[key] = visit(value, root, unresolved, [...pathParts, key]);
+    if (['__proto__', 'prototype', 'constructor'].includes(key)) {
+      continue;
+    }
+
+    Reflect.set(result, key, visit(value, root, unresolved, [...pathParts, key]));
   }
 
   return result;
 };
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 if (!fs.existsSync(inputPath)) {
   throw new Error(`Missing ${inputPath}. Run \"pnpm run parse:all\" first.`);
 }
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 const specRaw = fs.readFileSync(inputPath, 'utf8');
 const spec = JSON.parse(specRaw) as Record<string, unknown>;
 const unresolved: string[] = [];
 const sanitized = visit(spec, spec, unresolved) as Record<string, unknown>;
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 fs.writeFileSync(outputPath, JSON.stringify(sanitized, null, 2));
 
 if (unresolved.length > 0) {

@@ -2,7 +2,7 @@
 
 Build a Node-first, secure, generated TypeScript client from the existing OpenAPI 3.1 spec (`/Users/daniel/Developer/teamdynamix-ts/src/openapi.yaml`) using `openapi-typescript` + `openapi-fetch`, with runtime validation for all endpoints, auth and resiliency middleware, contract tests, and CI drift checks. The implementation will reuse the existing 6-phase spec pipeline and add a deterministic client-generation phase and validation gates.
 
-**Steps**
+## Steps
 
 1. Phase 0 — Baseline and constraints (blocks all later steps)
    1.1 Confirm source-of-truth spec path and generated artifact policy: use `output/openapi.json` (post-phase enrichment) as type/client generation input and keep `src/openapi.yaml` as canonical checked-in spec source.
@@ -115,7 +115,7 @@ Build a Node-first, secure, generated TypeScript client from the existing OpenAP
     11.2 Add structured extraction for parameter metadata completeness.
     11.3 Re-run generation to tighten types and validators as schema quality improves.
 
-**Relevant files**
+## Relevant files
 
 - `/Users/daniel/Developer/teamdynamix-ts/package.json` — add generation/check scripts and dependencies.
 - `/Users/daniel/Developer/teamdynamix-ts/tsconfig.json` — verify compiler options remain compatible with generated declarations and strict mode.
@@ -131,7 +131,7 @@ Build a Node-first, secure, generated TypeScript client from the existing OpenAP
 - `/Users/daniel/Developer/teamdynamix-ts/src/client/*` (new) — secure runtime wrapper and middleware.
 - `/Users/daniel/Developer/teamdynamix-ts/tests/*` (new) — unit + MSW integration tests.
 
-**Verification**
+## Verification
 
 1. Schema and generation integrity:
    - Run parse pipeline end-to-end and confirm `output/openapi.json` regenerates cleanly.
@@ -153,7 +153,7 @@ Build a Node-first, secure, generated TypeScript client from the existing OpenAP
 6. CI enforcement:
    - Confirm workflow fails on generation drift or schema lint/type/test failures with actionable logs.
 
-**Decisions**
+## Decisions
 
 - Chosen runtime target: Node-first.
 - Validation level: runtime validation for all endpoints.
@@ -161,7 +161,7 @@ Build a Node-first, secure, generated TypeScript client from the existing OpenAP
 - Scope includes secure client generation and repo integration; scope excludes full parser refactor for schema completeness (tracked as optional uplift).
 - openapi-to-typescript skill note about 3.0-only is superseded by `openapi-typescript` v7 docs and existing OpenAPI 3.1 support in project and tooling.
 
-**Further Considerations**
+## Further Considerations
 
 1. Validator implementation path:
    - Option A: generated validator artifacts from OpenAPI schemas (preferred for full-endpoint runtime validation consistency).

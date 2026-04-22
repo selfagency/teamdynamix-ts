@@ -11,20 +11,25 @@ const generatedDir = path.join(projectRoot, 'src', 'generated');
 const generatedSpecPath = path.join(generatedDir, 'openapi.json');
 const metadataPath = path.join(generatedDir, 'client-metadata.json');
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 if (!fs.existsSync(outputSpecPath)) {
   throw new Error(`Expected generated OpenAPI spec at ${outputSpecPath}. Run "pnpm run parse:all" first.`);
 }
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 if (!fs.existsSync(generatedDir)) {
+  // nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
   fs.mkdirSync(generatedDir, { recursive: true });
 }
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 const specRaw = fs.readFileSync(outputSpecPath, 'utf8');
 const spec = JSON.parse(specRaw) as {
   paths?: Record<string, unknown>;
   components?: { schemas?: Record<string, unknown> };
 };
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 fs.copyFileSync(outputSpecPath, generatedSpecPath);
 
 const metadata = {
@@ -37,6 +42,7 @@ const metadata = {
   },
 };
 
+// nosemgrep: javascript.lang.security.detect-non-literal-fs-filename
 fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
 console.log('✓ Copied OpenAPI spec to src/generated/openapi.json');

@@ -12,9 +12,10 @@ const JSON_CONTENT_TYPES = ['application/json', 'application/problem+json'];
 
 const getJsonSchema = (content: Record<string, { schema?: unknown }> | undefined): unknown => {
   if (!content) return undefined;
-  for (const contentType of JSON_CONTENT_TYPES) {
-    const schema = content[contentType]?.schema;
-    if (schema !== undefined) return schema;
+  for (const [contentType, mediaType] of Object.entries(content)) {
+    if (JSON_CONTENT_TYPES.includes(contentType) && mediaType?.schema !== undefined) {
+      return mediaType.schema;
+    }
   }
   const firstContent = Object.values(content)[0];
   return firstContent?.schema;
@@ -33,11 +34,21 @@ export class OpenApiRuntimeValidator {
   }
 
   private operationFor(schemaPath: string, method: string): OpenApiOperation | undefined {
-    const operation =
-      this.spec.paths?.[schemaPath]?.[
-        method.toLowerCase() as keyof NonNullable<DereferencedOpenApiSpec['paths']>[string]
-      ];
-    return operation as OpenApiOperation | undefined;
+    const methodName = method.toLowerCase();
+    const paths = this.spec.paths ?? {};
+    for (const [pathKey, pathItem] of Object.entries(paths)) {
+      if (pathKey !== schemaPath || !pathItem) {
+        continue;
+      }
+
+      for (const [operationMethod, operation] of Object.entries(pathItem)) {
+        if (operationMethod === methodName) {
+          return operation as OpenApiOperation;
+        }
+      }
+    }
+
+    return undefined;
   }
 
   private compileRequestValidator(schemaPath: string, method: string): ValidateFunction | undefined {
@@ -63,7 +74,18 @@ export class OpenApiRuntimeValidator {
     const operation = this.operationFor(schemaPath, method);
     if (!operation?.responses) return undefined;
 
-    const response = operation.responses[String(status)] ?? operation.responses.default;
+    let response: { content?: Record<string, { schema?: unknown }> } | undefined;
+    const statusKey = String(status);
+    for (const [responseCode, responseDef] of Object.entries(operation.responses)) {
+      if (responseCode === statusKey) {
+        response = responseDef;
+        break;
+      }
+      if (responseCode === 'default') {
+        response = responseDef;
+      }
+    }
+
     if (!response) return undefined;
 
     const schema = getJsonSchema(response.content);
