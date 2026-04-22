@@ -1,10 +1,9 @@
-import fs from 'fs';
 import path from 'path';
-import { EndpointExtractor } from './endpoint-extractor.js';
-import { TypeExtractor } from './type-extractor.js';
 import { CrossReferenceResolver } from './cross-reference-resolver.js';
+import { EndpointExtractor } from './endpoint-extractor.js';
 import { parseMarkdownFiles } from './markdown-parser.js';
-import type { ParserResult, ParsedType, ParsedEndpoint, ParserError, ParserStats } from './types.js';
+import { TypeExtractor } from './type-extractor.js';
+import type { ParsedEndpoint, ParsedType, ParserError, ParserResult } from './types.js';
 
 /**
  * Main parser that orchestrates extraction of endpoints and types
@@ -64,7 +63,6 @@ export class TDWebApiParser {
       }
 
       // Step 6: Generate stats
-      const stats = resolver.getStats();
       const processingTimeMs = Date.now() - this.startTime;
 
       const result: ParserResult = {
@@ -152,7 +150,6 @@ export class TDWebApiParser {
    * Extract types from type markdown files
    */
   private async extractTypes(markdownFiles: Map<string, { rawContent: string }>): Promise<ParsedType[]> {
-    const types: ParsedType[] = [];
     const typeMap = new Map<string, ParsedType>();
 
     for (const [filePath, content] of markdownFiles) {

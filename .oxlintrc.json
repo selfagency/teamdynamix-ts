@@ -4,7 +4,8 @@
   "categories": {},
   "rules": {
     "jest/valid-expect": "off",
-    "vitest/require-mock-type-parameters": "off"
+    "vitest/require-mock-type-parameters": "off",
+    "eslint-plugin-jest/require-to-throw-message": "off"
   },
   "settings": {
     "jsdoc": {
@@ -39,16 +40,6 @@
     "playwright-report",
     "test-results",
     "src/lexicons",
-    ".wxt",
-    "scripts/parser/parser",
-    "scripts/parser/schema",
-    "scripts/parser/fix-types.ts",
-    "scripts/parser/parse-phase1.ts",
-    "scripts/parser/parse-phase2.ts",
-    "scripts/parser/parse-phase3.ts",
-    "scripts/parser/parse-phase4.ts",
-    "scripts/parser/parse-phase5.ts",
-    "scripts/parser/parse-phase6.ts",
-    "scripts/parser/parse-all.ts"
+    "plans"
   ]
 }

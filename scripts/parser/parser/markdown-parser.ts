@@ -41,7 +41,6 @@ export class MarkdownParser {
    */
   parse(): MarkdownContent {
     const sections: MarkdownSection[] = [];
-    let currentLevel = 0;
     let stack: MarkdownSection[] = [];
 
     for (const line of this.lines) {
