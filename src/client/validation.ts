@@ -1,5 +1,5 @@
-import { createRequire } from 'node:module';
 import type { ValidateFunction } from 'ajv';
+import { createRequire } from 'node:module';
 import type { DereferencedOpenApiSpec, OpenApiOperation } from './spec.js';
 
 const _require = createRequire(import.meta.url);

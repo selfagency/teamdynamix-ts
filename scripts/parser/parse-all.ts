@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);

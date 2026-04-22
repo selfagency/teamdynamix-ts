@@ -1,5 +1,5 @@
-import createClient, { type Middleware } from 'openapi-fetch';
 import { setMaxListeners } from 'node:events';
+import createClient, { type Middleware } from 'openapi-fetch';
 import type { paths } from '../generated/schema.js';
 import { TeamDynamixClientError } from './errors.js';
 import { calculateBackoffDelay, isRetryable, parseRetryAfter, waitForRetry } from './retry.js';

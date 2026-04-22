@@ -1,5 +1,5 @@
-import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { createTeamDynamixClient, TeamDynamixClientError } from '../src/client/index.js';
 

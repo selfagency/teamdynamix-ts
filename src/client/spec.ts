@@ -1,6 +1,6 @@
+import SwaggerParser from '@apidevtools/swagger-parser';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import SwaggerParser from '@apidevtools/swagger-parser';
 
 type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options' | 'trace';
 
