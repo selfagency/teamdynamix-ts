@@ -1,5 +1,5 @@
-import type { ParsedType, ParsedTypeProperty } from './types.js';
 import { MarkdownParser } from './markdown-parser.js';
+import type { ParsedType, ParsedTypeProperty } from './types.js';
 
 /**
  * Extracts type definitions from member markdown files
@@ -142,14 +142,14 @@ export class TypeExtractor {
     let editable = true;
     let readOnly = false;
     let description: string = '';
-    let isNullable = false;
+    let _isNullable = false;
 
     if (cells.length === 4) {
       // Format: Name | Type | Nullable? | Summary
       type = cells[1] || 'string';
       const cell2 = cells[2];
       if (cell2) {
-        isNullable = cell2.toLowerCase().includes('nullable');
+        _isNullable = cell2.toLowerCase().includes('nullable');
       }
       description = cells[3] || '';
     } else if (cells.length === 5) {
@@ -165,7 +165,7 @@ export class TypeExtractor {
           type = cells[2] || 'string';
           const cell3 = cells[3];
           if (cell3) {
-            isNullable = cell3.toLowerCase().includes('nullable');
+            _isNullable = cell3.toLowerCase().includes('nullable');
           }
           description = cells[4] || '';
         } else {
@@ -173,7 +173,7 @@ export class TypeExtractor {
           type = col2 || 'string';
           const cell2b = cells[2];
           if (cell2b) {
-            isNullable = cell2b.toLowerCase().includes('nullable');
+            _isNullable = cell2b.toLowerCase().includes('nullable');
           }
           description = cells[4] || '';
         }
@@ -191,7 +191,7 @@ export class TypeExtractor {
       type = cells[3] || 'string';
       const cell4 = cells[4];
       if (cell4) {
-        isNullable = cell4.toLowerCase().includes('nullable');
+        _isNullable = cell4.toLowerCase().includes('nullable');
       }
       description = cells[5] || '';
     }

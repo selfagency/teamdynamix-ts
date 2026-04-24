@@ -42,6 +42,15 @@ jobs:
       - name: Test (Vitest)
         run: pnpm run test:coverage --reporter=default --reporter=junit --outputFile=test-report.junit.xml
 
+      - name: Prepare OpenAPI spec for docs build
+        run: |
+          test -f src/generated/openapi.json || { echo "Missing required file: src/generated/openapi.json"; exit 1; }
+          mkdir -p output
+          cp src/generated/openapi.json output/openapi-types.json
+
+      - name: Build docs (VitePress)
+        run: pnpm run docs:build
+
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1

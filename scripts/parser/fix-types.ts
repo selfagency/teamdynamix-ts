@@ -8,19 +8,6 @@ import path from 'path';
 
 const files = ['./parser/endpoint-extractor.ts', './parser/markdown-parser.ts', './parser/type-extractor.ts'];
 
-const fixes: Record<string, Array<{ pattern: string; replacement: string }>> = {
-  './parser/endpoint-extractor.ts': [
-    {
-      pattern: 'const methodMatch = line.match',
-      replacement: 'const methodMatch = line.match',
-    },
-    {
-      pattern: 'const method = methodMatch[1]?.toUpperCase',
-      replacement: 'const methodStr = methodMatch[1]?.toUpperCase()',
-    },
-  ],
-};
-
 // Read and apply fixes
 for (const file of files) {
   const filePath = path.join('/Users/daniel/Developer/teamdynamix-ts', file);

@@ -1,4 +1,4 @@
-import type { ParsedType, ParsedTypeProperty, ParsedSchema } from '../parser/types.js';
+import type { ParsedType, ParsedTypeProperty } from '../parser/types.js';
 
 /**
  * OpenAPI 3.1 Schema Object for components/schemas

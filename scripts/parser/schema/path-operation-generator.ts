@@ -1,4 +1,4 @@
-import type { ParsedEndpoint, ParsedParameter, ParsedResponse } from '../parser/types.js';
+import type { ParsedEndpoint, ParsedResponse } from '../parser/types.js';
 
 export interface OpenAPIPath {
   [method: string]: OpenAPIOperation;

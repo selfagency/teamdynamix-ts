@@ -5,32 +5,7 @@
 Secure Node-first TypeScript client for the TeamDynamix Web API,
 generated from OpenAPI 3.1.
 
-## What this project provides
-
-- Generated TypeScript types from the OpenAPI spec (`src/generated/schema.d.ts`)
-- Secure typed fetch client (`openapi-fetch`) with:
-  - Bearer token auth middleware
-  - Zod v4 boundary validation for SDK inputs (tenant/token and shared helper contracts)
-  - Request/response runtime validation
-  - Bounded retry with backoff and `Retry-After` support
-- Vitest + MSW test coverage for core client behavior
-
-## Source of truth
-
-- Canonical OpenAPI spec in this repository: `src/spec/openapi.yaml`
-- Canonical TeamDynamix API source: static TeamDynamix API documentation (`sources/TDWebApi/**`)
-- OpenAPI 3.1 spec origin: reverse engineered from the static TeamDynamix docs via this repo's parser/enrichment pipeline
-- Enriched generated spec: `output/openapi.json`
-- Generated TS declarations: `src/generated/schema.d.ts`
-
-## Commands
-
-- `pnpm run typecheck` — strict TypeScript checks
-- `pnpm run test` — Vitest suite
-- `pnpm run lint` — Oxlint
-- `pnpm run format` — Oxfmt
-
-## Client usage
+## Quick start
 
 ```ts
 import { createTeamDynamixClient } from 'teamdynamix-ts';
@@ -42,81 +17,41 @@ const { client } = await createTeamDynamixClient({
   runtimeValidationMode: 'fail-closed',
 });
 
-const { data, error } = await client.GET('/api/accounts');
-```
-
-## Route-specific SDK surface
-
-The returned `client` now exposes a domain-object API in addition to low-level HTTP methods:
-
-- `client.discovery.<method>()`
-- `client.tickets.<method>()`
-- `client.ticketRelationships.<method>()`
-- `client.people.<method>()`
-- `client.knowledgeBase.<method>()`
-- `client.assets.<method>()`
-- `client.cmdb.<method>()`
-- `client.services.<method>()`
-- `client.projects.<method>()`
-- `client.time.<method>()`
-- `client.referenceData.<method>()`
-- `client.helpers.<method>()` for discovery-first workflows
-
-Example:
-
-```ts
-const { client, raw } = await createTeamDynamixClient({
-  tenant: 'api',
-  tokenProvider: async () => process.env.TEAMDYNAMIX_TOKEN ?? '',
-});
-
-// Route-specific domain method (generated from OpenAPI metadata)
 const accounts = await client.referenceData.accounts();
-
-// Curated guarded mutation with explicit confirm semantics
-await client.ticketRelationships.removeTicketAsset({
-  appId: 123,
-  ticketId: 456,
-  assetId: 789,
-  confirm: true,
-});
-
-// Raw escape hatch for advanced/edge operations
-const rawResponse = await raw.GET('/api/accounts');
 ```
 
-### Migration examples
+## Documentation
 
-- Before: `await client.GET('/api/accounts')`
-- After: `await client.referenceData.accounts()`
-- Before: `await client.POST('/api/{appId}/tickets/{id}/feed', { ... })`
-- After: `await client.tickets.addTicketComment({ appId, ticketId, body })`
-- Before: `await client.DELETE('/api/{appId}/tickets/{id}/assets/{assetId}')`
-- After: `await client.ticketRelationships.removeTicketAsset({ appId, ticketId, assetId, confirm: true })`
+- Browse docs in `docs/` with VitePress.
+- Local docs dev server: `pnpm run docs:dev`
+- Build docs: `pnpm run docs:build`
+- Preview built docs: `pnpm run docs:preview`
 
-## Generated route manifests
+### API reference in docs
 
-- Full route manifest: `src/generated/sdk-route-manifest.json`
-- Generated read-route manifest: `src/generated/sdk-read-manifest.ts`
+- Full spec page: `docs/api/spec.md`
+- Operation pages: generated from `docs/operations/[operationId].paths.ts`
+- Tag pages: generated from `docs/tags/[tag].paths.ts`
 
-Regenerate manifests from OpenAPI metadata:
+## Development commands
 
-- `pnpm run generate:client`
-- `pnpm run generate:all`
+- `pnpm run typecheck` — strict TypeScript checks
+- `pnpm run lint` — Oxlint
+- `pnpm run format:check` — formatting verification
+- `pnpm run lint:md` — markdown lint checks
+- `pnpm run test` — Vitest suite
 
-## Security posture
+## Source of truth
 
-- HTTPS-only base URL enforcement
-- Authorization header injection via middleware (with route exclusions)
-- Runtime request and response validation against OpenAPI schema
-- Zod v4 parsing for client boundary inputs before request dispatch
-- Retry limited to safe methods and retryable status codes
-- Structured error taxonomy: auth / config / network / http / validation
+- Canonical OpenAPI spec in repo: `src/spec/openapi.yaml`
+- Enriched outputs and reports: `output/`
+- Type generation source: `output/openapi-types.json`
+- Generated declarations: `src/generated/schema.d.ts`
 
-## CI quality gates
+## More detail
 
-The `quality` workflow enforces, in order:
+See the full documentation in `docs/` for:
 
-1. `typecheck`
-2. lint / format / markdown checks
-3. tests
+- SDK usage patterns and migration guidance
+- Generated API reference
+- contributor-focused architecture and workflow guidance

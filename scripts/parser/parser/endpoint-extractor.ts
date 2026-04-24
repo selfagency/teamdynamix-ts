@@ -1,5 +1,4 @@
 import type { ParsedEndpoint, ParsedParameter, ParsedResponse, ParsedSchema } from './types.js';
-import { MarkdownParser } from './markdown-parser.js';
 
 /**
  * Extracts endpoint definitions from section markdown files
@@ -91,9 +90,6 @@ export class EndpointExtractor {
     const parameters: ParsedParameter[] = [];
     const responses: Record<string, ParsedResponse> = {};
     let requestBodySchema: ParsedSchema | undefined;
-    let isRequestBody = false;
-
-    const startSearch = startLine + 1;
     const endSearch = Math.min(startLine + 100, lines.length);
 
     while (i < endSearch) {

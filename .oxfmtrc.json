@@ -13,7 +13,8 @@
     "coverage",
     "playwright-report",
     "test-results",
-    "src/lexicons"
+    "src/lexicons",
+    "plans"
   ],
   "arrowParens": "avoid",
   "bracketSpacing": true,
