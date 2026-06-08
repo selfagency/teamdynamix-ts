@@ -15659,9 +15659,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': {
-            [key: string]: unknown;
-          };
+          'application/json': components['schemas']['Assets'];
         };
       };
       /** @description Bad request */
@@ -15712,9 +15710,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': {
-            [key: string]: unknown;
-          };
+          'application/json': components['schemas']['Assets'];
         };
       };
       /** @description Bad request */
@@ -19791,9 +19787,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': {
-            [key: string]: unknown;
-          };
+          'application/json': components['schemas']['Plans'];
         };
       };
       /** @description Bad request */
@@ -19901,9 +19895,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': {
-            [key: string]: unknown;
-          };
+          'application/json': components['schemas']['Plans'];
         };
       };
       /** @description Bad request */

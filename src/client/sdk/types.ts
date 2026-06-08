@@ -51,6 +51,14 @@ export interface TicketMutations {
   createTicket(input: { appId: string | number; body: unknown; params?: Record<string, unknown> }): Promise<unknown>;
   updateTicket(input: { appId: string | number; ticketId: string | number; body: unknown }): Promise<unknown>;
   addTicketComment(input: { appId: string | number; ticketId: string | number; body: unknown }): Promise<unknown>;
+  getTicketFeed(input: { appId: string | number; ticketId: string | number }): Promise<unknown>;
+  getTicketsFeed(input: { appId: string | number }): Promise<unknown>;
+  setTicketCustomAttributes(input: {
+    appId: string | number;
+    ticketId: string | number;
+    attributes: Array<{ ID: string | number; Value: unknown }>;
+  }): Promise<unknown>;
+  getTicketCustomAttributes(input: { appId: string | number; ticketId: string | number }): Promise<unknown>;
 }
 
 export interface TicketRelationshipMutations {
@@ -106,6 +114,12 @@ export interface AssetMutations {
   createAsset(input: { appId: string | number; body: unknown }): Promise<unknown>;
   updateAsset(input: { appId: string | number; assetId: string | number; body: unknown }): Promise<unknown>;
   deleteAsset(input: { appId: string | number; assetId: string | number; confirm: true }): Promise<unknown>;
+  setAssetCustomAttributes(input: {
+    appId: string | number;
+    assetId: string | number;
+    attributes: Array<{ ID: string | number; Value: unknown }>;
+  }): Promise<unknown>;
+  getAssetCustomAttributes(input: { appId: string | number; assetId: string | number }): Promise<unknown>;
 }
 
 export interface CmdbMutations {
@@ -136,6 +150,11 @@ export interface SdkHelpers {
   }): Promise<{ statuses: unknown; priorities: unknown; types: unknown }>;
 }
 
+export interface CustomAttributesRegistry {
+  getTicketCustomAttributes(input: { appId: string | number }): Promise<unknown>;
+  getAssetCustomAttributes(input: { appId: string | number }): Promise<unknown>;
+}
+
 export interface TeamDynamixSdk {
   readonly discovery: TeamDynamixSdkReadDomains['discovery'];
   readonly tickets: TeamDynamixSdkReadDomains['tickets'] & TicketMutations;
@@ -149,4 +168,5 @@ export interface TeamDynamixSdk {
   readonly time: TeamDynamixSdkReadDomains['time'] & TimeMutations;
   readonly referenceData: TeamDynamixSdkReadDomains['referenceData'];
   readonly helpers: SdkHelpers;
+  readonly registry: CustomAttributesRegistry;
 }

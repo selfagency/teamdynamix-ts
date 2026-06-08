@@ -11448,10 +11448,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Unresolved reference fallback for #/components/schemas/The TeamDynamix.Api.Assets.IntuneAssetMapping ID mapping between the Intune device and the TDX asset",
-                  "x-unresolved-ref": "#/components/schemas/The TeamDynamix.Api.Assets.IntuneAssetMapping ID mapping between the Intune device and the TDX asset"
+                  "$ref": "#/components/schemas/Assets"
                 }
               }
             }
@@ -11549,10 +11546,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Unresolved reference fallback for #/components/schemas/The TeamDynamix.Api.Assets.IntuneAssetMapping created mappings between the Intune devices and the TDX assets",
-                  "x-unresolved-ref": "#/components/schemas/The TeamDynamix.Api.Assets.IntuneAssetMapping created mappings between the Intune devices and the TDX assets"
+                  "$ref": "#/components/schemas/Assets"
                 }
               }
             }
@@ -18786,10 +18780,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Unresolved reference fallback for #/components/schemas/A TeamDynamix.Api.Plans.Plan object.",
-                  "x-unresolved-ref": "#/components/schemas/A TeamDynamix.Api.Plans.Plan object."
+                  "$ref": "#/components/schemas/Plans"
                 }
               }
             }
@@ -18985,10 +18976,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Unresolved reference fallback for #/components/schemas/A TeamDynamix.Api.Plans.Plan object.",
-                  "x-unresolved-ref": "#/components/schemas/A TeamDynamix.Api.Plans.Plan object."
+                  "$ref": "#/components/schemas/Plans"
                 }
               }
             }

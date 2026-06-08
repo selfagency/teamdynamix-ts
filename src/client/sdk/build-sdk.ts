@@ -3,19 +3,26 @@ import { SDK_READ_ROUTE_MANIFEST } from '../../generated/sdk-read-manifest.js';
 import type { TeamDynamixFetchClient } from '../client.js';
 import { appIdSchema, confirmTrueSchema, searchTextSchema } from '../schemas/index.js';
 import { executeSdkRoute } from './request.js';
+import {
+  buildCustomAttributeValue,
+  createTicketCustomAttributes,
+  createAssetCustomAttributes,
+  createCustomAttributesRegistry
+} from './custom-attributes.js';
 import type {
   AssetMutations,
   CmdbMutations,
   KnowledgeBaseMutations,
   ProjectMutations,
+  SdkDomainName,
   SdkHelpers,
-  SdkReadDomain,
   ServiceMutations,
+  SdkReadDomain,
   TeamDynamixSdk,
   TeamDynamixSdkReadDomains,
   TicketMutations,
   TicketRelationshipMutations,
-  TimeMutations,
+  TimeMutations
 } from './types.js';
 
 const nonEmptyIdSchema = z.union([z.string().trim().min(1), z.number().int().nonnegative()]);
@@ -33,7 +40,7 @@ const createReadDomains = (client: TeamDynamixFetchClient): TeamDynamixSdkReadDo
     services: {},
     projects: {},
     time: {},
-    referenceData: {},
+    referenceData: {}
   };
 
   for (const route of SDK_READ_ROUTE_MANIFEST) {
@@ -46,9 +53,14 @@ const createReadDomains = (client: TeamDynamixFetchClient): TeamDynamixSdkReadDo
 };
 
 const createTicketMutations = (client: TeamDynamixFetchClient): TicketMutations => ({
+  ...createTicketCustomAttributes(client),
   async createTicket(input) {
     const parsed = z
-      .object({ appId: appIdSchema, body: z.unknown(), params: z.record(z.string(), z.unknown()).optional() })
+      .object({
+        appId: appIdSchema,
+        body: z.unknown(),
+        params: z.record(z.string(), z.unknown()).optional()
+      })
       .parse(input);
     return executeSdkRoute(
       client,
@@ -60,16 +72,25 @@ const createTicketMutations = (client: TeamDynamixFetchClient): TicketMutations 
         httpMethod: 'POST',
         tags: ['Tickets'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
       {
-        params: { path: { appId: parsed.appId }, ...(parsed.params ? { query: parsed.params } : {}) },
-        body: parsed.body,
-      },
+        params: {
+          path: { appId: parsed.appId },
+          ...(parsed.params ? { query: parsed.params } : {})
+        },
+        body: parsed.body
+      }
     );
   },
   async updateTicket(input) {
-    const parsed = z.object({ appId: appIdSchema, ticketId: nonEmptyIdSchema, body: z.unknown() }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        ticketId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -80,13 +101,22 @@ const createTicketMutations = (client: TeamDynamixFetchClient): TicketMutations 
         httpMethod: 'POST',
         tags: ['Tickets'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.ticketId } }, body: parsed.body },
+      {
+        params: { path: { appId: parsed.appId, id: parsed.ticketId } },
+        body: parsed.body
+      }
     );
   },
   async addTicketComment(input) {
-    const parsed = z.object({ appId: appIdSchema, ticketId: nonEmptyIdSchema, body: z.unknown() }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        ticketId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -97,16 +127,59 @@ const createTicketMutations = (client: TeamDynamixFetchClient): TicketMutations 
         httpMethod: 'POST',
         tags: ['Tickets'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.ticketId } }, body: parsed.body },
+      {
+        params: { path: { appId: parsed.appId, id: parsed.ticketId } },
+        body: parsed.body
+      }
     );
   },
+  async getTicketFeed(input) {
+    const parsed = z.object({ appId: appIdSchema, ticketId: nonEmptyIdSchema }).parse(input);
+    return executeSdkRoute(
+      client,
+      {
+        domain: 'tickets',
+        methodName: 'getTicketFeed',
+        operationId: 'getAppIdTicketsIdFeed',
+        path: '/api/{appId}/tickets/{id}/feed',
+        httpMethod: 'GET',
+        tags: ['Tickets'],
+        mutating: false,
+        destructive: false
+      },
+      { params: { path: { appId: parsed.appId, id: parsed.ticketId } } }
+    );
+  },
+  async getTicketsFeed(input) {
+    const parsed = z.object({ appId: appIdSchema }).parse(input);
+    return executeSdkRoute(
+      client,
+      {
+        domain: 'tickets',
+        methodName: 'getTicketsFeed',
+        operationId: 'getAppIdTicketsFeed',
+        path: '/api/{appId}/tickets/feed',
+        httpMethod: 'GET',
+        tags: ['Tickets'],
+        mutating: false,
+        destructive: false
+      },
+      { params: { path: { appId: parsed.appId } } }
+    );
+  }
 });
 
 const createTicketRelationshipMutations = (client: TeamDynamixFetchClient): TicketRelationshipMutations => ({
   async createTicketTask(input) {
-    const parsed = z.object({ appId: appIdSchema, ticketId: nonEmptyIdSchema, body: z.unknown() }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        ticketId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -117,13 +190,22 @@ const createTicketRelationshipMutations = (client: TeamDynamixFetchClient): Tick
         httpMethod: 'POST',
         tags: ['TicketTasks'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, ticketId: parsed.ticketId } }, body: parsed.body },
+      {
+        params: { path: { appId: parsed.appId, ticketId: parsed.ticketId } },
+        body: parsed.body
+      }
     );
   },
   async addTicketAsset(input) {
-    const parsed = z.object({ appId: appIdSchema, ticketId: nonEmptyIdSchema, assetId: nonEmptyIdSchema }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        ticketId: nonEmptyIdSchema,
+        assetId: nonEmptyIdSchema
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -134,14 +216,27 @@ const createTicketRelationshipMutations = (client: TeamDynamixFetchClient): Tick
         httpMethod: 'POST',
         tags: ['Tickets'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.ticketId, assetId: parsed.assetId } } },
+      {
+        params: {
+          path: {
+            appId: parsed.appId,
+            id: parsed.ticketId,
+            assetId: parsed.assetId
+          }
+        }
+      }
     );
   },
   async removeTicketAsset(input) {
     const parsed = z
-      .object({ appId: appIdSchema, ticketId: nonEmptyIdSchema, assetId: nonEmptyIdSchema, confirm: confirmTrueSchema })
+      .object({
+        appId: appIdSchema,
+        ticketId: nonEmptyIdSchema,
+        assetId: nonEmptyIdSchema,
+        confirm: confirmTrueSchema
+      })
       .parse(input);
     return executeSdkRoute(
       client,
@@ -153,14 +248,26 @@ const createTicketRelationshipMutations = (client: TeamDynamixFetchClient): Tick
         httpMethod: 'DELETE',
         tags: ['Tickets'],
         mutating: true,
-        destructive: true,
+        destructive: true
       },
-      { params: { path: { appId: parsed.appId, id: parsed.ticketId, assetId: parsed.assetId } } },
+      {
+        params: {
+          path: {
+            appId: parsed.appId,
+            id: parsed.ticketId,
+            assetId: parsed.assetId
+          }
+        }
+      }
     );
   },
   async addTicketContact(input) {
     const parsed = z
-      .object({ appId: appIdSchema, ticketId: nonEmptyIdSchema, contactUid: contactUidSchema })
+      .object({
+        appId: appIdSchema,
+        ticketId: nonEmptyIdSchema,
+        contactUid: contactUidSchema
+      })
       .parse(input);
     return executeSdkRoute(
       client,
@@ -172,9 +279,17 @@ const createTicketRelationshipMutations = (client: TeamDynamixFetchClient): Tick
         httpMethod: 'POST',
         tags: ['Tickets'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.ticketId, contactUid: parsed.contactUid } } },
+      {
+        params: {
+          path: {
+            appId: parsed.appId,
+            id: parsed.ticketId,
+            contactUid: parsed.contactUid
+          }
+        }
+      }
     );
   },
   async removeTicketContact(input) {
@@ -183,7 +298,7 @@ const createTicketRelationshipMutations = (client: TeamDynamixFetchClient): Tick
         appId: appIdSchema,
         ticketId: nonEmptyIdSchema,
         contactUid: contactUidSchema,
-        confirm: confirmTrueSchema,
+        confirm: confirmTrueSchema
       })
       .parse(input);
     return executeSdkRoute(
@@ -196,11 +311,19 @@ const createTicketRelationshipMutations = (client: TeamDynamixFetchClient): Tick
         httpMethod: 'DELETE',
         tags: ['Tickets'],
         mutating: true,
-        destructive: true,
+        destructive: true
       },
-      { params: { path: { appId: parsed.appId, id: parsed.ticketId, contactUid: parsed.contactUid } } },
+      {
+        params: {
+          path: {
+            appId: parsed.appId,
+            id: parsed.ticketId,
+            contactUid: parsed.contactUid
+          }
+        }
+      }
     );
-  },
+  }
 });
 
 const createKnowledgeBaseMutations = (client: TeamDynamixFetchClient): KnowledgeBaseMutations => ({
@@ -216,13 +339,19 @@ const createKnowledgeBaseMutations = (client: TeamDynamixFetchClient): Knowledge
         httpMethod: 'POST',
         tags: ['KnowledgeBase'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId } }, body: parsed.body },
+      { params: { path: { appId: parsed.appId } }, body: parsed.body }
     );
   },
   async updateArticle(input) {
-    const parsed = z.object({ appId: appIdSchema, articleId: nonEmptyIdSchema, body: z.unknown() }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        articleId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -233,11 +362,14 @@ const createKnowledgeBaseMutations = (client: TeamDynamixFetchClient): Knowledge
         httpMethod: 'PUT',
         tags: ['KnowledgeBase'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.articleId } }, body: parsed.body },
+      {
+        params: { path: { appId: parsed.appId, id: parsed.articleId } },
+        body: parsed.body
+      }
     );
-  },
+  }
 });
 
 const createProjectMutations = (client: TeamDynamixFetchClient): ProjectMutations => ({
@@ -253,9 +385,9 @@ const createProjectMutations = (client: TeamDynamixFetchClient): ProjectMutation
         httpMethod: 'POST',
         tags: ['Issues'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { body: parsed.body },
+      { body: parsed.body }
     );
   },
   async createRisk(input) {
@@ -270,11 +402,11 @@ const createProjectMutations = (client: TeamDynamixFetchClient): ProjectMutation
         httpMethod: 'POST',
         tags: ['Risks'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { body: parsed.body },
+      { body: parsed.body }
     );
-  },
+  }
 });
 
 const createServiceMutations = (client: TeamDynamixFetchClient): ServiceMutations => ({
@@ -290,13 +422,19 @@ const createServiceMutations = (client: TeamDynamixFetchClient): ServiceMutation
         httpMethod: 'POST',
         tags: ['ServiceCatalog'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId } }, body: parsed.body },
+      { params: { path: { appId: parsed.appId } }, body: parsed.body }
     );
   },
   async updateService(input) {
-    const parsed = z.object({ appId: appIdSchema, serviceId: nonEmptyIdSchema, body: z.unknown() }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        serviceId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -307,14 +445,21 @@ const createServiceMutations = (client: TeamDynamixFetchClient): ServiceMutation
         httpMethod: 'PUT',
         tags: ['ServiceCatalog'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.serviceId } }, body: parsed.body },
+      {
+        params: { path: { appId: parsed.appId, id: parsed.serviceId } },
+        body: parsed.body
+      }
     );
   },
   async deleteService(input) {
     const parsed = z
-      .object({ appId: appIdSchema, serviceId: nonEmptyIdSchema, confirm: confirmTrueSchema })
+      .object({
+        appId: appIdSchema,
+        serviceId: nonEmptyIdSchema,
+        confirm: confirmTrueSchema
+      })
       .parse(input);
     return executeSdkRoute(
       client,
@@ -326,9 +471,9 @@ const createServiceMutations = (client: TeamDynamixFetchClient): ServiceMutation
         httpMethod: 'DELETE',
         tags: ['ServiceCatalog'],
         mutating: true,
-        destructive: true,
+        destructive: true
       },
-      { params: { path: { appId: parsed.appId, id: parsed.serviceId } } },
+      { params: { path: { appId: parsed.appId, id: parsed.serviceId } } }
     );
   },
   async createServiceCategory(input) {
@@ -343,13 +488,19 @@ const createServiceMutations = (client: TeamDynamixFetchClient): ServiceMutation
         httpMethod: 'POST',
         tags: ['ServiceCatalog'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId } }, body: parsed.body },
+      { params: { path: { appId: parsed.appId } }, body: parsed.body }
     );
   },
   async updateServiceCategory(input) {
-    const parsed = z.object({ appId: appIdSchema, categoryId: nonEmptyIdSchema, body: z.unknown() }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        categoryId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -360,14 +511,21 @@ const createServiceMutations = (client: TeamDynamixFetchClient): ServiceMutation
         httpMethod: 'PUT',
         tags: ['ServiceCatalog'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.categoryId } }, body: parsed.body },
+      {
+        params: { path: { appId: parsed.appId, id: parsed.categoryId } },
+        body: parsed.body
+      }
     );
   },
   async deleteServiceCategory(input) {
     const parsed = z
-      .object({ appId: appIdSchema, categoryId: nonEmptyIdSchema, confirm: confirmTrueSchema })
+      .object({
+        appId: appIdSchema,
+        categoryId: nonEmptyIdSchema,
+        confirm: confirmTrueSchema
+      })
       .parse(input);
     return executeSdkRoute(
       client,
@@ -379,14 +537,15 @@ const createServiceMutations = (client: TeamDynamixFetchClient): ServiceMutation
         httpMethod: 'DELETE',
         tags: ['ServiceCatalog'],
         mutating: true,
-        destructive: true,
+        destructive: true
       },
-      { params: { path: { appId: parsed.appId, id: parsed.categoryId } } },
+      { params: { path: { appId: parsed.appId, id: parsed.categoryId } } }
     );
-  },
+  }
 });
 
 const createAssetMutations = (client: TeamDynamixFetchClient): AssetMutations => ({
+  ...createAssetCustomAttributes(client),
   async createAsset(input) {
     const parsed = z.object({ appId: appIdSchema, body: z.unknown() }).parse(input);
     return executeSdkRoute(
@@ -399,13 +558,19 @@ const createAssetMutations = (client: TeamDynamixFetchClient): AssetMutations =>
         httpMethod: 'POST',
         tags: ['Assets'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId } }, body: parsed.body },
+      { params: { path: { appId: parsed.appId } }, body: parsed.body }
     );
   },
   async updateAsset(input) {
-    const parsed = z.object({ appId: appIdSchema, assetId: nonEmptyIdSchema, body: z.unknown() }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        assetId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -416,13 +581,22 @@ const createAssetMutations = (client: TeamDynamixFetchClient): AssetMutations =>
         httpMethod: 'PATCH',
         tags: ['Assets'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.assetId } }, body: parsed.body },
+      {
+        params: { path: { appId: parsed.appId, id: parsed.assetId } },
+        body: parsed.body
+      }
     );
   },
   async deleteAsset(input) {
-    const parsed = z.object({ appId: appIdSchema, assetId: nonEmptyIdSchema, confirm: confirmTrueSchema }).parse(input);
+    const parsed = z
+      .object({
+        appId: appIdSchema,
+        assetId: nonEmptyIdSchema,
+        confirm: confirmTrueSchema
+      })
+      .parse(input);
     return executeSdkRoute(
       client,
       {
@@ -433,11 +607,11 @@ const createAssetMutations = (client: TeamDynamixFetchClient): AssetMutations =>
         httpMethod: 'DELETE',
         tags: ['Assets'],
         mutating: true,
-        destructive: true,
+        destructive: true
       },
-      { params: { path: { appId: parsed.appId, id: parsed.assetId } } },
+      { params: { path: { appId: parsed.appId, id: parsed.assetId } } }
     );
-  },
+  }
 });
 
 const createCmdbMutations = (client: TeamDynamixFetchClient): CmdbMutations => ({
@@ -453,14 +627,18 @@ const createCmdbMutations = (client: TeamDynamixFetchClient): CmdbMutations => (
         httpMethod: 'POST',
         tags: ['ConfigurationItems'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId } }, body: parsed.body },
+      { params: { path: { appId: parsed.appId } }, body: parsed.body }
     );
   },
   async updateConfigurationItem(input) {
     const parsed = z
-      .object({ appId: appIdSchema, configurationItemId: nonEmptyIdSchema, body: z.unknown() })
+      .object({
+        appId: appIdSchema,
+        configurationItemId: nonEmptyIdSchema,
+        body: z.unknown()
+      })
       .parse(input);
     return executeSdkRoute(
       client,
@@ -472,14 +650,23 @@ const createCmdbMutations = (client: TeamDynamixFetchClient): CmdbMutations => (
         httpMethod: 'PATCH',
         tags: ['ConfigurationItems'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { appId: parsed.appId, id: parsed.configurationItemId } }, body: parsed.body },
+      {
+        params: {
+          path: { appId: parsed.appId, id: parsed.configurationItemId }
+        },
+        body: parsed.body
+      }
     );
   },
   async deleteConfigurationItem(input) {
     const parsed = z
-      .object({ appId: appIdSchema, configurationItemId: nonEmptyIdSchema, confirm: confirmTrueSchema })
+      .object({
+        appId: appIdSchema,
+        configurationItemId: nonEmptyIdSchema,
+        confirm: confirmTrueSchema
+      })
       .parse(input);
     return executeSdkRoute(
       client,
@@ -491,11 +678,15 @@ const createCmdbMutations = (client: TeamDynamixFetchClient): CmdbMutations => (
         httpMethod: 'DELETE',
         tags: ['ConfigurationItems'],
         mutating: true,
-        destructive: true,
+        destructive: true
       },
-      { params: { path: { appId: parsed.appId, id: parsed.configurationItemId } } },
+      {
+        params: {
+          path: { appId: parsed.appId, id: parsed.configurationItemId }
+        }
+      }
     );
-  },
+  }
 });
 
 const createTimeMutations = (client: TeamDynamixFetchClient): TimeMutations => ({
@@ -511,9 +702,9 @@ const createTimeMutations = (client: TeamDynamixFetchClient): TimeMutations => (
         httpMethod: 'POST',
         tags: ['Time'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { body: parsed.body },
+      { body: parsed.body }
     );
   },
   async updateTimeEntry(input) {
@@ -528,9 +719,9 @@ const createTimeMutations = (client: TeamDynamixFetchClient): TimeMutations => (
         httpMethod: 'PUT',
         tags: ['Time'],
         mutating: true,
-        destructive: false,
+        destructive: false
       },
-      { params: { path: { id: parsed.timeEntryId } }, body: parsed.body },
+      { params: { path: { id: parsed.timeEntryId } }, body: parsed.body }
     );
   },
   async deleteTimeEntry(input) {
@@ -545,11 +736,11 @@ const createTimeMutations = (client: TeamDynamixFetchClient): TimeMutations => (
         httpMethod: 'DELETE',
         tags: ['Time'],
         mutating: true,
-        destructive: true,
+        destructive: true
       },
-      { params: { path: { id: parsed.timeEntryId } } },
+      { params: { path: { id: parsed.timeEntryId } } }
     );
-  },
+  }
 });
 
 const asRecord = (value: unknown): Record<string, unknown> | undefined =>
@@ -568,9 +759,9 @@ const createHelpers = (client: TeamDynamixFetchClient): SdkHelpers => ({
         httpMethod: 'GET',
         tags: ['Accounts'],
         mutating: false,
-        destructive: false,
+        destructive: false
       },
-      undefined,
+      undefined
     );
 
     if (!Array.isArray(response)) {
@@ -597,9 +788,9 @@ const createHelpers = (client: TeamDynamixFetchClient): SdkHelpers => ({
         httpMethod: 'POST',
         tags: ['People'],
         mutating: false,
-        destructive: false,
+        destructive: false
       },
-      { body: { SearchText: parsedEmail } },
+      { body: { SearchText: parsedEmail } }
     );
 
     if (!Array.isArray(response)) {
@@ -628,9 +819,9 @@ const createHelpers = (client: TeamDynamixFetchClient): SdkHelpers => ({
           httpMethod: 'GET',
           tags: ['TicketStatuses'],
           mutating: false,
-          destructive: false,
+          destructive: false
         },
-        { params: { path: { appId: parsed.appId } } },
+        { params: { path: { appId: parsed.appId } } }
       ),
       executeSdkRoute(
         client,
@@ -642,9 +833,9 @@ const createHelpers = (client: TeamDynamixFetchClient): SdkHelpers => ({
           httpMethod: 'GET',
           tags: ['TicketPriorities'],
           mutating: false,
-          destructive: false,
+          destructive: false
         },
-        { params: { path: { appId: parsed.appId } } },
+        { params: { path: { appId: parsed.appId } } }
       ),
       executeSdkRoute(
         client,
@@ -656,49 +847,49 @@ const createHelpers = (client: TeamDynamixFetchClient): SdkHelpers => ({
           httpMethod: 'GET',
           tags: ['TicketTypes'],
           mutating: false,
-          destructive: false,
+          destructive: false
         },
-        { params: { path: { appId: parsed.appId } } },
-      ),
+        { params: { path: { appId: parsed.appId } } }
+      )
     ]);
 
     return { statuses, priorities, types };
-  },
+  }
 });
 
 export const createTeamDynamixSdk = (client: TeamDynamixFetchClient): TeamDynamixSdk => {
   const readDomains = createReadDomains(client);
   const ticketDomain: TeamDynamixSdk['tickets'] = {
     ...readDomains.tickets,
-    ...createTicketMutations(client),
+    ...createTicketMutations(client)
   };
   const ticketRelationshipDomain: TeamDynamixSdk['ticketRelationships'] = {
     ...readDomains.ticketRelationships,
-    ...createTicketRelationshipMutations(client),
+    ...createTicketRelationshipMutations(client)
   };
   const knowledgeBaseDomain: TeamDynamixSdk['knowledgeBase'] = {
     ...readDomains.knowledgeBase,
-    ...createKnowledgeBaseMutations(client),
+    ...createKnowledgeBaseMutations(client)
   };
   const assetDomain: TeamDynamixSdk['assets'] = {
     ...readDomains.assets,
-    ...createAssetMutations(client),
+    ...createAssetMutations(client)
   };
   const cmdbDomain: TeamDynamixSdk['cmdb'] = {
     ...readDomains.cmdb,
-    ...createCmdbMutations(client),
+    ...createCmdbMutations(client)
   };
   const serviceDomain: TeamDynamixSdk['services'] = {
     ...readDomains.services,
-    ...createServiceMutations(client),
+    ...createServiceMutations(client)
   };
   const projectDomain: TeamDynamixSdk['projects'] = {
     ...readDomains.projects,
-    ...createProjectMutations(client),
+    ...createProjectMutations(client)
   };
   const timeDomain: TeamDynamixSdk['time'] = {
     ...readDomains.time,
-    ...createTimeMutations(client),
+    ...createTimeMutations(client)
   };
 
   return {
@@ -712,5 +903,6 @@ export const createTeamDynamixSdk = (client: TeamDynamixFetchClient): TeamDynami
     projects: projectDomain,
     time: timeDomain,
     helpers: createHelpers(client),
+    registry: createCustomAttributesRegistry(client)
   };
 };
