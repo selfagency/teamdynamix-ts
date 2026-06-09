@@ -8,7 +8,7 @@ Packaged as `@selfagency/teamdynamix-ts` on npm.
 
 ## Architecture
 
-```
+```text
 Client                SDK (10 domains)           Helpers
 ┌──────────┐         ┌────────────────┐         ┌──────────────┐
 │ Config   │  ───→   │ discovery      │         │ findAccount  │

@@ -17,12 +17,14 @@ pnpm build
 ```
 
 This runs:
+
 1. `tsc` — type-check the full source
 2. `vite build` — bundle the ESM SDK into `dist/`
 3. `postbuild` script — writes a minimal `dist/package.json` for npm compatibility
 
 Output in `dist/`:
-```
+
+```text
 dist/
 ├── index.js          # bundled ESM
 ├── index.js.map      # sourcemap
@@ -82,6 +84,7 @@ pnpm openapi:generate
 ```
 
 This runs `scripts/parser/prepare-openapi-spec.ts` which:
+
 1. Fetches the TeamDynamix Web API Swagger document
 2. Dereferences all `$ref` pointers
 3. Writes a clean OpenAPI 3.0 JSON file to `src/generated/openapi.json`
@@ -93,6 +96,7 @@ pnpm generate:sdk-manifest
 ```
 
 This runs `scripts/generate-sdk-manifest.ts` which:
+
 1. Reads the dereferenced OpenAPI spec
 2. Extracts all GET endpoints
 3. Assigns each to a domain bucket based on API tags
@@ -129,7 +133,7 @@ The [Release workflow](https://github.com/selfagency/teamdynamix-ts/blob/main/.g
 
 ## Project structure
 
-```
+```text
 ├── src/
 │   ├── client/              # SDK implementation
 │   │   ├── auth.ts          # loginWithPassword, loginWithServiceAccount
