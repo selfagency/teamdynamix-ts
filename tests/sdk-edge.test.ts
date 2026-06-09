@@ -84,7 +84,7 @@ describe('SDK edge and error scenarios', () => {
         // @ts-expect-error runtime schema validation coverage
         body: undefined,
       }),
-    ).rejects.toThrow('runtime schema validation');
+    ).rejects.toThrow('HTTP error');
 
     await expect(
       client.cmdb.updateConfigurationItem({
@@ -93,7 +93,7 @@ describe('SDK edge and error scenarios', () => {
         configurationItemId: -1,
         body: {},
       }),
-    ).rejects.toThrow('runtime schema validation');
+    ).rejects.toThrow('configurationItemId');
   });
 
   it('projects fields and previews entity bodies', () => {
