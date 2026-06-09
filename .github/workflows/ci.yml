@@ -67,9 +67,6 @@ jobs:
           mkdir -p output
           cp src/generated/openapi.json output/openapi-types.json
 
-      - name: Build docs (VitePress)
-        run: pnpm run docs:build
-
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1
