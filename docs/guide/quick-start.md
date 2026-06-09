@@ -14,13 +14,32 @@ pnpm add teamdynamix-ts
 ## Create a client
 
 ```ts
-import { createTeamDynamixClient, previewEntity, projectFields } from 'teamdynamix-ts';
+import { createTeamDynamixClient, loginWithPassword } from 'teamdynamix-ts';
 
 const { client } = await createTeamDynamixClient({
   tenant: 'api',
-  tokenProvider: async () => process.env.TEAMDYNAMIX_TOKEN ?? '',
+  tokenProvider: loginWithPassword({
+    tenant: 'api',
+    username: process.env.TD_USERNAME!,
+    password: process.env.TD_PASSWORD!,
+  }),
   environment: 'production',
   runtimeValidationMode: 'fail-closed',
+});
+```
+
+Or authenticate with an admin service account:
+
+```ts
+import { loginWithServiceAccount } from 'teamdynamix-ts';
+
+const { client } = await createTeamDynamixClient({
+  tenant: 'api',
+  tokenProvider: loginWithServiceAccount({
+    tenant: 'api',
+    beid: process.env.TD_BEID!,
+    webServicesKey: process.env.TD_WSKEY!,
+  }),
 });
 ```
 

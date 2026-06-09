@@ -44,14 +44,11 @@ jobs:
             exit 0
           fi
 
-          script_name="$(node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); const scripts=pkg.scripts || {}; const candidates=['openapi:generate','generate:openapi','docs:generate-openapi','api:generate','build:openapi']; const found=candidates.find((name) => scripts[name]); if (found) process.stdout.write(found);")"
+          test -f src/generated/openapi.json || { echo "Missing required file: src/generated/openapi.json. This file is committed to the repository. If it is absent, run 'pnpm run generate:prepare' first."; exit 1; }
 
-          if [ -n "$script_name" ]; then
-            echo "Generating OpenAPI types with pnpm run $script_name"
-            pnpm run "$script_name"
-          fi
-
-          test -f output/openapi-types.json || { echo "Missing required file: output/openapi-types.json. Add the repository's OpenAPI generation step before docs:build."; exit 1; }
+          mkdir -p output
+          cp src/generated/openapi.json output/openapi-types.json
+          echo "Copied src/generated/openapi.json → output/openapi-types.json"
 
       - name: Build docs
         run: pnpm run docs:build

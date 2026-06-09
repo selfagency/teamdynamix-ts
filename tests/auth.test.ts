@@ -1,0 +1,88 @@
+import { http, HttpResponse } from 'msw';
+import { describe, expect, it } from 'vitest';
+import { loginWithPassword, loginWithServiceAccount } from '../src/client/auth.js';
+import { server } from './setup-msw.js';
+
+const tenant = 'testtenant';
+const baseUrl = `https://${tenant}.teamdynamix.com`;
+
+const passwordLoginUrl = `${baseUrl}/api/auth/login`;
+const adminLoginUrl = `${baseUrl}/api/auth/loginadmin`;
+
+describe('loginWithPassword', () => {
+  it('returns a token provider function', () => {
+    const provider = loginWithPassword({ tenant, username: 'u', password: 'p' });
+    expect(provider).toBeInstanceOf(Function);
+  });
+
+  it('sends POST /api/auth/login with username/password and returns the JWT', async () => {
+    server.use(
+      http.post(passwordLoginUrl, async ({ request }) => {
+        const body = await request.json();
+        expect(body).toEqual({ username: 'alice', password: 'secret' });
+        return new HttpResponse('jwt-token-123', { status: 200 });
+      }),
+    );
+
+    const provider = loginWithPassword({ tenant, username: 'alice', password: 'secret' });
+    await expect(provider()).resolves.toBe('jwt-token-123');
+  });
+
+  it('throws TeamDynamixClientError on non-OK response', async () => {
+    server.use(http.post(passwordLoginUrl, () => new HttpResponse('Unauthorized', { status: 401 })));
+
+    const provider = loginWithPassword({ tenant, username: 'bad', password: 'wrong' });
+    await expect(provider()).rejects.toMatchObject({
+      name: 'TeamDynamixClientError',
+      code: 'AUTH_ERROR',
+      status: 401,
+    });
+  });
+
+  it('uses sandbox URL when environment is sandbox', async () => {
+    const sandboxLoginUrl = `https://${tenant}-sandbox.teamdynamix.com/api/auth/login`;
+    let calledUrl = '';
+
+    server.use(
+      http.post(sandboxLoginUrl, async ({ request }) => {
+        calledUrl = request.url;
+        return new HttpResponse('sandbox-jwt', { status: 200 });
+      }),
+    );
+
+    const provider = loginWithPassword({ tenant, username: 'u', password: 'p', environment: 'sandbox' });
+    await provider();
+    expect(calledUrl).toContain(`${tenant}-sandbox.teamdynamix.com`);
+  });
+});
+
+describe('loginWithServiceAccount', () => {
+  it('returns a token provider function', () => {
+    const provider = loginWithServiceAccount({ tenant, beid: 'b', webServicesKey: 'k' });
+    expect(provider).toBeInstanceOf(Function);
+  });
+
+  it('sends POST /api/auth/loginadmin with BEID/WebServicesKey and returns the JWT', async () => {
+    server.use(
+      http.post(adminLoginUrl, async ({ request }) => {
+        const body = await request.json();
+        expect(body).toEqual({ BEID: 'beid-42', WebServicesKey: 'wsk-ey' });
+        return new HttpResponse('admin-jwt', { status: 200 });
+      }),
+    );
+
+    const provider = loginWithServiceAccount({ tenant, beid: 'beid-42', webServicesKey: 'wsk-ey' });
+    await expect(provider()).resolves.toBe('admin-jwt');
+  });
+
+  it('throws TeamDynamixClientError on non-OK response', async () => {
+    server.use(http.post(adminLoginUrl, () => new HttpResponse('Forbidden', { status: 403 })));
+
+    const provider = loginWithServiceAccount({ tenant, beid: 'bad', webServicesKey: 'bad' });
+    await expect(provider()).rejects.toMatchObject({
+      name: 'TeamDynamixClientError',
+      code: 'AUTH_ERROR',
+      status: 403,
+    });
+  });
+});
