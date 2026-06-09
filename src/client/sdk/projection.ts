@@ -1,11 +1,11 @@
 export const projectFields = <T extends Record<string, unknown>>(items: T[], fields: Array<keyof T>): Partial<T>[] =>
   items.map(item =>
     fields.reduce<Partial<T>>((projection, field) => {
-      if (field in item) {
+      if (Object.hasOwn(item, field)) {
         projection[field] = item[field];
       }
       return projection;
-    }, {}),
+    }, {} as Partial<T>),
   );
 
 export const previewEntity = <T extends Record<string, unknown>>(
