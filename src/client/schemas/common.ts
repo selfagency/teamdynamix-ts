@@ -17,5 +17,21 @@ export const paginationSchema = z.object({
 
 export const searchTextSchema = z.string().trim().min(1).max(500);
 
-export type AppId = z.infer<typeof appIdSchema>;
-export type PaginationInput = z.infer<typeof paginationSchema>;
+export const customAttributeIdSchema = z.union([z.string().trim().min(1), z.number().int().nonnegative()]);
+
+export const customAttributeValueSchema = z.union([
+  z.string(),
+  z.number(),
+  z.boolean(),
+  z.date(),
+  z.array(z.any()),
+  z.record(z.string(), z.any()),
+]);
+
+export const customAttributeSchema = z.object({
+  ID: customAttributeIdSchema,
+  Name: nonEmptyString.optional(),
+  Value: customAttributeValueSchema.optional(),
+});
+
+// Consumers can reconstruct via z.infer<typeof schemaName> as needed.

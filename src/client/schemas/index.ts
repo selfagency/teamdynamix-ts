@@ -5,5 +5,7 @@ export {
   searchTextSchema,
   tenantSchema,
   tokenSchema,
+  customAttributeIdSchema,
+  customAttributeValueSchema,
+  customAttributeSchema,
 } from './common.js';
-export type { AppId, PaginationInput } from './common.js';

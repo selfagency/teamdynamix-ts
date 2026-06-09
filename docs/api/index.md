@@ -1,14 +1,20 @@
 ---
 ---
 
-# API Reference
+# Developer Docs
 
-The API reference is generated from the OpenAPI specification.
+This section is for maintainers and contributors.
 
-## Views
+## In this section
 
-- [Full specification page](/api/spec)
+- API generation and schema artifacts
+- curated SDK helper exports and validation behavior
 
-## Notes
+## Scope
 
-Dynamic operation and tag routes are generated at build time from `docs/public/openapi.json` and exposed in the API sidebar.
+Developer docs cover:
+
+- generated artifacts in `output/` and `src/generated/`
+- client generation behavior
+- curated SDK helper exports
+- contribution workflow and validation gates

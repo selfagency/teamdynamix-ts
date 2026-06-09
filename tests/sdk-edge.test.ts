@@ -1,27 +1,8 @@
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { createTeamDynamixClient, TeamDynamixClientError } from '../src/client/index.js';
-
-const server = setupServer();
-
-beforeAll(() => {
-  server.listen({
-    onUnhandledRequest: req => {
-      throw new Error(`Unhandled request: ${req.method} ${req.url}`);
-    },
-  });
-});
-
-afterEach(() => {
-  server.resetHandlers();
-});
-
-afterAll(() => {
-  server.close();
-});
-
-const specPath = `${process.cwd()}/tests/fixtures/openapi-test-spec.json`;
+import { previewEntity, projectFields } from '../src/client/sdk/index.js';
+import { server, specPath } from './setup-msw.js';
 
 describe('SDK edge and error scenarios', () => {
   it('returns undefined when helper receives non-array account payload', async () => {
@@ -103,7 +84,7 @@ describe('SDK edge and error scenarios', () => {
         // @ts-expect-error runtime schema validation coverage
         body: undefined,
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrow('HTTP error');
 
     await expect(
       client.cmdb.updateConfigurationItem({
@@ -112,6 +93,11 @@ describe('SDK edge and error scenarios', () => {
         configurationItemId: -1,
         body: {},
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrow('configurationItemId');
+  });
+
+  it('projects fields and previews entity bodies', () => {
+    expect(projectFields([{ a: 1, b: 2 }], ['a'])).toEqual([{ a: 1 }]);
+    expect(previewEntity({ body: 'hello world' }, { maxLength: 5 })).toMatchObject({ _preview: 'hello…' });
   });
 });

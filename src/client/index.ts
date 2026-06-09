@@ -1,3 +1,4 @@
+export { bulkAddUsersToGroup, previewEntity, projectFields, runTicketReport } from './sdk/index.js';
 export { createTeamDynamixClient } from './client.js';
 export { TeamDynamixClientError, redactAuthorization } from './errors.js';
 export { createTeamDynamixSdk } from './sdk/index.js';

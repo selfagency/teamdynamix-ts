@@ -5,15 +5,20 @@ on:
   push:
     branches: [ main ]
 
-permissions:
-  contents: read
-
 jobs:
   checks:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+      security-events: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -27,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Audit dependencies
+        run: pnpm audit --prod
+
       - name: Typecheck
         run: pnpm run typecheck
 
@@ -39,17 +47,38 @@ jobs:
       - name: Markdown lint (Rumdl)
         run: pnpm run lint:md
 
+      - name: Fallow
+        continue-on-error: true
+        uses: fallow-rs/fallow@647fe2d90f7316b9a95ccd690481224e9a95333b # v2.89.0
+        with:
+          command: audit
+          format: sarif
+          annotations: true
+          comment: true
+          review-comments: true
+          review-guidance: false
+          max-annotations: 50
+          fail-on-issues: true
+          gate: new-only
+
       - name: Test (Vitest)
         run: pnpm run test:coverage --reporter=default --reporter=junit --outputFile=test-report.junit.xml
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Verify build outputs
+        run: |
+          for f in index.js index.js.map index.d.ts index.d.ts.map package.json; do
+            test -f "dist/$f" || { echo "Missing dist/$f"; exit 1; }
+          done
+          echo "All build outputs verified."
 
       - name: Prepare OpenAPI spec for docs build
         run: |
           test -f src/generated/openapi.json || { echo "Missing required file: src/generated/openapi.json"; exit 1; }
           mkdir -p output
           cp src/generated/openapi.json output/openapi-types.json
-
-      - name: Build docs (VitePress)
-        run: pnpm run docs:build
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
