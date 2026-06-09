@@ -15,4 +15,3 @@ A secure TypeScript client for the TeamDynamix Web API, generated from OpenAPI 3
 ## Quick links
 
 - [Quick Start](/guide/quick-start)
-- [Full OpenAPI Spec View](/api/spec)

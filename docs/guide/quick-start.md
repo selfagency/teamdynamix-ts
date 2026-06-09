@@ -59,4 +59,3 @@ const preview = previewEntity(accounts[0] ?? {}, { bodyField: 'Description' });
 ## Learn more
 
 - [API overview](/api/)
-- [Full OpenAPI Spec View](/api/spec)
