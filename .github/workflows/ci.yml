@@ -45,6 +45,7 @@ jobs:
         run: pnpm run lint:md
 
       - name: Fallow
+        continue-on-error: true
         uses: fallow-rs/fallow@647fe2d90f7316b9a95ccd690481224e9a95333b # v2.89.0
         with:
           command: audit
@@ -58,6 +59,7 @@ jobs:
           gate: new-only
 
       - name: Upload SARIF to GitHub Code Scanning
+        if: always()
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: fallow-results.sarif

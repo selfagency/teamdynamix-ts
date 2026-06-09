@@ -9,4 +9,3 @@ export {
   customAttributeValueSchema,
   customAttributeSchema,
 } from './common.js';
-export type { AppId, PaginationInput, CustomAttributeId, CustomAttributeValue, CustomAttribute } from './common.js';
