@@ -72,7 +72,15 @@ tokenProvider: loginWithServiceAccount({
 
 The client calls `tokenProvider()` before every request and automatically retries once with a fresh token if the API returns 401.
 
-You can also supply a pre-acquired JWT:
+You can also supply a pre-acquired JWT using the convenience helper:
+
+```ts
+import { createTokenProviderFromJWT } from 'teamdynamix-ts'
+
+tokenProvider: createTokenProviderFromJWT('eyJhbGciOiJIUzI1NiIs...')
+```
+
+Or inline without the helper:
 
 ```ts
 tokenProvider: () => 'eyJhbGciOiJIUzI1NiIs...'

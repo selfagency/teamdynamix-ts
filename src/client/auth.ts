@@ -75,6 +75,25 @@ export const loginWithPassword = (config: PasswordAuthConfig): (() => Promise<st
 };
 
 /**
+ * Creates a token provider from a pre-acquired JWT string.
+ *
+ * The returned function simply returns the JWT on each invocation.
+ * Useful when you obtained a token through another mechanism (session, cached token, etc.)
+ * and want to create a client without re-authenticating.
+ *
+ * @example
+ * ```ts
+ * const { client } = await createTeamDynamixClient({
+ *   tenant: 'mytenant',
+ *   tokenProvider: createTokenProviderFromJWT('eyJhbGciOiJIUzI1NiIs...'),
+ * });
+ * ```
+ */
+export const createTokenProviderFromJWT = (jwt: string): (() => string) => {
+  return () => jwt;
+};
+
+/**
  * Creates a token provider that authenticates with a TeamDynamix admin service account.
  *
  * Service accounts are managed in TDAdmin → Organization Settings

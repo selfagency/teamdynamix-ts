@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
-import { loginWithPassword, loginWithServiceAccount } from '../src/client/auth.js';
+import { loginWithPassword, loginWithServiceAccount, createTokenProviderFromJWT } from '../src/client/auth.js';
 import { server } from './setup-msw.js';
 
 const tenant = 'testtenant';
@@ -118,5 +118,22 @@ describe('loginWithServiceAccount', () => {
       code: 'AUTH_ERROR',
       status: 403,
     });
+  });
+});
+
+describe('createTokenProviderFromJWT', () => {
+  it('returns a function', () => {
+    const provider = createTokenProviderFromJWT('some-jwt');
+    expect(provider).toBeInstanceOf(Function);
+  });
+
+  it('returns a synchronous function that yields the JWT', () => {
+    const provider = createTokenProviderFromJWT('test-token');
+    expect(provider()).toBe('test-token');
+  });
+
+  it('does not trim surrounding whitespace from the token', () => {
+    const provider = createTokenProviderFromJWT('  padded-token  ');
+    expect(provider()).toBe('  padded-token  ');
   });
 });

@@ -1,6 +1,11 @@
 import { z } from 'zod';
 import type { TeamDynamixFetchClient } from '../client.js';
-import { customAttributeIdSchema, customAttributeValueSchema, customAttributeSchema } from '../schemas/index.js';
+import {
+  appIdSchema,
+  customAttributeIdSchema,
+  customAttributeValueSchema,
+  customAttributeSchema,
+} from '../schemas/index.js';
 import { executeSdkRoute } from './request.js';
 import type { SdkRouteDefinition } from './types.js';
 
@@ -47,7 +52,7 @@ export const buildCustomAttributeFromObject = (
   value: unknown,
 ): { ID: number | string; Value: unknown } => {
   // Use the ID if provided, otherwise use the Name
-  const identifier = attribute.ID || attribute.Name;
+  const identifier = attribute.ID ?? attribute.Name;
 
   if (!identifier) {
     throw new Error('Custom attribute must have either ID or Name');
@@ -74,8 +79,6 @@ export const getCustomAttributeValue = (
 
   return undefined;
 };
-
-const appIdSchema = z.union([z.string().trim().min(1), z.number().int().nonnegative()]);
 
 type AttributeOperationConfig = {
   domain: string;
@@ -228,7 +231,7 @@ export const createCustomAttributesRegistry = (client: TeamDynamixFetchClient) =
   async getTicketCustomAttributes(input: { appId: string | number }): Promise<unknown> {
     const parsed = z
       .object({
-        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+        appId: appIdSchema,
       })
       .parse(input);
 
@@ -254,7 +257,7 @@ export const createCustomAttributesRegistry = (client: TeamDynamixFetchClient) =
   async getAssetCustomAttributes(input: { appId: string | number }): Promise<unknown> {
     const parsed = z
       .object({
-        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+        appId: appIdSchema,
       })
       .parse(input);
 
