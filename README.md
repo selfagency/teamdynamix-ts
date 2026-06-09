@@ -8,11 +8,15 @@ generated from OpenAPI 3.1.
 ## Quick start
 
 ```ts
-import { createTeamDynamixClient, projectFields } from 'teamdynamix-ts';
+import { createTeamDynamixClient, loginWithPassword, projectFields } from 'teamdynamix-ts';
 
 const { client } = await createTeamDynamixClient({
   tenant: 'api',
-  tokenProvider: async () => process.env.TEAMDYNAMIX_TOKEN ?? '',
+  tokenProvider: loginWithPassword({
+    tenant: 'api',
+    username: process.env.TD_USERNAME!,
+    password: process.env.TD_PASSWORD!,
+  }),
   environment: 'production',
   runtimeValidationMode: 'fail-closed',
 });
@@ -21,10 +25,28 @@ const accounts = await client.referenceData.accounts();
 const projected = projectFields(accounts, ['ID', 'Name']);
 ```
 
+Or authenticate with an admin service account:
+
+```ts
+import { loginWithServiceAccount } from 'teamdynamix-ts';
+
+const { client } = await createTeamDynamixClient({
+  tenant: 'api',
+  tokenProvider: loginWithServiceAccount({
+    tenant: 'api',
+    beid: process.env.TD_BEID!,
+    webServicesKey: process.env.TD_WSKEY!,
+  }),
+});
+```
+
 ## Curated helpers
 
 ```ts
-import { bulkAddUsersToGroup, previewEntity, projectFields, runTicketReport } from 'teamdynamix-ts';
+import {
+  bulkAddUsersToGroup, loginWithPassword, loginWithServiceAccount,
+  previewEntity, projectFields, runTicketReport,
+} from 'teamdynamix-ts';
 
 const search = await runTicketReport(client, { appId: 1, searchId: 42 });
 const summary = previewEntity(search.items[0] ?? {}, { bodyField: 'Description' });
