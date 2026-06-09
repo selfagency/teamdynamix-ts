@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Resolve tag and verify CI readiness
         id: tag
-        uses: actions/github-script@v8
+        uses: actions/github-script@e69e546dcd5bf919ece5cbfc274d0b35d45b2ecf # v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -162,17 +162,18 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write
+      id-token: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@1f9d0fa76c70e2b1e1d2b3c0f3c0e1e3e2e1f9d0 # v4
         with:
           ref: ${{ needs.detect-tag.outputs.release_tag }}
           fetch-depth: 0
 
       - name: Generate release notes
         id: changelog_notes
-        uses: actions/github-script@v8
+        uses: actions/github-script@e69e546dcd5bf919ece5cbfc274d0b35d45b2ecf # v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -216,10 +217,10 @@ jobs:
           RELEASE_NOTES: ${{ steps.changelog_notes.outputs.notes }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4
         with:
           node-version: 22
           cache: pnpm
@@ -233,15 +234,51 @@ jobs:
 
       - name: Verify tag matches package version
         run: |
-          node -e "const fs=require('fs'); const releaseTag=process.env.RELEASE_TAG; const expectedVersion=releaseTag.replace(/^v/, ''); const pkg=JSON.parse(fs.readFileSync('./dist/package.json', 'utf8')); if (pkg.version !== expectedVersion) { console.error(`Release tag ${releaseTag} does not match dist/package.json version ${pkg.version}`); process.exit(1); } console.log(`Verified release tag ${releaseTag} matches dist/package.json version ${pkg.version}`);"
+          node -e "
+            const fs = require('fs');
+            const releaseTag = process.env.RELEASE_TAG;
+            const expectedVersion = releaseTag.replace(/^v/, '');
+            const pkg = JSON.parse(fs.readFileSync('./dist/package.json', 'utf8'));
+            if (pkg.version !== expectedVersion) {
+              console.error('Release tag ' + releaseTag + ' does not match dist/package.json version ' + pkg.version);
+              process.exit(1);
+            }
+            console.log('Verified release tag ' + releaseTag + ' matches dist/package.json version ' + pkg.version);
+          "
         env:
           RELEASE_TAG: ${{ needs.detect-tag.outputs.release_tag }}
+
+      - name: Ensure npm CLI supports trusted publishing (>=11.5.1)
+        run: |
+          set -euo pipefail
+          version_is_supported() {
+            node -e "
+              const [maj = 0, min = 0, patch = 0] = (process.argv[1] || '')
+                .split('.')
+                .map(v => Number.parseInt(v, 10));
+              const ok = maj > 11 || (maj === 11 && (min > 5 || (min === 5 && patch >= 1)));
+              process.exit(ok ? 0 : 1);
+            " "$1"
+          }
+
+          RUNNER_NPM="$(npm --version)"
+          echo "Runner npm: ${RUNNER_NPM}"
+
+          PNPM_NPM="$(pnpm dlx npm@11.6.2 --version)"
+          echo "pnpm-managed npm: ${PNPM_NPM}"
+
+          if ! version_is_supported "${PNPM_NPM}"; then
+            echo "❌ pnpm-managed npm ${PNPM_NPM} does not meet trusted publishing minimum (>=11.5.1)."
+            exit 1
+          fi
+
+          echo "✅ Using pnpm dlx npm@11.6.2 for publish"
 
       - name: Pack npm tarball
         run: npm pack ./dist --pack-destination .
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v2
         with:
           tag_name: ${{ needs.detect-tag.outputs.release_tag }}
           body_path: release-notes.md
@@ -252,7 +289,37 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to npm
-        run: npm publish ./dist --tag $NPM_DIST_TAG
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_DIST_TAG: ${{ contains(needs.detect-tag.outputs.release_tag, '-') && 'next' || 'latest' }}
+        run: |
+          set -euo pipefail
+
+          dump_npm_debug_log() {
+            local latest_log
+            latest_log="$(ls -t /home/runner/.npm/_logs/*-debug-*.log 2>/dev/null | head -n1 || true)"
+            if [[ -n "${latest_log}" && -f "${latest_log}" ]]; then
+              echo "📄 npm debug log: ${latest_log}"
+              echo "----- npm debug log (last 120 lines) -----"
+              tail -n 120 "${latest_log}" || true
+              echo "------------------------------------------"
+            else
+              echo "ℹ️ No npm debug log found in /home/runner/.npm/_logs"
+            fi
+          }
+
+          publish_with_diagnostics() {
+            local dist_tag="$1"
+
+            set +e
+            pnpm dlx npm@11.6.2 publish ./dist --access public --tag="${dist_tag}" --provenance
+            local publish_exit=$?
+            set -e
+
+            if [[ ${publish_exit} -ne 0 ]]; then
+              echo "❌ npm publish failed (exit ${publish_exit})."
+              echo "ℹ️ Diagnostic context: trusted publishing uses OIDC + provenance; failures after provenance often indicate package authorization mismatch in npm registry settings."
+              dump_npm_debug_log
+              exit ${publish_exit}
+            fi
+          }
+
+          DIST_TAG="$([[ '${{ contains(needs.detect-tag.outputs.release_tag, '-') }}' == 'true' ]] && echo 'next' || echo 'latest')"
+          publish_with_diagnostics "$DIST_TAG"

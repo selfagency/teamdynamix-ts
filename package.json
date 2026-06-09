@@ -1,10 +1,26 @@
 {
-  "name": "teamdynamix-ts",
+  "name": "@selfagency/teamdynamix-ts",
   "version": "0.1.0",
+  "private": false,
   "description": "An open source TypeScript client for the TeamDynamix API.",
-  "keywords": [],
+  "keywords": [
+    "issues",
+    "itsm",
+    "sdk",
+    "tdx",
+    "teamdynamix",
+    "ticketing"
+  ],
+  "homepage": "https://github.com/selfagency/teamdynamix-ts",
+  "bugs": {
+    "url": "https://github.com/selfagency/teamdynamix-ts/issues"
+  },
   "license": "MIT",
   "author": "Daniel Sieradski <daniel@self.agency>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selfagency/teamdynamix-ts.git"
+  },
   "type": "module",
   "main": "index.js",
   "scripts": {

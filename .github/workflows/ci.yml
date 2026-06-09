@@ -31,7 +31,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        
+
+      - name: Audit dependencies
+        run: pnpm audit --prod
+
       - name: Typecheck
         run: pnpm run typecheck
 
@@ -57,9 +60,19 @@ jobs:
           max-annotations: 50
           fail-on-issues: true
           gate: new-only
-        
+
       - name: Test (Vitest)
         run: pnpm run test:coverage --reporter=default --reporter=junit --outputFile=test-report.junit.xml
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Verify build outputs
+        run: |
+          for f in index.js index.js.map index.d.ts index.d.ts.map package.json; do
+            test -f "dist/$f" || { echo "Missing dist/$f"; exit 1; }
+          done
+          echo "All build outputs verified."
 
       - name: Prepare OpenAPI spec for docs build
         run: |
@@ -69,12 +82,12 @@ jobs:
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+        uses: codecov/test-results-action@5c5ba1c6ef2453f9f5f5c2f5e8e1c5e1e1e1e1e # v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@015f24e681873fd561566db2300b1b0d1c6e45b7 # v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
