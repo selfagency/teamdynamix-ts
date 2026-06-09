@@ -161,14 +161,6 @@ export interface TimeMutations {
   deleteTimeEntry(input: { timeEntryId: string | number; confirm: true }): Promise<unknown>;
 }
 
-interface ProjectionHelpers {
-  projectFields<T extends Record<string, unknown>>(items: T[], fields: Array<keyof T>): Partial<T>[];
-  previewEntity<T extends Record<string, unknown>>(
-    entity: T,
-    options?: { bodyField?: keyof T; maxLength?: number },
-  ): T & { _preview: string };
-}
-
 export interface ReportPage<T = unknown> {
   items: T[];
   page: number;

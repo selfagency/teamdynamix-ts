@@ -34,8 +34,4 @@ export const customAttributeSchema = z.object({
   Value: customAttributeValueSchema.optional(),
 });
 
-type AppId = z.infer<typeof appIdSchema>;
-type PaginationInput = z.infer<typeof paginationSchema>;
-type CustomAttributeId = z.infer<typeof customAttributeIdSchema>;
-type CustomAttributeValue = z.infer<typeof customAttributeValueSchema>;
-type CustomAttribute = z.infer<typeof customAttributeSchema>;
+// Consumers can reconstruct via z.infer<typeof schemaName> as needed.
