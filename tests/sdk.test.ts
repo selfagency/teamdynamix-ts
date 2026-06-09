@@ -43,7 +43,7 @@ describe('SDK domain surface', () => {
         // @ts-expect-error runtime schema verification
         confirm: false,
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrow('destructive operation without confirm');
   });
 
   it('supports helper lookup workflow for account and ticket context', async () => {
@@ -131,7 +131,7 @@ describe('SDK domain surface', () => {
         // @ts-expect-error runtime schema verification
         confirm: false,
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrow('destructive operation without confirm');
 
     await expect(
       client.assets.deleteAsset({
@@ -140,7 +140,7 @@ describe('SDK domain surface', () => {
         // @ts-expect-error runtime schema verification
         confirm: false,
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrow('destructive operation without confirm');
 
     await expect(
       client.cmdb.deleteConfigurationItem({
@@ -149,7 +149,7 @@ describe('SDK domain surface', () => {
         // @ts-expect-error runtime schema verification
         confirm: false,
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrow('destructive operation without confirm');
 
     await expect(
       client.time.deleteTimeEntry({
@@ -157,6 +157,6 @@ describe('SDK domain surface', () => {
         // @ts-expect-error runtime schema verification
         confirm: false,
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrow('destructive operation without confirm');
   });
 });
