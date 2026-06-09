@@ -11,7 +11,7 @@ npm install @selfagency/teamdynamix-ts
 ```
 
 ```ts
-import { createTeamDynamixClient, loginWithPassword } from 'teamdynamix-ts'
+import { createTeamDynamixClient, loginWithPassword } from 'teamdynamix-ts';
 
 const { client } = await createTeamDynamixClient({
   tenant: 'mytenant',
@@ -20,26 +20,26 @@ const { client } = await createTeamDynamixClient({
     username: process.env.TD_USERNAME!,
     password: process.env.TD_PASSWORD!,
   }),
-})
+});
 
-const accounts = await client.referenceData.accounts()
+const accounts = await client.referenceData.accounts();
 ```
 
 ## Full documentation
 
 **[teamdynamix-ts.self.agency](https://teamdynamix-ts.self.agency)** — quick start, SDK domain reference, mutation signatures, error handling, and API spec.
 
-| Page | Contents |
-|---|---|
-| [Quick Start](https://teamdynamix-ts.self.agency/guide/quick-start) | Install, auth (password + service account), first queries, pagination |
-| [Client Config](https://teamdynamix-ts.self.agency/guide/client-config) | Timeout, retry policy, validation modes, sandbox |
-| [SDK Domains](https://teamdynamix-ts.self.agency/guide/sdk-domains) | All 150+ read methods across 10 domains |
-| [SDK Mutations](https://teamdynamix-ts.self.agency/guide/sdk-mutations) | Create, update, delete with safety gates |
-| [Helper Functions](https://teamdynamix-ts.self.agency/guide/helper-functions) | projection, preview, bulk insert, report runner |
-| [Custom Attributes](https://teamdynamix-ts.self.agency/guide/custom-attributes) | Reading and writing custom fields |
-| [Error Handling](https://teamdynamix-ts.self.agency/guide/error-handling) | Error codes, HTTP errors, auth errors, validation errors |
-| [API Reference](https://teamdynamix-ts.self.agency/api) | Interactive OpenAPI spec |
-| [Developer Guide](https://teamdynamix-ts.self.agency/developer) | Build, test, release, project structure |
+| Page                                                                            | Contents                                                              |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [Quick Start](https://teamdynamix-ts.self.agency/guide/quick-start)             | Install, auth (password + service account), first queries, pagination |
+| [Client Config](https://teamdynamix-ts.self.agency/guide/client-config)         | Timeout, retry policy, validation modes, sandbox                      |
+| [SDK Domains](https://teamdynamix-ts.self.agency/guide/sdk-domains)             | All 150+ read methods across 10 domains                               |
+| [SDK Mutations](https://teamdynamix-ts.self.agency/guide/sdk-mutations)         | Create, update, delete with safety gates                              |
+| [Helper Functions](https://teamdynamix-ts.self.agency/guide/helper-functions)   | projection, preview, bulk insert, report runner                       |
+| [Custom Attributes](https://teamdynamix-ts.self.agency/guide/custom-attributes) | Reading and writing custom fields                                     |
+| [Error Handling](https://teamdynamix-ts.self.agency/guide/error-handling)       | Error codes, HTTP errors, auth errors, validation errors              |
+| [API Reference](https://teamdynamix-ts.self.agency/api)                         | Interactive OpenAPI spec                                              |
+| [Developer Guide](https://teamdynamix-ts.self.agency/developer)                 | Build, test, release, project structure                               |
 
 ## Development
 
