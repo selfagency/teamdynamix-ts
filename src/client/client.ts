@@ -10,8 +10,13 @@ import type { NormalizedClientConfig, TeamDynamixClientConfig } from './types.js
 import { DEFAULT_RETRY_POLICY, DEFAULT_TIMEOUT_MS } from './types.js';
 import { OpenApiRuntimeValidator } from './validation.js';
 
-const toBaseUrl = (tenant: string, environment: 'production' | 'sandbox'): string =>
-  environment === 'sandbox' ? `https://${tenant}-sandbox.teamdynamix.com` : `https://${tenant}.teamdynamix.com`;
+const toBaseUrl = (tenant: string, environment: 'production' | 'sandbox'): string => {
+  // If tenant is already a full domain (e.g. "td.myuniversity.edu"), use it directly.
+  if (tenant.includes('.')) {
+    return `https://${tenant}`;
+  }
+  return environment === 'sandbox' ? `https://${tenant}-sandbox.teamdynamix.com` : `https://${tenant}.teamdynamix.com`;
+};
 
 const ensureHttps = (url: string): string => {
   const parsed = new URL(url);
