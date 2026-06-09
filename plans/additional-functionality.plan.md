@@ -20,7 +20,7 @@ Adopt high-value functionality patterns from seven external TeamDynamix projects
      - [TeamDynamix.Api.Issues.IssueSearch](https://solutions.teamdynamix.com/TDWebApi/Home/type/TeamDynamix.Api.Issues.IssueSearch)
      - [TeamDynamix.Api.Issues.Issue](https://solutions.teamdynamix.com/TDWebApi/Home/type/TeamDynamix.Api.Issues.Issue)
 
-     2.2 Response-shaping and large payload ergonomics (_parallel with 2.1 and 2.3_)
+   2.2 Response-shaping and large payload ergonomics (_parallel with 2.1 and 2.3_)
 
    - Add opt-in “lightweight projection” helper functions for search/list/feed patterns that return minimal field projections for token/cost-sensitive consumers.
    - Add optional body-preview shaping helper for feed-like entities (metadata + truncated preview) without changing raw endpoint behavior.
@@ -31,7 +31,7 @@ Adopt high-value functionality patterns from seven external TeamDynamix projects
      - [tdx-projects-mcp README.md](https://github.com/tdx-benheard/tdx-projects-mcp/blob/master/README.md)
      - [tdx-projects-mcp CLAUDE.md](https://github.com/tdx-benheard/tdx-projects-mcp/blob/master/CLAUDE.md)
 
-     2.3 Report execution workflow helper (_parallel with 2.1 and 2.2_)
+   2.3 Report execution workflow helper (_parallel with 2.1 and 2.2_)
 
    - Add a high-level report runner helper that supports:
      - first-page safe defaults,
@@ -56,7 +56,7 @@ Adopt high-value functionality patterns from seven external TeamDynamix projects
      - [teamdynamix bulk-group-membership](https://github.com/carriehwillis/teamdynamix/tree/master/bulk-group-membership)
      - [bulk-populate-group.py](https://github.com/carriehwillis/teamdynamix/blob/master/bulk-group-membership/bulk-populate-group.py)
 
-     3.2 Bulk group create/edit convenience workflows
+   3.2 Bulk group create/edit convenience workflows
 
    - Add helper methods that accept typed arrays (not file parsing in core SDK) for:
      - create groups in bulk,
@@ -70,7 +70,7 @@ Adopt high-value functionality patterns from seven external TeamDynamix projects
      - [teamdynamix bulk-group-edit](https://github.com/carriehwillis/teamdynamix/tree/master/bulk-group-edit)
      - [bulk-group-edit.py](https://github.com/carriehwillis/teamdynamix/blob/master/bulk-group-edit/bulk-group-edit.py)
 
-     3.3 Security-role and application-access assignment workflow
+   3.3 Security-role and application-access assignment workflow
 
    - Add admin helper(s) for role/app reassignment workflows analogous to security-role scripts:
      - resolve user by identifier,
@@ -88,14 +88,14 @@ Adopt high-value functionality patterns from seven external TeamDynamix projects
    - Source:
      - [AI-Ticket-Helper app.py](https://github.com/tylerdavis234-ops/AI-Ticket-Helper/blob/main/app.py)
 
-     4.2 Analytics/reporting pipeline companion package
+   4.2 Analytics/reporting pipeline companion package
 
    - Propose `@teamdynamix-ts/analytics` companion package for DuckDB/notebook/report workflows inspired by `dynamix-manager`.
    - Do not merge Python/notebook runtime into core SDK.
    - Source:
      - [dynamix-manager repository](https://github.com/cu-micahcooper/dynamix-manager)
 
-     4.3 Browser UI automation exclusions
+   4.3 Browser UI automation exclusions
 
    - Explicitly document that extension/DOM-injection report automation patterns are excluded from core SDK due to fragility/security/model mismatch.
    - Sources:
