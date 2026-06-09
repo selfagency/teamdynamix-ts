@@ -20,6 +20,13 @@ export default defineConfig({
           items: [
             { text: 'Overview', link: '/guide/' },
             { text: 'Quick Start', link: '/guide/quick-start' },
+            { text: 'Client Configuration', link: '/guide/client-config' },
+            { text: 'SDK Domains', link: '/guide/sdk-domains' },
+            { text: 'SDK Mutations', link: '/guide/sdk-mutations' },
+            { text: 'Helper Functions', link: '/guide/helper-functions' },
+            { text: 'Custom Attributes', link: '/guide/custom-attributes' },
+            { text: 'Error Handling', link: '/guide/error-handling' },
+            { text: 'Advanced', link: '/guide/advanced' },
           ],
         },
       ],
@@ -28,11 +35,9 @@ export default defineConfig({
           text: 'API Reference',
           items: [
             { text: 'Overview', link: '/api/' },
-
           ],
         },
       ],
-
       '/developer/': [
         {
           text: 'Developer Docs',

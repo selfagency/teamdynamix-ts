@@ -1,95 +1,61 @@
 # teamdynamix-ts
 
-[![CI](https://github.com/selfagency/teamdynamix-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/selfagency/teamdynamix-ts/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/selfagency/teamdynamix-ts/graph/badge.svg?token=TbW25stfHD)](https://codecov.io/gh/selfagency/teamdynamix-ts)
+[![CI](https://github.com/selfagency/teamdynamix-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/selfagency/teamdynamix-ts/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/selfagency/teamdynamix-ts/graph/badge.svg?token=TbW25stfHD)](https://codecov.io/gh/selfagency/teamdynamix-ts)
+[![npm](https://img.shields.io/npm/v/%40selfagency%2Fteamdynamix-ts)](https://www.npmjs.com/package/@selfagency/teamdynamix-ts)
 
-Secure Node-first TypeScript client for the TeamDynamix Web API,
-generated from OpenAPI 3.1.
+**Type-safe TeamDynamix Web API client for Node.js** — auto-generated reads, curated mutations, runtime validation, and auth helpers.
 
-## Quick start
+```bash
+npm install @selfagency/teamdynamix-ts
+```
 
 ```ts
-import { createTeamDynamixClient, loginWithPassword, projectFields } from 'teamdynamix-ts';
+import { createTeamDynamixClient, loginWithPassword } from 'teamdynamix-ts'
 
 const { client } = await createTeamDynamixClient({
-  tenant: 'api',
+  tenant: 'mytenant',
   tokenProvider: loginWithPassword({
-    tenant: 'api',
+    tenant: 'mytenant',
     username: process.env.TD_USERNAME!,
     password: process.env.TD_PASSWORD!,
   }),
-  environment: 'production',
-  runtimeValidationMode: 'fail-closed',
-});
+})
 
-const accounts = await client.referenceData.accounts();
-const projected = projectFields(accounts, ['ID', 'Name']);
+const accounts = await client.referenceData.accounts()
 ```
 
-Or authenticate with an admin service account:
+## Full documentation
 
-```ts
-import { loginWithServiceAccount } from 'teamdynamix-ts';
+**[teamdynamix-ts.self.agency](https://teamdynamix-ts.self.agency)** — quick start, SDK domain reference, mutation signatures, error handling, and API spec.
 
-const { client } = await createTeamDynamixClient({
-  tenant: 'api',
-  tokenProvider: loginWithServiceAccount({
-    tenant: 'api',
-    beid: process.env.TD_BEID!,
-    webServicesKey: process.env.TD_WSKEY!,
-  }),
-});
+| Page | Contents |
+|---|---|
+| [Quick Start](https://teamdynamix-ts.self.agency/guide/quick-start) | Install, auth (password + service account), first queries, pagination |
+| [Client Config](https://teamdynamix-ts.self.agency/guide/client-config) | Timeout, retry policy, validation modes, sandbox |
+| [SDK Domains](https://teamdynamix-ts.self.agency/guide/sdk-domains) | All 150+ read methods across 10 domains |
+| [SDK Mutations](https://teamdynamix-ts.self.agency/guide/sdk-mutations) | Create, update, delete with safety gates |
+| [Helper Functions](https://teamdynamix-ts.self.agency/guide/helper-functions) | projection, preview, bulk insert, report runner |
+| [Custom Attributes](https://teamdynamix-ts.self.agency/guide/custom-attributes) | Reading and writing custom fields |
+| [Error Handling](https://teamdynamix-ts.self.agency/guide/error-handling) | Error codes, HTTP errors, auth errors, validation errors |
+| [API Reference](https://teamdynamix-ts.self.agency/api) | Interactive OpenAPI spec |
+| [Developer Guide](https://teamdynamix-ts.self.agency/developer) | Build, test, release, project structure |
+
+## Development
+
+```bash
+pnpm install
+pnpm test          # Vitest
+pnpm typecheck     # tsc --noEmit
+pnpm lint          # oxlint
+pnpm docs:dev      # VitePress local preview
 ```
 
-## Curated helpers
+## Release
 
-```ts
-import {
-  bulkAddUsersToGroup,
-  loginWithPassword,
-  loginWithServiceAccount,
-  previewEntity,
-  projectFields,
-  runTicketReport,
-} from 'teamdynamix-ts';
-
-const search = await runTicketReport(client, { appId: 1, searchId: 42 });
-const summary = previewEntity(search.items[0] ?? {}, { bodyField: 'Description' });
-const bulk = await bulkAddUsersToGroup(client, { groupId: 7, uids: ['u1', 'u2'] });
+```bash
+git tag v1.0.0
+git push origin v1.0.0
 ```
 
-## Documentation
-
-- Browse docs in `docs/` with VitePress.
-- Local docs dev server: `pnpm run docs:dev`
-- Build docs: `pnpm run docs:build`
-- Preview built docs: `pnpm run docs:preview`
-
-### API reference in docs
-
-- Full spec page: `docs/api/spec.md`
-- Operation pages: generated from `docs/operations/[operationId].paths.ts`
-- Tag pages: generated from `docs/tags/[tag].paths.ts`
-- Curated SDK helpers are exported from `teamdynamix-ts` and documented in the Guide
-
-## Development commands
-
-- `pnpm run typecheck` — strict TypeScript checks
-- `pnpm run lint` — Oxlint
-- `pnpm run format:check` — formatting verification
-- `pnpm run lint:md` — markdown lint checks
-- `pnpm run test` — Vitest suite
-
-## Source of truth
-
-- Canonical OpenAPI spec in repo: `src/spec/openapi.yaml`
-- Enriched outputs and reports: `output/`
-- Type generation source: `output/openapi-types.json`
-- Generated declarations: `src/generated/schema.d.ts`
-
-## More detail
-
-See the full documentation in `docs/` for:
-
-- SDK usage patterns and migration guidance
-- Generated API reference
-- contributor-focused architecture and workflow guidance
+The Release workflow builds, OIDC-authenticates with npm, and publishes with `--provenance`.
