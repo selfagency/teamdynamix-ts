@@ -166,7 +166,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@1f9d0fa76c70e2b1e1d2b3c0f3c0e1e3e2e1f9d0 # v4
+        uses: actions/checkout@v4
         with:
           ref: ${{ needs.detect-tag.outputs.release_tag }}
           fetch-depth: 0
@@ -217,10 +217,10 @@ jobs:
           RELEASE_NOTES: ${{ steps.changelog_notes.outputs.notes }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
@@ -278,7 +278,7 @@ jobs:
         run: npm pack ./dist --pack-destination .
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v2
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.detect-tag.outputs.release_tag }}
           body_path: release-notes.md
