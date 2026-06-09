@@ -44,8 +44,12 @@ const { client } = await createTeamDynamixClient({
 
 ```ts
 import {
-  bulkAddUsersToGroup, loginWithPassword, loginWithServiceAccount,
-  previewEntity, projectFields, runTicketReport,
+  bulkAddUsersToGroup,
+  loginWithPassword,
+  loginWithServiceAccount,
+  previewEntity,
+  projectFields,
+  runTicketReport,
 } from 'teamdynamix-ts';
 
 const search = await runTicketReport(client, { appId: 1, searchId: 42 });
