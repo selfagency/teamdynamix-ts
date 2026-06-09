@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Resolve tag and verify CI readiness
         id: tag
-        uses: actions/github-script@e69e546dcd5bf919ece5cbfc274d0b35d45b2ecf # v8
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -173,7 +173,7 @@ jobs:
 
       - name: Generate release notes
         id: changelog_notes
-        uses: actions/github-script@e69e546dcd5bf919ece5cbfc274d0b35d45b2ecf # v8
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
