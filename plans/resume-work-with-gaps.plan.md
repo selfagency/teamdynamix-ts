@@ -5,6 +5,7 @@ This plan addresses the current state of the project, incorporates the gap analy
 ## Current State Assessment
 
 ### What's Working
+
 - Core client infrastructure exists with authentication and validation
 - Basic SDK structure with domain-based organization is in place
 - Some helper functions are implemented (findAccountByName, findUserByEmail, resolveTicketLookupContext)
@@ -12,11 +13,12 @@ This plan addresses the current state of the project, incorporates the gap analy
 - OpenAPI spec exists at `src/spec/openapi.yaml`
 
 ### What's Broken
-- OpenAPI generation pipeline is failing (expects source files in `sources/TDWebApi` which don't exist)
-- No output directory is being generated
-- Generate scripts can't run without the pipeline output
+
+- Historical blocker: the original OpenAPI pipeline expected `sources/TDWebApi` and was replaced
+- The current generation pipeline is working and deterministic
 
 ### Key Gaps vs TDXLib (High Priority)
+
 1. **Ticket Feed API**: Essential for tracking ticket updates
 2. **Custom Attributes Support**: Critical for real-world TeamDynamix usage
 3. **Asset Attachments**: Important for asset management
@@ -26,12 +28,14 @@ This plan addresses the current state of the project, incorporates the gap analy
 ## Updated Implementation Plan
 
 ### Phase 1: Fix OpenAPI Generation (1-2 days)
+
 1. Create a simple script to copy the existing spec to the output location
 2. Update generate-client to work with the existing spec
 3. Test generation pipeline and ensure it produces the expected outputs
 4. Update documentation generation to work with the new flow
 
 ### Phase 2: Address Critical TDXLib Gaps (2-3 days)
+
 1. **Ticket Feed API**
    - Implement ticket feed methods for tracking updates
    - Add feed filtering and pagination
@@ -48,6 +52,7 @@ This plan addresses the current state of the project, incorporates the gap analy
    - Create batch attachment operations
 
 ### Phase 3: Enhance Search and Discovery (2-3 days)
+
 1. **Advanced Search**
    - Add search filters for all domain objects
    - Implement search result pagination
@@ -59,6 +64,7 @@ This plan addresses the current state of the project, incorporates the gap analy
    - Create configuration validation with Zod
 
 ### Phase 4: Quality of Life Features (2-3 days)
+
 1. **Basic Caching Layer**
    - Implement caching for lookup tables (accounts, users, etc.)
    - Add cache invalidation strategies
@@ -70,6 +76,7 @@ This plan addresses the current state of the project, incorporates the gap analy
    - Create result aggregation helpers
 
 ### Phase 5: API-Quirk Guardrails (2-3 days)
+
 1. **TeamDynamix API Quirks**
    - Issue search payload normalization (`projectId` → `ProjectIDs: [id]`)
    - Project issue update comment requirements
@@ -81,6 +88,7 @@ This plan addresses the current state of the project, incorporates the gap analy
    - Error recovery helpers
 
 ### Phase 6: Bulk Operations (3-4 days)
+
 1. **Batch Operations**
    - Implement batch ticket updates
    - Add batch asset operations
@@ -94,6 +102,7 @@ This plan addresses the current state of the project, incorporates the gap analy
 ## Verification
 
 For each phase:
+
 1. Run static checks: `pnpm run typecheck`, `pnpm run lint`, `pnpm run format:check`
 2. Run tests: `pnpm run test`
 3. Generate documentation: `pnpm run docs:build`

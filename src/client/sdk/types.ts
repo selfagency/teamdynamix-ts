@@ -30,7 +30,7 @@ export interface SdkRequestOptions {
   headers?: Record<string, string>;
 }
 
-export type SdkReadMethod = (...args: any[]) => Promise<unknown>;
+export type SdkReadMethod = (...args: unknown[]) => Promise<unknown>;
 export type SdkReadDomain = Record<string, SdkReadMethod>;
 
 export interface TeamDynamixSdkReadDomains {
@@ -83,6 +83,18 @@ export interface TicketRelationshipMutations {
   }): Promise<unknown>;
 }
 
+export interface PeopleMutations {
+  getPersonByUid(input: { uid: string }): Promise<unknown>;
+  getGroupMembers(input: { groupId: string | number }): Promise<unknown>;
+  createGroup(input: { body: unknown }): Promise<unknown>;
+  updateGroup(input: { groupId: string | number; body: unknown }): Promise<unknown>;
+  searchGroups(input: { body: Record<string, unknown> }): Promise<unknown>;
+  addGroupMember(input: { uid: string; groupId: string | number; removeOtherGroups?: boolean }): Promise<unknown>;
+  removeGroupMember(input: { uid: string; groupId: string | number; confirm: true }): Promise<unknown>;
+  assignGroupApplications(input: { groupId: string | number }): Promise<unknown>;
+  bulkManageGroups(input: { groupIds: Array<string | number> }): Promise<unknown>;
+}
+
 export interface KnowledgeBaseMutations {
   createArticle(input: { appId: string | number; body: unknown }): Promise<unknown>;
   updateArticle(input: { appId: string | number; articleId: string | number; body: unknown }): Promise<unknown>;
@@ -91,6 +103,13 @@ export interface KnowledgeBaseMutations {
 export interface ProjectMutations {
   createIssue(input: { body: unknown }): Promise<unknown>;
   createRisk(input: { body: unknown }): Promise<unknown>;
+  searchIssues(input: { projectId: string | number; body?: Record<string, unknown> }): Promise<unknown>;
+  updateIssue(input: {
+    projectId: string | number;
+    issueId: string | number;
+    comments: string;
+    body?: Record<string, unknown>;
+  }): Promise<unknown>;
 }
 
 export interface ServiceMutations {
@@ -142,6 +161,28 @@ export interface TimeMutations {
   deleteTimeEntry(input: { timeEntryId: string | number; confirm: true }): Promise<unknown>;
 }
 
+export interface ProjectionHelpers {
+  projectFields<T extends Record<string, unknown>>(items: T[], fields: Array<keyof T>): Partial<T>[];
+  previewEntity<T extends Record<string, unknown>>(
+    entity: T,
+    options?: { bodyField?: keyof T; maxLength?: number },
+  ): T & { _preview: string };
+}
+
+export interface ReportPage<T = unknown> {
+  items: T[];
+  page: number;
+  pageSize: number;
+  hasMore: boolean;
+  totalCount?: number;
+}
+
+export interface BulkResult<TInput = unknown, TResult = unknown> {
+  dryRun: boolean;
+  succeeded: Array<{ input: TInput; result: TResult }>;
+  failed: Array<{ input: TInput; error: unknown }>;
+}
+
 export interface SdkHelpers {
   findAccountByName(name: string): Promise<Record<string, unknown> | undefined>;
   findUserByEmail(email: string): Promise<Record<string, unknown> | undefined>;
@@ -159,7 +200,7 @@ export interface TeamDynamixSdk {
   readonly discovery: TeamDynamixSdkReadDomains['discovery'];
   readonly tickets: TeamDynamixSdkReadDomains['tickets'] & TicketMutations;
   readonly ticketRelationships: TeamDynamixSdkReadDomains['ticketRelationships'] & TicketRelationshipMutations;
-  readonly people: TeamDynamixSdkReadDomains['people'];
+  readonly people: TeamDynamixSdkReadDomains['people'] & PeopleMutations;
   readonly knowledgeBase: TeamDynamixSdkReadDomains['knowledgeBase'] & KnowledgeBaseMutations;
   readonly assets: TeamDynamixSdkReadDomains['assets'] & AssetMutations;
   readonly cmdb: TeamDynamixSdkReadDomains['cmdb'] & CmdbMutations;

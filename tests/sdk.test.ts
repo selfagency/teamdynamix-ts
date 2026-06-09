@@ -1,27 +1,7 @@
 import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { createTeamDynamixClient } from '../src/client/index.js';
-
-const server = setupServer();
-
-beforeAll(() => {
-  server.listen({
-    onUnhandledRequest: req => {
-      throw new Error(`Unhandled request: ${req.method} ${req.url}`);
-    },
-  });
-});
-
-afterEach(() => {
-  server.resetHandlers();
-});
-
-afterAll(() => {
-  server.close();
-});
-
-const specPath = `${process.cwd()}/tests/fixtures/openapi-test-spec.json`;
+import { server, specPath } from './setup-msw.js';
 
 describe('SDK domain surface', () => {
   it('exposes generated read domain methods and keeps raw escape hatch', async () => {

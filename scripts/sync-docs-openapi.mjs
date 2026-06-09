@@ -6,8 +6,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 
-const preferredSourceSpec = path.join(projectRoot, 'output', 'openapi-types.json');
-const fallbackSourceSpec = path.join(projectRoot, 'src', 'generated', 'openapi.json');
 const sourceCandidates = [
   path.join(projectRoot, 'output', 'openapi-types.json'),
   path.join(projectRoot, 'src', 'generated', 'openapi.json'),

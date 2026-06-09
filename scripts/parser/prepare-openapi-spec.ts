@@ -8,6 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import yaml from 'js-yaml';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,17 +27,6 @@ if (!fs.existsSync(outputDir)) {
 // Check if source spec exists
 if (!fs.existsSync(sourceSpecPath)) {
   throw new Error(`Source OpenAPI spec not found at ${sourceSpecPath}`);
-}
-
-// Import YAML to JSON conversion
-let yaml;
-try {
-  yaml = await import('js-yaml');
-} catch (e) {
-  console.error('❌ js-yaml package not found. Installing...');
-  const { execSync } = await import('child_process');
-  execSync('pnpm add -D js-yaml', { cwd: projectRoot, stdio: 'inherit' });
-  yaml = await import('js-yaml');
 }
 
 // Read and convert the YAML spec

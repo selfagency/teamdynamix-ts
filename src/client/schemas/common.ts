@@ -12,7 +12,7 @@ export const confirmTrueSchema = z.literal(true);
 
 export const paginationSchema = z.object({
   page: z.number().int().positive().optional(),
-  pageSize: z.number().int().positive().max(500).optional()
+  pageSize: z.number().int().positive().max(500).optional(),
 });
 
 export const searchTextSchema = z.string().trim().min(1).max(500);
@@ -25,13 +25,13 @@ export const customAttributeValueSchema = z.union([
   z.boolean(),
   z.date(),
   z.array(z.any()),
-  z.record(z.string(), z.any())
+  z.record(z.string(), z.any()),
 ]);
 
 export const customAttributeSchema = z.object({
   ID: customAttributeIdSchema,
-  Name: nonEmptyString,
-  Value: customAttributeValueSchema.optional()
+  Name: nonEmptyString.optional(),
+  Value: customAttributeValueSchema.optional(),
 });
 
 export type AppId = z.infer<typeof appIdSchema>;

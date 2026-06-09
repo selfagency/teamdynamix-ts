@@ -14,7 +14,7 @@ pnpm add teamdynamix-ts
 ## Create a client
 
 ```ts
-import { createTeamDynamixClient } from 'teamdynamix-ts';
+import { createTeamDynamixClient, previewEntity, projectFields } from 'teamdynamix-ts';
 
 const { client } = await createTeamDynamixClient({
   tenant: 'api',
@@ -28,6 +28,13 @@ const { client } = await createTeamDynamixClient({
 
 ```ts
 const accounts = await client.referenceData.accounts();
+```
+
+## Curated helpers
+
+```ts
+const projected = projectFields(accounts, ['ID', 'Name']);
+const preview = previewEntity(accounts[0] ?? {}, { bodyField: 'Description' });
 ```
 
 ## Learn more

@@ -2,9 +2,22 @@ import { z } from 'zod';
 import type { TeamDynamixFetchClient } from '../client.js';
 import { customAttributeIdSchema, customAttributeValueSchema, customAttributeSchema } from '../schemas/index.js';
 import { executeSdkRoute } from './request.js';
-import type { TicketMutations, AssetMutations } from './types.js';
 
 const nonEmptyIdSchema = z.union([z.string().trim().min(1), z.number().int().nonnegative()]);
+
+type CustomAttributeEntry = {
+  ID?: string | number;
+  Name?: string;
+  Value?: unknown;
+};
+
+const hasAttributes = (value: unknown): value is { Attributes: CustomAttributeEntry[] } => {
+  if (typeof value !== 'object' || value === null || !('Attributes' in value)) {
+    return false;
+  }
+  const attributes = (value as { Attributes?: unknown }).Attributes;
+  return Array.isArray(attributes);
+};
 
 /**
  * Creates a custom attribute value object for API submission
@@ -53,11 +66,8 @@ export const getCustomAttributeValue = (
   const parsedId = customAttributeIdSchema.parse(attributeNameOrId);
 
   // If the object has custom attributes, search through them
-  if (object.Attributes && Array.isArray(object.Attributes)) {
-    const attribute = object.Attributes.find((attr: any) => {
-      return attr.ID === parsedId || attr.Name === parsedId;
-    });
-
+  if (hasAttributes(object)) {
+    const attribute = object.Attributes.find(attr => attr.ID === parsedId || attr.Name === parsedId);
     return attribute?.Value;
   }
 
@@ -76,11 +86,13 @@ export const createTicketCustomAttributes = (client: TeamDynamixFetchClient) => 
     ticketId: string | number;
     attributes: Array<{ ID: string | number; Value: unknown }>;
   }): Promise<unknown> {
-    const parsed = z.object({
-      appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-      ticketId: nonEmptyIdSchema,
-      attributes: z.array(customAttributeSchema),
-    }).parse(input);
+    const parsed = z
+      .object({
+        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+        ticketId: nonEmptyIdSchema,
+        attributes: z.array(customAttributeSchema),
+      })
+      .parse(input);
 
     return executeSdkRoute(
       client,
@@ -104,14 +116,13 @@ export const createTicketCustomAttributes = (client: TeamDynamixFetchClient) => 
   /**
    * Gets all custom attributes for a ticket
    */
-  async getTicketCustomAttributes(input: {
-    appId: string | number;
-    ticketId: string | number;
-  }): Promise<unknown> {
-    const parsed = z.object({
-      appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-      ticketId: nonEmptyIdSchema,
-    }).parse(input);
+  async getTicketCustomAttributes(input: { appId: string | number; ticketId: string | number }): Promise<unknown> {
+    const parsed = z
+      .object({
+        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+        ticketId: nonEmptyIdSchema,
+      })
+      .parse(input);
 
     const ticket = await executeSdkRoute(
       client,
@@ -128,7 +139,7 @@ export const createTicketCustomAttributes = (client: TeamDynamixFetchClient) => 
       { params: { path: { appId: parsed.appId, id: parsed.ticketId } } },
     );
 
-    return (ticket as any)?.Attributes || [];
+    return hasAttributes(ticket) ? ticket.Attributes : [];
   },
 });
 
@@ -144,11 +155,13 @@ export const createAssetCustomAttributes = (client: TeamDynamixFetchClient) => (
     assetId: string | number;
     attributes: Array<{ ID: string | number; Value: unknown }>;
   }): Promise<unknown> {
-    const parsed = z.object({
-      appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-      assetId: nonEmptyIdSchema,
-      attributes: z.array(customAttributeSchema),
-    }).parse(input);
+    const parsed = z
+      .object({
+        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+        assetId: nonEmptyIdSchema,
+        attributes: z.array(customAttributeSchema),
+      })
+      .parse(input);
 
     return executeSdkRoute(
       client,
@@ -172,14 +185,13 @@ export const createAssetCustomAttributes = (client: TeamDynamixFetchClient) => (
   /**
    * Gets all custom attributes for an asset
    */
-  async getAssetCustomAttributes(input: {
-    appId: string | number;
-    assetId: string | number;
-  }): Promise<unknown> {
-    const parsed = z.object({
-      appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-      assetId: nonEmptyIdSchema,
-    }).parse(input);
+  async getAssetCustomAttributes(input: { appId: string | number; assetId: string | number }): Promise<unknown> {
+    const parsed = z
+      .object({
+        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+        assetId: nonEmptyIdSchema,
+      })
+      .parse(input);
 
     const asset = await executeSdkRoute(
       client,
@@ -196,7 +208,7 @@ export const createAssetCustomAttributes = (client: TeamDynamixFetchClient) => (
       { params: { path: { appId: parsed.appId, id: parsed.assetId } } },
     );
 
-    return (asset as any)?.Attributes || [];
+    return hasAttributes(asset) ? asset.Attributes : [];
   },
 });
 
@@ -207,12 +219,12 @@ export const createCustomAttributesRegistry = (client: TeamDynamixFetchClient) =
   /**
    * Gets custom attribute definitions for tickets
    */
-  async getTicketCustomAttributes(input: {
-    appId: string | number;
-  }): Promise<unknown> {
-    const parsed = z.object({
-      appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-    }).parse(input);
+  async getTicketCustomAttributes(input: { appId: string | number }): Promise<unknown> {
+    const parsed = z
+      .object({
+        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+      })
+      .parse(input);
 
     return executeSdkRoute(
       client,
@@ -233,12 +245,12 @@ export const createCustomAttributesRegistry = (client: TeamDynamixFetchClient) =
   /**
    * Gets custom attribute definitions for assets
    */
-  async getAssetCustomAttributes(input: {
-    appId: string | number;
-  }): Promise<unknown> {
-    const parsed = z.object({
-      appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-    }).parse(input);
+  async getAssetCustomAttributes(input: { appId: string | number }): Promise<unknown> {
+    const parsed = z
+      .object({
+        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
+      })
+      .parse(input);
 
     return executeSdkRoute(
       client,

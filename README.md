@@ -8,7 +8,7 @@ generated from OpenAPI 3.1.
 ## Quick start
 
 ```ts
-import { createTeamDynamixClient } from 'teamdynamix-ts';
+import { createTeamDynamixClient, projectFields } from 'teamdynamix-ts';
 
 const { client } = await createTeamDynamixClient({
   tenant: 'api',
@@ -18,6 +18,17 @@ const { client } = await createTeamDynamixClient({
 });
 
 const accounts = await client.referenceData.accounts();
+const projected = projectFields(accounts, ['ID', 'Name']);
+```
+
+## Curated helpers
+
+```ts
+import { bulkAddUsersToGroup, previewEntity, projectFields, runTicketReport } from 'teamdynamix-ts';
+
+const search = await runTicketReport(client, { appId: 1, searchId: 42 });
+const summary = previewEntity(search.items[0] ?? {}, { bodyField: 'Description' });
+const bulk = await bulkAddUsersToGroup(client, { groupId: 7, uids: ['u1', 'u2'] });
 ```
 
 ## Documentation
@@ -32,6 +43,7 @@ const accounts = await client.referenceData.accounts();
 - Full spec page: `docs/api/spec.md`
 - Operation pages: generated from `docs/operations/[operationId].paths.ts`
 - Tag pages: generated from `docs/tags/[tag].paths.ts`
+- Curated SDK helpers are exported from `teamdynamix-ts` and documented in the Guide
 
 ## Development commands
 

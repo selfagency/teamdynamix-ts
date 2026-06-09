@@ -7,6 +7,6 @@ export {
   tokenSchema,
   customAttributeIdSchema,
   customAttributeValueSchema,
-  customAttributeSchema
+  customAttributeSchema,
 } from './common.js';
 export type { AppId, PaginationInput, CustomAttributeId, CustomAttributeValue, CustomAttribute } from './common.js';

@@ -5,6 +5,7 @@ This plan addresses the current state of the project and prioritizes the most cr
 ## Current State Assessment
 
 ### What's Working
+
 - Core client infrastructure exists with authentication and validation
 - Basic SDK structure with domain-based organization is in place
 - Some helper functions are implemented (findAccountByName, findUserByEmail, resolveTicketLookupContext)
@@ -12,96 +13,80 @@ This plan addresses the current state of the project and prioritizes the most cr
 - OpenAPI spec exists at `src/spec/openapi.yaml`
 
 ### What's Broken
-- OpenAPI generation pipeline is failing (expects source files in `sources/TDWebApi` which don't exist)
-- No output directory is being generated
-- Generate scripts can't run without the pipeline output
+
+- Historical blocker: the original OpenAPI pipeline expected `sources/TDWebApi` and was replaced
+- The current generation pipeline is working and deterministic
 
 ### What's Missing
-- API-quirk guardrails for TeamDynamix-specific behaviors
-- Response-shaping helpers for large payloads
-- Report execution helpers
-- Bulk operations
-- Advanced workflow helpers
+
+- Asset attachments and other remaining feature gaps from TDXLib
+- Optional caching and configuration-file support
+- Wider helper surface for non-group bulk workflows
 
 ## Immediate Priority: Fix the OpenAPI Pipeline
 
-### Step 1: Use Existing OpenAPI Spec Directly (Quick Fix)
-Since we already have a valid OpenAPI spec at `src/spec/openapi.yaml`, let's bypass the broken markdown parsing pipeline and use it directly.
+### Step 1: OpenAPI Pipeline
 
-1. Create a simple script to copy the existing spec to the expected output location
-2. Modify the generate-client script to work with the existing spec
-3. Test the generation pipeline
+The pipeline is already fixed and should be treated as completed infrastructure.
+
+1. Keep `generate:all` deterministic
+2. Preserve `docs:sync-openapi` compatibility
+3. Treat the existing canonical spec as the source of truth
 
 ### Step 2: Implement Critical SDK Features
-Focus on the most valuable features from the additional functionality plan:
 
-1. **API-Quirk Guardrails** (Tier-1)
-   - Issue search payload normalization (`projectId` → `ProjectIDs: [id]`)
+The core helper surface is now implemented. Remaining work is smaller and mostly additive:
+
+1. **Remaining gaps**
+   - Asset attachments
+   - Optional caching
+   - Configuration-file support
+
+2. **Keep existing helpers stable**
+   - Issue search normalization
    - Project issue update comment requirements
-   - Input validation and clear error messages
-
-2. **Response-Shaping Helpers** (Tier-1)
-   - Lightweight projection helpers for search/list endpoints
-   - Optional body-preview shaping for feed-like entities
-   - Preserve full-fidelity behavior by default
-
-3. **Report Execution Helper** (Tier-1)
-   - Pagination abstraction
-   - Page/offset handling
-   - Metadata return contract
+   - Projection/report/bulk helpers
 
 ### Step 3: Add Value-Add Features
-Implement the most useful helper functions:
 
-1. **Enhanced Search Helpers**
-   - Add more lookup functions based on common patterns
-   - Improve existing helpers with better error handling
+Most of the originally planned helper work is now in the codebase. Optional follow-ons:
 
-2. **Basic Bulk Operations** (Simplified)
-   - Focus on the most common use cases
-   - Add dry-run mode and result aggregation
+1. **Future search helpers**
+   - Additional lookup convenience wrappers
+
+2. **Future bulk operations**
+   - Additional admin workflows beyond group membership and group management
 
 ## Implementation Plan
 
-### Phase 1: Fix OpenAPI Generation (1-2 days)
-1. Create a simple script to copy existing spec to output location
-2. Update generate-client to work with existing spec
-3. Test generation pipeline and ensure it produces the expected outputs
-4. Update documentation generation to work with the new flow
+### Phase 1: OpenAPI Generation
 
-### Phase 2: Implement API-Quirk Guardrails (2-3 days)
-1. Add helper functions for common TeamDynamix API quirks
-2. Implement input validation with clear error messages
-3. Add tests for quirk handling
-4. Update documentation with examples
+✅ Completed. The pipeline is deterministic and currently passing end-to-end.
 
-### Phase 3: Response-Shaping Helpers (2-3 days)
-1. Implement lightweight projection helpers
-2. Add optional response shaping utilities
-3. Ensure backward compatibility
-4. Add tests and documentation
+### Phase 2: API-Quirk Guardrails
 
-### Phase 4: Report Execution Helper (2 days)
-1. Implement report execution workflow helper
-2. Add pagination abstraction
-3. Create result aggregation utilities
-4. Add tests and examples
+✅ Completed. Issue search normalization and issue update comment enforcement are implemented and tested.
 
-### Phase 5: Enhanced Search and Lookup (1-2 days)
-1. Add more lookup functions based on common patterns
-2. Improve error handling in existing helpers
-3. Add caching where appropriate
-4. Update tests and documentation
+### Phase 3: Response-Shaping Helpers
 
-### Phase 6: Basic Bulk Operations (3-4 days)
-1. Implement simplified bulk operations for most common use cases
-2. Add dry-run mode and result aggregation
-3. Add proper error handling and partial failure support
-4. Add comprehensive tests
+✅ Completed. `projectFields` and `previewEntity` are implemented and exported.
+
+### Phase 4: Report Execution Helper
+
+✅ Completed. `runTicketReport` is available and covered by tests.
+
+### Phase 5: Enhanced Search and Lookup
+
+✅ Completed for the current planned surface. Additional lookup wrappers can still be added later.
+
+### Phase 6: Basic Bulk Operations
+
+✅ Completed for group-management workflows. Additional bulk helpers remain a future extension.
 
 ## Verification
 
 For each phase:
+
 1. Run static checks: `pnpm run typecheck`, `pnpm run lint`, `pnpm run format:check`
 2. Run tests: `pnpm run test`
 3. Generate documentation: `pnpm run docs:build`
@@ -118,6 +103,7 @@ For each phase:
 ## Next Steps After Completion
 
 Once these phases are complete, we can:
+
 1. Revisit the OpenAPI modularization plan with a more stable codebase
 2. Consider additional features from the original plans
 3. Improve performance and reduce bundle size

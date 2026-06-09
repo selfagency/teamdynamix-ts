@@ -48,10 +48,10 @@ This document compares the capabilities of our `teamdynamix-ts` TypeScript SDK w
 | Edit Tickets | ✅ | ✅ | Parity |
 | Search Tickets | ✅ | ✅ | Parity |
 | Ticket Tasks | ✅ | ✅ | Parity |
-| Ticket Feed | ❌ | ✅ | Missing |
+| Ticket Feed | ✅ | ✅ | Implemented |
 | Ticket Templates | ❌ | ✅ | Missing |
 | Batch Operations | ❌ | ✅ | Missing |
-| Custom Attributes | ❌ | ✅ | Missing |
+| Custom Attributes | ✅ | ✅ | Implemented |
 | Ticket Attachments | ❌ | ✅ | Missing |
 | Ticket Forms | ❌ | ✅ Read-only | Missing |
 | Ticket Status/Type/Priority | ✅ | ✅ | Parity |
@@ -80,11 +80,11 @@ This document compares the capabilities of our `teamdynamix-ts` TypeScript SDK w
 | Feature | teamdynamix-ts | tdxlib | Gap |
 |---------|----------------|--------|-----|
 | Search People | ✅ | ✅ | Parity |
-| Get Person by UID | ❌ | ✅ | Missing |
+| Get Person by UID | ✅ | ✅ | Implemented |
 | Get Groups | ✅ | ✅ | Parity |
-| Get Group Members | ❌ | ✅ | Missing |
-| Edit Groups | ❌ | ✅ Read-only | Missing |
-| Bulk User Operations | ❌ | ✅ | Missing |
+| Get Group Members | ✅ | ✅ | Implemented |
+| Edit Groups | ✅ | ✅ | Implemented |
+| Bulk User Operations | ✅ | ✅ | Implemented |
 
 ### Knowledge Base & Services
 
@@ -113,9 +113,9 @@ This document compares the capabilities of our `teamdynamix-ts` TypeScript SDK w
 | Find Account by Name | ✅ | ✅ | Parity |
 | Find User by Email | ✅ | ✅ | Parity |
 | Get Lookup Context | ✅ | ❌ | Advantage |
-| Response Shaping | ❌ | ✅ | Missing |
-| Bulk Operations | ❌ | ✅ | Missing |
-| Report Helpers | ❌ | ❌ | Neither has this |
+| Response Shaping | ✅ | ✅ | Implemented |
+| Bulk Operations | ✅ | ✅ | Implemented |
+| Report Helpers | ✅ | ❌ | Implemented in teamdynamix-ts |
 | Caching | ❌ | ✅ | Missing |
 | Date/Time Helpers | ❌ | ✅ | Missing |
 
@@ -176,24 +176,22 @@ This document compares the capabilities of our `teamdynamix-ts` TypeScript SDK w
 
 ### Short-term (Next 3 months)
 
-1. Implement critical missing features from TDXLib:
-   - Ticket feed API
-   - Basic custom attributes support
+1. Finish the remaining operational gaps:
    - Asset attachments
-   - Improved search with filters
-
-2. Add quality-of-life features:
    - Configuration file support
-   - Basic caching for lookup tables
-   - Better error messages
+   - Lookup caching
+   - Search refinements
+
+2. Harden the current helper surface:
+   - Expand bulk/admin workflows as needed
+   - Add regression coverage for all destructive actions
+   - Keep response shaping opt-in
 
 ### Medium-term (3-6 months)
 
-1. Advanced features from TDXLib:
-   - Batch operations
-   - Response shaping
-   - Template system
-   - Advanced custom attributes
+1. Consider optional companion packages:
+   - Analytics/reporting pipeline helpers
+   - CLI conveniences for CSV ingest and migration
 
 2. Unique TypeScript advantages:
    - Runtime validation helpers

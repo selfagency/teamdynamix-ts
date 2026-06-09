@@ -24,7 +24,7 @@
 
 ## Generated Files
 
-```
+```text
 output/
 ├── openapi-types.json          # 1.2MB - Main OpenAPI spec for generation
 ├── preparation-report.md       # Preparation summary
@@ -41,12 +41,14 @@ src/generated/
 ## Key Changes Made
 
 ### 1. New Script: `scripts/parser/prepare-openapi-spec.ts`
+
 - Reads existing YAML spec from `src/spec/openapi.yaml`
 - Converts to JSON and writes to `output/openapi-types.json`
 - Creates preparation report
 - Auto-installs js-yaml if missing
 
 ### 2. Updated Scripts in `package.json`
+
 ```json
 {
   "generate:prepare": "pnpm exec tsx ./scripts/parser/prepare-openapi-spec.ts",
@@ -57,6 +59,7 @@ src/generated/
 ```
 
 ### 3. Added Dependencies
+
 - `js-yaml` - For YAML to JSON conversion
 - `tsx` - TypeScript execution (already added)
 - `cross-env` - Cross-platform environment variables
@@ -66,17 +69,20 @@ src/generated/
 Now that the generation pipeline is fixed, we can proceed with:
 
 ### Phase 2: Address Critical TDXLib Gaps
+
 1. **Ticket Feed API** - Implement ticket feed methods
 2. **Custom Attributes Support** - Add CA helpers
 3. **Asset Attachments** - File upload/download support
 
 ### Phase 3: Enhance Search and Discovery
+
 1. **Advanced Search** - Better filters and pagination
 2. **Configuration File Support** - JSON/YAML config files
 
 ## Verification Commands
 
 All of these now work without errors:
+
 ```bash
 pnpm run generate:prepare    # Prepares the OpenAPI spec
 pnpm run generate:client    # Generates the SDK client
