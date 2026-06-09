@@ -2,6 +2,19 @@
 
 All errors thrown by the SDK are `TeamDynamixClientError` instances with a structured shape.
 
+## Redacting sensitive data from errors
+
+Use `redactAuthorization()` to strip Bearer tokens from strings (request bodies, error messages) before logging or reporting:
+
+```ts
+import { redactAuthorization } from 'teamdynamix-ts'
+
+console.error(redactAuthorization(errorBody))
+// 'Authorization: Bearer [REDACTED]'
+```
+
+The function replaces `Authorization: Bearer <token>` with `Authorization: Bearer [REDACTED]` in any string.
+
 ## Error type
 
 ```ts

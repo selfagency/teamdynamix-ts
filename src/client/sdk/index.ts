@@ -3,6 +3,8 @@ export { runTicketReport } from './report.js';
 export { bulkAddUsersToGroup } from './bulk.js';
 export { createTeamDynamixSdk } from './build-sdk.js';
 export type {
+  BulkResult,
+  ReportPage,
   SdkDomainName,
   SdkHttpMethod,
   SdkReadDomain,

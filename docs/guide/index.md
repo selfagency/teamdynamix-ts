@@ -8,27 +8,27 @@ Packaged as `@selfagency/teamdynamix-ts` on npm.
 
 ## Architecture
 
-```
+```text
 Client                SDK (10 domains)           Helpers
-┌──────────┐         ┌────────────────┐         ┌──────────────┐
-│ Config   │  ───→   │ discovery      │         │ findAccount  │
-│ Auth     │  ───→   │ tickets        │         │ findUser     │
-│ Retry    │  ───→   │ ticketRelations│         │ resolveCtx   │
-│ Timeout  │  ───→   │ people         │         │ projectFields│
-│ Val.     │  ───→   │ knowledgeBase  │         │ previewEntity│
-│          │  ───→   │ assets         │         │ bulkAddUsers │
-│          │  ───→   │ cmdb           │         │ runReport    │
-│          │  ───→   │ services       │         └──────────────┘
-│          │  ───→   │ projects       │
-│          │  ───→   │ time           │
-│          │  ───→   │ referenceData  │
+┌──────────┐         ┌────────────────┐         ┌───────────────────┐
+│ Config   │  ───→   │ discovery      │         │ projectFields     │
+│ Auth     │  ───→   │ tickets        │         │ previewEntity     │
+│ Retry    │  ───→   │ ticketRelations│         │ bulkAddUsersToGrp │
+│ Timeout  │  ───→   │ people         │         │ runTicketReport   │
+│ Val.     │  ───→   │ knowledgeBase  │         └───────────────────┘
+│          │  ───→   │ assets         │         ┌───────────────────┐
+│          │  ───→   │ cmdb           │         │ helpers           │
+│          │  ───→   │ services       │         │  findAccountByName│
+│          │  ───→   │ projects       │         │  findUserByEmail  │
+│          │  ───→   │ time           │         │  resolveContext   │
+│          │  ───→   │ referenceData  │         └───────────────────┘
 │          │         └────────────────┘
 │          │         ┌────────────────┐
 │          │  ───→   │ registry       │  ← Custom attributes
 │          │         └────────────────┘
 └──────────┘
-          TeamDynamixFetchClient
-          (auth middleware, retry, validation)
+           TeamDynamixFetchClient
+           (auth middleware, retry, validation)
 ```
 
 ## SDK domains
@@ -56,11 +56,12 @@ Everything you can import from `teamdynamix-ts`:
 ```ts
 // Client factory
 createTeamDynamixClient(config)
+createTeamDynamixSdk(client)               // SDK with domains, mutations, helpers, registry
 
 // Auth helpers (token providers)
 loginWithPassword({ username, password })
 loginWithServiceAccount({ beid, webServicesKey })
-createTokenProviderFromJWT(jwt)
+createTokenProviderFromJWT(jwt)             // Wrap a pre-acquired token
 
 // Standalone helper functions (operate on raw data)
 projectFields(items, fields)
@@ -68,7 +69,21 @@ previewEntity(entity, options?)
 bulkAddUsersToGroup(client, input)
 runTicketReport(client, input)
 
-// Type exports (via z.infer from exported schemas)
+// Return types for helpers
+BulkResult                                  // Type — result of bulkAddUsersToGroup
+ReportPage                                  // Type — result of runTicketReport
+
+// Error handling
+TeamDynamixClientError                      // Class — all SDK errors
+redactAuthorization(input)                  // Function — strip tokens from strings
+
+// Zod schemas (re-exported from the package)
+appIdSchema
+tenantSchema
+paginationSchema
+confirmTrueSchema
+searchTextSchema
+tokenSchema
 ```
 
 ## Quick links

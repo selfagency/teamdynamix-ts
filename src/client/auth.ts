@@ -15,8 +15,13 @@ interface ServiceAccountAuthConfig extends AuthBaseConfig {
   webServicesKey: string;
 }
 
-const toBaseUrl = (tenant: string, environment: 'production' | 'sandbox'): string =>
-  environment === 'sandbox' ? `https://${tenant}-sandbox.teamdynamix.com` : `https://${tenant}.teamdynamix.com`;
+const toBaseUrl = (tenant: string, environment: 'production' | 'sandbox'): string => {
+  // If tenant is already a full domain (e.g. "td.myuniversity.edu"), use it directly.
+  if (tenant.includes('.')) {
+    return `https://${tenant}`;
+  }
+  return environment === 'sandbox' ? `https://${tenant}-sandbox.teamdynamix.com` : `https://${tenant}.teamdynamix.com`;
+};
 
 /**
  * Creates a token provider that authenticates with a TeamDynamix username and password.
@@ -34,6 +39,15 @@ const toBaseUrl = (tenant: string, environment: 'production' | 'sandbox'): strin
  *     password: process.env.TD_PASSWORD!,
  *   }),
  * });
+ * ```
+ *
+ * For custom FQDNs pass the full hostname as `tenant` (the `environment` option is ignored):
+ * ```ts
+ * loginWithPassword({
+ *   tenant: 'td.myuniversity.edu',
+ *   username: '...',
+ *   password: '...',
+ * })
  * ```
  */
 export const loginWithPassword = (config: PasswordAuthConfig): (() => Promise<string>) => {
@@ -61,6 +75,25 @@ export const loginWithPassword = (config: PasswordAuthConfig): (() => Promise<st
 };
 
 /**
+ * Creates a token provider from a pre-acquired JWT string.
+ *
+ * The returned function simply returns the JWT on each invocation.
+ * Useful when you obtained a token through another mechanism (session, cached token, etc.)
+ * and want to create a client without re-authenticating.
+ *
+ * @example
+ * ```ts
+ * const { client } = await createTeamDynamixClient({
+ *   tenant: 'mytenant',
+ *   tokenProvider: createTokenProviderFromJWT('eyJhbGciOiJIUzI1NiIs...'),
+ * });
+ * ```
+ */
+export const createTokenProviderFromJWT = (jwt: string): (() => string) => {
+  return () => jwt;
+};
+
+/**
  * Creates a token provider that authenticates with a TeamDynamix admin service account.
  *
  * Service accounts are managed in TDAdmin → Organization Settings
@@ -80,6 +113,15 @@ export const loginWithPassword = (config: PasswordAuthConfig): (() => Promise<st
  *     webServicesKey: process.env.TD_WSKEY!,
  *   }),
  * });
+ * ```
+ *
+ * For custom FQDNs pass the full hostname as `tenant` (the `environment` option is ignored):
+ * ```ts
+ * loginWithServiceAccount({
+ *   tenant: 'td.myuniversity.edu',
+ *   beid: '...',
+ *   webServicesKey: '...',
+ * })
  * ```
  */
 export const loginWithServiceAccount = (config: ServiceAccountAuthConfig): (() => Promise<string>) => {

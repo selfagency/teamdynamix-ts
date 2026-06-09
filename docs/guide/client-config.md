@@ -35,11 +35,20 @@ interface TeamDynamixClientConfig {
 
 ### `tenant` (required)
 
-Your TeamDynamix subdomain. Used to build the default base URL:
+Your TeamDynamix subdomain, or a full custom domain:
 
 ```ts
-// tenant: 'mytenant' → baseUrl: 'https://mytenant.teamdynamix.com/TDWebApi'
+// Subdomain slug → standard URL
+// tenant: 'mytenant'        → baseUrl: 'https://mytenant.teamdynamix.com'
+
+// Full FQDN → used directly
+// tenant: 'td.myuniversity.edu'  → baseUrl: 'https://td.myuniversity.edu'
 ```
+
+When `tenant` contains a dot, it's treated as a fully qualified domain name and used as-is.
+When it has no dot, it's treated as a subdomain slug on `teamdynamix.com`.
+
+> **Note for auth helpers:** The same `tenant` field works in `loginWithPassword` and `loginWithServiceAccount`. When using a FQDN, the `environment` option is ignored (there's no standard sandbox suffix for custom domains).
 
 ### `tokenProvider` (required)
 
@@ -63,7 +72,15 @@ tokenProvider: loginWithServiceAccount({
 
 The client calls `tokenProvider()` before every request and automatically retries once with a fresh token if the API returns 401.
 
-You can also supply a pre-acquired JWT:
+You can also supply a pre-acquired JWT using the convenience helper:
+
+```ts
+import { createTokenProviderFromJWT } from 'teamdynamix-ts'
+
+tokenProvider: createTokenProviderFromJWT('eyJhbGciOiJIUzI1NiIs...')
+```
+
+Or inline without the helper:
 
 ```ts
 tokenProvider: () => 'eyJhbGciOiJIUzI1NiIs...'

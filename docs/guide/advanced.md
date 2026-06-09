@@ -71,13 +71,15 @@ import { createTeamDynamixClient, loginWithPassword } from 'teamdynamix-ts'
 import { createTeamDynamixClient, loginWithServiceAccount } from 'teamdynamix-ts'
 ```
 
-All SDK types, Zod schemas, and the `TeamDynamixClientError` class are also exported:
+All SDK types, Zod schemas, and the `TeamDynamixClientError` class are also exported from the package top level:
 
 ```ts
 import {
   TeamDynamixClientError,
   appIdSchema,
   customAttributeSchema,
+  paginationSchema,
+  tenantSchema,
 } from 'teamdynamix-ts'
 ```
 
@@ -86,7 +88,7 @@ import {
 Zod schemas are exported from the package for standalone use:
 
 ```ts
-import { appIdSchema, tenantSchema, paginationSchema } from 'teamdynamix-ts'
+import { appIdSchema, paginationSchema, tenantSchema } from 'teamdynamix-ts'
 
 const parsed = appIdSchema.parse(42)
 // → 42
