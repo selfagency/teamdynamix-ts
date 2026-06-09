@@ -2,6 +2,7 @@ import { z } from 'zod';
 import type { TeamDynamixFetchClient } from '../client.js';
 import { customAttributeIdSchema, customAttributeValueSchema, customAttributeSchema } from '../schemas/index.js';
 import { executeSdkRoute } from './request.js';
+import type { SdkRouteDefinition } from './types.js';
 
 const nonEmptyIdSchema = z.union([z.string().trim().min(1), z.number().int().nonnegative()]);
 
@@ -74,6 +75,59 @@ export const getCustomAttributeValue = (
   return undefined;
 };
 
+const appIdSchema = z.union([z.string().trim().min(1), z.number().int().nonnegative()]);
+
+type AttributeOperationConfig = {
+  domain: string;
+  methodName: string;
+  operationId: string;
+  path: string;
+  httpMethod: 'GET' | 'POST' | 'PATCH';
+  tags: string[];
+};
+
+/** Shared set-attributes helper — eliminates structural duplication across domains */
+async function setCustomAttributes(
+  client: TeamDynamixFetchClient,
+  config: AttributeOperationConfig,
+  input: { appId: string | number; id: string | number; attributes: Array<{ ID: string | number; Value: unknown }> },
+): Promise<unknown> {
+  const parsed = z
+    .object({
+      appId: appIdSchema,
+      id: nonEmptyIdSchema,
+      attributes: z.array(customAttributeSchema),
+    })
+    .parse(input);
+
+  return executeSdkRoute(client, { ...config, mutating: true, destructive: false } as SdkRouteDefinition, {
+    params: { path: { appId: parsed.appId, id: parsed.id } },
+    body: { Attributes: parsed.attributes },
+  });
+}
+
+/** Shared get-attributes helper — eliminates structural duplication across domains */
+async function getEntityAttributes(
+  client: TeamDynamixFetchClient,
+  config: AttributeOperationConfig,
+  input: { appId: string | number; id: string | number },
+): Promise<unknown> {
+  const parsed = z
+    .object({
+      appId: appIdSchema,
+      id: nonEmptyIdSchema,
+    })
+    .parse(input);
+
+  const entity = await executeSdkRoute(
+    client,
+    { ...config, mutating: false, destructive: false } as SdkRouteDefinition,
+    { params: { path: { appId: parsed.appId, id: parsed.id } } },
+  );
+
+  return hasAttributes(entity) ? entity.Attributes : [];
+}
+
 /**
  * Custom attribute mutation helpers for tickets
  */
@@ -86,15 +140,7 @@ export const createTicketCustomAttributes = (client: TeamDynamixFetchClient) => 
     ticketId: string | number;
     attributes: Array<{ ID: string | number; Value: unknown }>;
   }): Promise<unknown> {
-    const parsed = z
-      .object({
-        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-        ticketId: nonEmptyIdSchema,
-        attributes: z.array(customAttributeSchema),
-      })
-      .parse(input);
-
-    return executeSdkRoute(
+    return setCustomAttributes(
       client,
       {
         domain: 'tickets',
@@ -103,13 +149,8 @@ export const createTicketCustomAttributes = (client: TeamDynamixFetchClient) => 
         path: '/api/{appId}/tickets/{id}',
         httpMethod: 'POST',
         tags: ['Tickets'],
-        mutating: true,
-        destructive: false,
       },
-      {
-        params: { path: { appId: parsed.appId, id: parsed.ticketId } },
-        body: { Attributes: parsed.attributes },
-      },
+      { appId: input.appId, id: input.ticketId, attributes: input.attributes },
     );
   },
 
@@ -117,14 +158,7 @@ export const createTicketCustomAttributes = (client: TeamDynamixFetchClient) => 
    * Gets all custom attributes for a ticket
    */
   async getTicketCustomAttributes(input: { appId: string | number; ticketId: string | number }): Promise<unknown> {
-    const parsed = z
-      .object({
-        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-        ticketId: nonEmptyIdSchema,
-      })
-      .parse(input);
-
-    const ticket = await executeSdkRoute(
+    return getEntityAttributes(
       client,
       {
         domain: 'tickets',
@@ -133,13 +167,9 @@ export const createTicketCustomAttributes = (client: TeamDynamixFetchClient) => 
         path: '/api/{appId}/tickets/{id}',
         httpMethod: 'GET',
         tags: ['Tickets'],
-        mutating: false,
-        destructive: false,
       },
-      { params: { path: { appId: parsed.appId, id: parsed.ticketId } } },
+      { appId: input.appId, id: input.ticketId },
     );
-
-    return hasAttributes(ticket) ? ticket.Attributes : [];
   },
 });
 
@@ -155,15 +185,7 @@ export const createAssetCustomAttributes = (client: TeamDynamixFetchClient) => (
     assetId: string | number;
     attributes: Array<{ ID: string | number; Value: unknown }>;
   }): Promise<unknown> {
-    const parsed = z
-      .object({
-        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-        assetId: nonEmptyIdSchema,
-        attributes: z.array(customAttributeSchema),
-      })
-      .parse(input);
-
-    return executeSdkRoute(
+    return setCustomAttributes(
       client,
       {
         domain: 'assets',
@@ -172,13 +194,8 @@ export const createAssetCustomAttributes = (client: TeamDynamixFetchClient) => (
         path: '/api/{appId}/assets/{id}',
         httpMethod: 'PATCH',
         tags: ['Assets'],
-        mutating: true,
-        destructive: false,
       },
-      {
-        params: { path: { appId: parsed.appId, id: parsed.assetId } },
-        body: { Attributes: parsed.attributes },
-      },
+      { appId: input.appId, id: input.assetId, attributes: input.attributes },
     );
   },
 
@@ -186,14 +203,7 @@ export const createAssetCustomAttributes = (client: TeamDynamixFetchClient) => (
    * Gets all custom attributes for an asset
    */
   async getAssetCustomAttributes(input: { appId: string | number; assetId: string | number }): Promise<unknown> {
-    const parsed = z
-      .object({
-        appId: z.union([z.string().trim().min(1), z.number().int().nonnegative()]),
-        assetId: nonEmptyIdSchema,
-      })
-      .parse(input);
-
-    const asset = await executeSdkRoute(
+    return getEntityAttributes(
       client,
       {
         domain: 'assets',
@@ -202,13 +212,9 @@ export const createAssetCustomAttributes = (client: TeamDynamixFetchClient) => (
         path: '/api/{appId}/assets/{id}',
         httpMethod: 'GET',
         tags: ['Assets'],
-        mutating: false,
-        destructive: false,
       },
-      { params: { path: { appId: parsed.appId, id: parsed.assetId } } },
+      { appId: input.appId, id: input.assetId },
     );
-
-    return hasAttributes(asset) ? asset.Attributes : [];
   },
 });
 
