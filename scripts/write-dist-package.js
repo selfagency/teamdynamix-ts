@@ -23,7 +23,7 @@ async function main() {
     license,
     author,
     type: 'module',
-    files: ['index.js', 'index.js.map', 'index.d.ts', 'index.d.ts.map'],
+    files: ['index.js', 'index.js.map', 'index.d.ts', 'index.d.ts.map', '**/*.d.ts', '**/*.d.ts.map'],
     main: './index.js',
     types: './index.d.ts',
     exports: {
@@ -49,6 +49,13 @@ async function main() {
   } catch {
     console.warn('No README.md found; skipping copy.');
   }
+
+  // Copy generated OpenAPI schema declarations — tsc doesn't emit input .d.ts files
+  const schemaSrc = resolve(ROOT, 'src/generated/schema.d.ts');
+  const schemaDest = resolve(outDir, 'generated/schema.d.ts');
+  await mkdir(resolve(outDir, 'generated'), { recursive: true });
+  await copyFile(schemaSrc, schemaDest);
+  console.log('Copied', schemaSrc, 'to', schemaDest);
 }
 
 try {
