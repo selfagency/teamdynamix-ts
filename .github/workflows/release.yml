@@ -165,9 +165,20 @@ jobs:
               });
               core.info(`Committed version bump ${version} + changelog to main (${bumpCommit.data.sha}).`);
 
+              // GITHUB_TOKEN pushes don't trigger on:push workflows, so dispatch CI explicitly
+              await github.rest.actions.createWorkflowDispatch({
+                owner,
+                repo,
+                workflow_id: 'ci.yml',
+                ref: 'main',
+              });
+              core.info('Dispatched CI on release bump commit.');
+
               // Wait for CI to pass on the fresh bump commit before tagging
               const deadline = Date.now() + 15 * 60 * 1000;
+              const start = Date.now();
               let ciOk = false;
+              let poll = 0;
               while (Date.now() < deadline) {
                 const runsResp = await github.rest.actions.listWorkflowRuns({
                   owner,
@@ -185,6 +196,7 @@ jobs:
                   core.setFailed(`Release blocked: CI concluded '${run.conclusion}' on release bump commit ${bumpCommit.data.sha}.`);
                   return;
                 }
+                core.info(`Waiting for CI on ${bumpCommit.data.sha}... (poll ${++poll}, elapsed ${Math.round((Date.now() - start) / 1000)}s)`);
                 await new Promise(resolve => setTimeout(resolve, 15000));
               }
               if (!ciOk) {
@@ -454,7 +466,7 @@ jobs:
   rollback:
     name: Rollback failed release
     needs: [detect-tag, release]
-    if: always() && needs.release.result == 'failure' && needs.detect-tag.outputs.release_tag != ''
+    if: always() && needs.detect-tag.outputs.release_tag != '' && (needs.release.result == 'failure' || needs.detect-tag.result == 'failure' || (needs.detect-tag.outputs.created_by_dispatch == 'true' && cancelled()))
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
