@@ -23,7 +23,15 @@ async function main() {
     license,
     author,
     type: 'module',
-    files: ['index.js', 'index.js.map', 'index.d.ts', 'index.d.ts.map', '**/*.d.ts', '**/*.d.ts.map'],
+    files: [
+      'index.js',
+      'index.js.map',
+      'index.d.ts',
+      'index.d.ts.map',
+      '**/*.d.ts',
+      '**/*.d.ts.map',
+      'generated/openapi.json',
+    ],
     main: './index.js',
     types: './index.d.ts',
     exports: {
@@ -56,6 +64,13 @@ async function main() {
   await mkdir(resolve(outDir, 'generated'), { recursive: true });
   await copyFile(schemaSrc, schemaDest);
   console.log('Copied', schemaSrc, 'to', schemaDest);
+
+  // Copy dereferenced OpenAPI JSON — runtime validator loads it via specPath;
+  // dist must be self-contained (ponytail: fixes ENOENT when consumed as npm dep).
+  const specSrc = resolve(ROOT, 'src/generated/openapi.json');
+  const specDest = resolve(outDir, 'generated/openapi.json');
+  await copyFile(specSrc, specDest);
+  console.log('Copied', specSrc, 'to', specDest);
 }
 
 try {
