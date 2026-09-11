@@ -14,7 +14,8 @@
     "playwright-report",
     "test-results",
     "src/lexicons",
-    "plans"
+    "plans",
+    "CHANGELOG.md"
   ],
   "arrowParens": "avoid",
   "bracketSpacing": true,
