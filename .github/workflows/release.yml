@@ -167,8 +167,8 @@ jobs:
 
               core.setOutput('created_by_dispatch', 'true');
               core.setOutput('bump_sha', bumpCommit.data.sha);
-              core.setOutput('pre_pkg_b64', pkgResp.data.content);
-              core.setOutput('pre_cl_b64', clB64 ?? '');
+              core.setOutput('pre_pkg_b64', pkgResp.data.content.replace(/\s/g, ''));
+              core.setOutput('pre_cl_b64', (clB64 ?? '').replace(/\s/g, ''));
 
               // GITHUB_TOKEN pushes don't trigger on:push workflows, so dispatch CI explicitly
               await github.rest.actions.createWorkflowDispatch({
