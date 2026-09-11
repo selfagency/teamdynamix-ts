@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 25
     permissions:
       contents: write
-      actions: read
+      actions: write
 
     outputs:
       release_tag: ${{ steps.tag.outputs.release_tag }}
@@ -466,7 +466,7 @@ jobs:
   rollback:
     name: Rollback failed release
     needs: [detect-tag, release]
-    if: always() && needs.detect-tag.outputs.release_tag != '' && (needs.release.result == 'failure' || needs.detect-tag.result == 'failure' || (needs.detect-tag.outputs.created_by_dispatch == 'true' && cancelled()))
+    if: always() && ((needs.release.result == 'failure' && needs.detect-tag.outputs.release_tag != '') || (needs.detect-tag.result == 'failure' && needs.detect-tag.outputs.bump_sha != '') || (needs.detect-tag.outputs.created_by_dispatch == 'true' && cancelled() && needs.detect-tag.outputs.bump_sha != ''))
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -484,13 +484,15 @@ jobs:
             const createdByDispatch = '${{ needs.detect-tag.outputs.created_by_dispatch }}' === 'true';
 
             // Delete the GitHub release object if one was created
-            try {
-              const rel = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
-              await github.rest.repos.deleteRelease({ owner, repo, release_id: rel.data.id });
-              core.info(`Deleted GitHub release for ${tag}.`);
-            } catch (error) {
-              if (error.status !== 404) throw error;
-              core.info(`No GitHub release found for ${tag}.`);
+            if (tag) {
+              try {
+                const rel = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
+                await github.rest.repos.deleteRelease({ owner, repo, release_id: rel.data.id });
+                core.info(`Deleted GitHub release for ${tag}.`);
+              } catch (error) {
+                if (error.status !== 404) throw error;
+                core.info(`No GitHub release found for ${tag}.`);
+              }
             }
 
             if (!createdByDispatch) {
@@ -499,12 +501,14 @@ jobs:
             }
 
             // Delete the auto-created tag
-            try {
-              await github.rest.git.deleteRef({ owner, repo, ref: `tags/${tag}` });
-              core.info(`Deleted tag ${tag}.`);
-            } catch (error) {
-              if (error.status !== 404) throw error;
-              core.info(`Tag ${tag} not found.`);
+            if (tag) {
+              try {
+                await github.rest.git.deleteRef({ owner, repo, ref: `tags/${tag}` });
+                core.info(`Deleted tag ${tag}.`);
+              } catch (error) {
+                if (error.status !== 404) throw error;
+                core.info(`Tag ${tag} not found.`);
+              }
             }
 
             // Restore package.json + CHANGELOG.md to their pre-bump state on main
