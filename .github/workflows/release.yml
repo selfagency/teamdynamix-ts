@@ -165,6 +165,11 @@ jobs:
               });
               core.info(`Committed version bump ${version} + changelog to main (${bumpCommit.data.sha}).`);
 
+              core.setOutput('created_by_dispatch', 'true');
+              core.setOutput('bump_sha', bumpCommit.data.sha);
+              core.setOutput('pre_pkg_b64', pkgResp.data.content);
+              core.setOutput('pre_cl_b64', clB64 ?? '');
+
               // GITHUB_TOKEN pushes don't trigger on:push workflows, so dispatch CI explicitly
               await github.rest.actions.createWorkflowDispatch({
                 owner,
@@ -203,11 +208,6 @@ jobs:
                 core.setFailed(`Release blocked: timed out waiting for CI on release bump commit ${bumpCommit.data.sha}.`);
                 return;
               }
-
-              core.setOutput('created_by_dispatch', 'true');
-              core.setOutput('bump_sha', bumpCommit.data.sha);
-              core.setOutput('pre_pkg_b64', pkgResp.data.content);
-              core.setOutput('pre_cl_b64', clB64 ?? '');
 
               core.info(`Creating tag ${tagName} at ${bumpCommit.data.sha}...`);
               await github.rest.git.createRef({
