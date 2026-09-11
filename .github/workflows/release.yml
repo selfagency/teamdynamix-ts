@@ -67,17 +67,104 @@ jobs:
                 return;
               }
 
+              const version = tagName.replace(/^v/, '');
               const main = await github.rest.repos.getBranch({ owner, repo, branch: 'main' });
               const mainSha = main.data.commit.sha;
 
-              core.info(`Creating tag ${tagName} at ${mainSha}...`);
+              // Generate release notes for the upcoming tag (previous tag lookup)
+              const tagsResp = await github.rest.repos.listTags({ owner, repo, per_page: 100 });
+              const previousTag = tagsResp.data.find(tag => tag.name.startsWith('v'))?.name ?? '';
+
+              const notesResponse = await github.rest.repos.generateReleaseNotes({
+                owner,
+                repo,
+                tag_name: tagName,
+                ...(previousTag ? { previous_tag_name: previousTag } : {}),
+                target_commitish: 'main',
+              });
+              const notes = notesResponse.data.body ?? '';
+
+              // Bump package.json version
+              const pkgResp = await github.rest.repos.getContent({
+                owner,
+                repo,
+                path: 'package.json',
+                ref: 'main',
+              });
+              const pkg = JSON.parse(Buffer.from(pkgResp.data.content, 'base64').toString('utf8'));
+              pkg.version = version;
+              const pkgContent = JSON.stringify(pkg, null, 2) + '\n';
+
+              // Prepend CHANGELOG.md entry
+              const today = new Date().toISOString().slice(0, 10);
+              const section = `## ${tagName} - ${today}\n\n${notes}\n\n`;
+              let changelogContent;
+              let changelogSha;
+              try {
+                const clResp = await github.rest.repos.getContent({
+                  owner,
+                  repo,
+                  path: 'CHANGELOG.md',
+                  ref: 'main',
+                });
+                changelogSha = clResp.data.sha;
+                const existing = Buffer.from(clResp.data.content, 'base64').toString('utf8');
+                changelogContent = section + existing;
+              } catch (error) {
+                const status = error && typeof error === 'object' && 'status' in error ? error.status : null;
+                if (status !== 404) {
+                  throw error;
+                }
+                changelogContent = `# Changelog\n\n${section}`;
+              }
+
+              // Commit version bump + changelog to main
+              const pkgBlob = await github.rest.git.createBlob({
+                owner,
+                repo,
+                content: Buffer.from(pkgContent, 'utf8').toString('base64'),
+                encoding: 'base64',
+              });
+              const clBlob = await github.rest.git.createBlob({
+                owner,
+                repo,
+                content: Buffer.from(changelogContent, 'utf8').toString('base64'),
+                encoding: 'base64',
+              });
+              const mainCommit = await github.rest.git.getCommit({ owner, repo, commit_sha: mainSha });
+              const tree = await github.rest.git.createTree({
+                owner,
+                repo,
+                base_tree: mainCommit.data.tree.sha,
+                tree: [
+                  { path: 'package.json', mode: '100644', type: 'blob', sha: pkgBlob.data.sha },
+                  { path: 'CHANGELOG.md', mode: '100644', type: 'blob', sha: clBlob.data.sha },
+                ],
+              });
+              const bumpCommit = await github.rest.git.createCommit({
+                owner,
+                repo,
+                message: `chore(release): v${version}`,
+                tree: tree.data.sha,
+                parents: [mainSha],
+              });
+              await github.rest.git.updateRef({
+                owner,
+                repo,
+                ref: 'heads/main',
+                sha: bumpCommit.data.sha,
+              });
+              core.info(`Committed version bump ${version} + changelog to main (${bumpCommit.data.sha}).`);
+
+              core.info(`Creating tag ${tagName} at ${bumpCommit.data.sha}...`);
               await github.rest.git.createRef({
                 owner,
                 repo,
                 ref: `refs/tags/${tagName}`,
-                sha: mainSha,
+                sha: bumpCommit.data.sha,
               });
               core.info(`Tag ${tagName} created.`);
+            } else {
             } else {
               tagName = context.ref.replace('refs/tags/', '');
             }
