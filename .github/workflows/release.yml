@@ -165,7 +165,6 @@ jobs:
               });
               core.info(`Tag ${tagName} created.`);
             } else {
-            } else {
               tagName = context.ref.replace('refs/tags/', '');
             }
 
