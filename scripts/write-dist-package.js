@@ -36,9 +36,12 @@ async function main() {
     types: './index.d.ts',
     exports: {
       '.': {
-        import: './index.js',
         types: './index.d.ts',
+        import: './index.js',
+        require: './index.js',
+        default: './index.js',
       },
+      './package.json': './package.json',
     },
     dependencies,
   };
