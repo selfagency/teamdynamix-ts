@@ -1,7 +1,3 @@
-## v0.1.5 - 2026-09-14
-
-**Full Changelog**: https://github.com/selfagency/teamdynamix-ts/compare/v0.1.4...v0.1.5
-
 # Changelog
 
 ## v0.1.4 - 2026-09-11
